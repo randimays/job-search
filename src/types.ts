@@ -22,7 +22,7 @@ export interface GreenhouseJobApiFormat {
 
 export interface Job {
   companyName: string,
-  deadline: string | null,
+  deadline: Date | null,
   id: number,
   published: Date | null,
   title: string,

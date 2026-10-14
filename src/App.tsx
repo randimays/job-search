@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { fetchJobs } from './api';
+import { formatDate } from './utils';
 
 function App() {
   const [jobs, setJobs] = useState([]);
-  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric'});
+  const today = formatDate();
 
   useEffect(() => {
     if (!jobs.length) {
