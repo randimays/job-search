@@ -1,23 +1,27 @@
-import { Fragment } from 'react';
 import type { ReactElement } from 'react';
 import type { Job } from '../types';
 import { formatDate } from '../utils';
 
-const JobRow = ({
-  companyName,
-  deadline,
-  id,
-  published,
-  title,
-  updated,
-  url
-}: Job): ReactElement | null => {
+interface JobRowProps {
+  job: Job;
+}
+
+const JobRow = ({ job }: JobRowProps): ReactElement | null => {
+  const {
+    companyName,
+    deadline,
+    published,
+    title,
+    updated,
+    url
+  } = job;
+
   if (!companyName || !title || !url) {
     return null;
   }
 
   return (
-    <Fragment key={id}>
+    <tr>
       <td>
         {published ? <span>{formatDate(published)}</span> : null}
       </td>
@@ -29,7 +33,7 @@ const JobRow = ({
       <td>
         {deadline ? <span>{formatDate(deadline)}</span> : null}
       </td>
-    </Fragment>
+    </tr>
   );
 };
 

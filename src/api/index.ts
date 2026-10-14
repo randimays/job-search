@@ -1,7 +1,9 @@
 import { GreenhouseMock } from '../mock/greenhouse';
+import { greenhouseJobsHandler } from '../utils';
 
 const BOARD_CONFIGS = [
   {
+    handler: greenhouseJobsHandler,
     name: 'Greenhouse',
     url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
   }
@@ -9,14 +11,16 @@ const BOARD_CONFIGS = [
 
 // export const fetchJobs = async (boardName: string, companyIdentifier: string): any => {
 export const fetchJobs = (boardName: string, companyIdentifier: string): any => {
-  // const configs = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
+  const config = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
 
-  // if (!configs || !configs.url) {
-  //   throw new Error('fetchJobs: invalid or unsupported boardName');
-  // }
+  if (!config || !config.url) {
+    throw new Error('fetchJobs: invalid or unsupported boardName');
+  }
+
+  console.log('config: ', config);
 
   // try {
-  //   const response = fetch(configs.url(companyIdentifier));
+  //   const response = fetch(config.url(companyIdentifier));
   //   const json = (await response).json();
 
   //   console.log('response: ', json);
@@ -24,5 +28,9 @@ export const fetchJobs = (boardName: string, companyIdentifier: string): any => 
   //   throw new Error(`Error from service call: ${error}`);
   // }
 
-  return GreenhouseMock;
+  let response = GreenhouseMock;
+
+  const formattedJobs = config.handler(response);
+
+  return formattedJobs;
 }

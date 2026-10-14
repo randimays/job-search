@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchJobs } from './api';
+import JobsTable from './components/JobsTable';
 import { formatDate } from './utils';
 
 function App() {
@@ -12,12 +13,12 @@ function App() {
     }
   }, []);
 
-  console.log('jobs: ', jobs);
-
   return (
     <>
       <h1 className="text-3xl font-bold">Job search for {today}</h1>
-      <h2 className="text-2xl mt-4">Jobs</h2>
+      { jobs && (
+        <JobsTable jobs={jobs} />
+      )}
     </>
   );
 }
