@@ -17,7 +17,7 @@ export const fetchJobs = (boardName: string, companyIdentifier: string): any => 
     throw new Error('fetchJobs: invalid or unsupported boardName');
   }
 
-  console.log('config: ', config);
+  // console.log('config: ', config);
 
   // try {
   //   const response = fetch(config.url(companyIdentifier));

@@ -1,8 +1,9 @@
 export const BOARDS = ['Greenhouse'];
 
-// This represents all of the keywords that I would want to see matches for
+// This represents all of the keywords 
+// I would want to see matches for
 export const ROLE_MATCHERS = [
-  'developer',
+  'develop', // captures "developer and development"
   'engineer',
   'front end',
   'full stack',
@@ -16,10 +17,10 @@ export const ROLE_MATCHERS = [
 
 // This represents keywords that would eliminate a match 
 // if it was captured by ROLE_MATCHERS. 
-// Example: I want "Software Engineer," but I don't want "Data Engineer"
+// Example: I want "Software Engineer," 
+// but I don't want "Data Engineer"
 export const ROLE_EXCLUSIONS = [
-  // Roles that aren't a match
-  'analyst',
+  // seniority levels or types that aren't a match
   'architect',
   'director',
   'founding',
@@ -33,21 +34,32 @@ export const ROLE_EXCLUSIONS = [
   'staff',
   'volunteer',
   'vp',
-  'writer',
-  // Domains that aren't a match
+  // Domains or role types that aren't a match
+  'analyst',
+  'automation',
+  'azure',
   'back end',
   'data',
   'designer',
+  'devops',
+  'devsecops',
+  'help desk',
   'java',
-  'operations',
+  'ml',
+  'network', // also doubles for resume drop
   'python',
   'qa',
   'release',
+  'reliability',
+  'salesforce',
+  'systems',
+  'wordpress',
+  'writer',
   // Resume drop links
-  'talent',
+  'evergreen',
   'future',
-  'resume',
+  'interest',
   'pool',
-  'network',
-  'interest'
+  'resume',
+  'talent',
 ];

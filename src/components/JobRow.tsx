@@ -26,7 +26,7 @@ const JobRow = ({ job }: JobRowProps): ReactElement | null => {
         {published ? <span>{formatDate(published)}</span> : null}
       </td>
       <td>{companyName}</td>
-      <td><a href={url}>{title}&#8250;</a></td>
+      <td><a href={url}>{title} &#8250;</a></td>
       <td>
         {updated ? <span>{formatDate(updated)}</span> : null}
       </td>
