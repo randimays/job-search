@@ -1,10 +1,10 @@
-# Job Search
+# Job Search (WIP as of 10/14/26)
 
 This application uses Typescript, Tailwind, React and Vite to produce an application for viewing jobs relevant to my skill set.
 
 I used AI to help me with parts of the code and troubleshooting, but this code is largely written by me! I wanted to sharpen my skills and write the code myself so I could learn how to use these technologies the old-fashioned way.
 
-## Acceptance Criteria
+## Acceptance Criteria (also WIP)
 
 - Wire up a full job flow for one company that filters out all irrelevant jobs (non-software-engineer, non-remote or not San Antonio, TX area) and evaluates whether they've been seen before.
 - For each job that has not been seen before, give me the option to mark it as not a match,and never show me the job again
