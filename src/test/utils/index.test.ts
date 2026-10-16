@@ -6,12 +6,13 @@ import {
   greenhouseJobsHandler,
   greenhouseMapper,
   isExplicitlyRemoteOrVirtual,
-  isPotentialJobMatch
+  isPotentialJobMatch,
+  toTitleCase,
 } from '../../utils';
 import { GreenhouseMock } from '../../mock/greenhouse';
 
 describe('formatDate', () => {
-    beforeEach(() => {
+  beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2026, 9, 14, 12, 0, 0));
   });
@@ -34,6 +35,19 @@ describe('formatDate', () => {
 
   it('handles valid dates', () => {
     expect(formatDate(new Date('2026-10-02T10:14:01-04:00'))).toBe('October 2');
+  });
+});
+
+describe('toTitleCase', () => {
+  it('handles junk values', () => {
+    expect(toTitleCase('')).toBe('');
+  });
+
+  it('handles valid values', () => {
+    expect(toTitleCase('a')).toBe('a');
+    expect(toTitleCase('greenhouse')).toBe('Greenhouse');
+    expect(toTitleCase('GREENHOUSE')).toBe('Greenhouse');
+    expect(toTitleCase('greenhouse platform')).toBe('Greenhouse Platform');
   });
 });
 
@@ -209,7 +223,7 @@ describe('isExplicitlyRemoteOrVirtual', () => {
 
 describe('greenhouseJobsHandler', () => {
   it('handles empty jobs array', () => {
-    expect(greenhouseJobsHandler([])).toBeNull();
+    expect(greenhouseJobsHandler([])).toEqual([]);
   });
 
   it('correctly filters a list of jobs per the given keywords', () => {

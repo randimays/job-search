@@ -7,7 +7,7 @@ interface JobsTableProps {
 }
 
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
-  console.log("🚀 ~ JobsTable ~ jobs:", jobs)
+  // console.log("🚀 ~ JobsTable ~ jobs:", jobs)
   if (!jobs || !jobs.length) {
     return <p className="mt-12">No suitable jobs found for today.</p>;
   }

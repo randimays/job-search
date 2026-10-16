@@ -21,14 +21,17 @@ export const ROLE_MATCHERS = [
 // but I don't want "Data Engineer"
 export const ROLE_EXCLUSIONS = [
   // seniority levels or types that aren't a match
+  'apprentice',
   'architect',
   'associate',
   'director',
+  'early career',
   'founding',
   'head',
   'intern',
+  'internship',
   'junior',
-  'manager',
+  'engineering manager',
   'lead',
   'principal',
   'sales',

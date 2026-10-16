@@ -12,6 +12,18 @@ export const formatDate = (date: Date = new Date()): string => {
   return new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric'});
 };
 
+export const toTitleCase = (value: string): string => {
+  if (!value || typeof value !== 'string' || value.length === 1) {
+    return value;
+  }
+
+  return value
+    .toLowerCase()
+    .split(' ')
+    .map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(' ');
+}
+
 // -------- Job formatting (from API, for display)
 
 export const convertAPIDate = (date: string | null): Date | null => {
@@ -58,21 +70,29 @@ const keywordToPattern = (keyword: string): string =>
     .join('[\\s-]*');
 
 // Builds the regex for matching job titles against desired keywords
-const buildRegexMatcher = (keywords: string[]): RegExp =>
-  new RegExp(`\\b(?:${keywords.map(keywordToPattern).join('|')})`, 'i');
+const buildRegexMatcher = (keywords: string[], wholeWord = false): RegExp =>
+    new RegExp(
+    `\\b(?:${keywords.map(keywordToPattern).join('|')})${wholeWord ? '\\b' : ''}`,
+    'i',
+  );
 
 const matches = buildRegexMatcher(ROLE_MATCHERS);
-const exclusions = buildRegexMatcher(ROLE_EXCLUSIONS);
+const exclusions = buildRegexMatcher(ROLE_EXCLUSIONS, true);
 
 // Checks against the ROLE_MATCHERS and ROLE_EXCLUSIONS lists (in constants.ts)
 // to filter for potential matches by keywords
-export const isPotentialJobMatch = (title: string): boolean => {
+export const isPotentialJobMatch = (title: string, omittedTitles: string[]): boolean => {
   if (!title || typeof title !== 'string') {
     console.error('isPotentialJobMatch: invalid or missing job title');
     return true;
   }
 
   const normalized = title.trim();
+
+  if (!matches.test(normalized) || exclusions.test(normalized)) {
+    omittedTitles.push(normalized);
+  }
+
   return matches.test(normalized) && !exclusions.test(normalized);
 };
 
@@ -85,21 +105,19 @@ export const isExplicitlyRemoteOrVirtual = (location: string): boolean => {
   return true;
 }
 
-export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | null => {
-  if (!jobs || !jobs.length) {
-    console.error('greenhouseJobsHandler: invalid job array given');
-    return null;
+export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
+  const omittedTitles: string[] = [];
+  let filteredJobs: GreenhouseJobApiFormat[] = [];
+
+  if (jobs && jobs.length) {
+    filteredJobs = jobs
+      .filter(job => isExplicitlyRemoteOrVirtual(job?.location?.name))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, omittedTitles)) || [];
+
+    return filteredJobs.map(filteredJob => greenhouseMapper(filteredJob));
   }
 
-  const filteredJobs = jobs
-    .filter(job => isExplicitlyRemoteOrVirtual(job?.location?.name))
-    .filter(remoteJob => isPotentialJobMatch(remoteJob?.title));
-  
-  if (!filteredJobs || !filteredJobs.length) {
-    return [];
-  }
-
-  return filteredJobs.map(filteredJob => greenhouseMapper(filteredJob));
+  return [];
 };
 
 // -------- CSV parsing
