@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchJobs } from './api';
+import { createApiBatch } from './api';
 import JobsTable from './components/JobsTable';
-import { formatDate } from './utils';
+import { formatDate, parseCsv } from './utils';
+import csv from './data/jobBoards.csv?raw';
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -9,7 +10,9 @@ function App() {
 
   useEffect(() => {
     if (!jobs.length) {
-      setJobs(fetchJobs('Greenhouse', 'capitaltg'));
+      const csvToArray = parseCsv(csv);
+      
+      Promise.allSettled()
     }
   }, []);
 

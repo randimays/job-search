@@ -7,8 +7,8 @@ import {
   greenhouseMapper,
   isExplicitlyRemoteOrVirtual,
   isPotentialJobMatch
-} from '../utils';
-import { GreenhouseMock } from '../mock/greenhouse';
+} from '../../utils';
+import { GreenhouseMock } from '../../mock/greenhouse';
 
 describe('formatDate', () => {
     beforeEach(() => {

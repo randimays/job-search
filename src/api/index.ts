@@ -9,28 +9,35 @@ const BOARD_CONFIGS = [
   }
 ];
 
-// export const fetchJobs = async (boardName: string, companyIdentifier: string): any => {
-export const fetchJobs = (boardName: string, companyIdentifier: string): any => {
+export const createApiBatch = (csvData: string[][]): void => {
+
+};
+
+export const fetchJobs = async (boardName: string, companyIdentifier: string): any => {
+// export const fetchJobs = (boardName: string, companyIdentifier: string): any => {
   const config = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
 
   if (!config || !config.url) {
     throw new Error('fetchJobs: invalid or unsupported boardName');
   }
 
-  // console.log('config: ', config);
+  console.log('config: ', config);
 
-  // try {
-  //   const response = fetch(config.url(companyIdentifier));
-  //   const json = (await response).json();
+  try {
+    const response = fetch(config.url(companyIdentifier));
+    const json = (await response).json();
 
-  //   console.log('response: ', json);
-  // } catch (error) {
-  //   throw new Error(`Error from service call: ${error}`);
-  // }
+    console.log('response: ', json);
+    return json;
+  } catch (error) {
+    throw new Error(`Error from service call: ${error}`);
+  }
 
-  let response = GreenhouseMock;
+  // return json;
 
-  const formattedJobs = config.handler(response);
+  // let response = GreenhouseMock;
 
-  return formattedJobs;
+  // const formattedJobs = config.handler(response);
+
+  // return formattedJobs;
 }

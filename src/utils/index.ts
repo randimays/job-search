@@ -1,5 +1,5 @@
-import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from './constants';
-import type { GreenhouseJobApiFormat, Job } from './types';
+import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
+import type { GreenhouseJobApiFormat, Job } from '../types';
 
 // -------- Data formatting
 
@@ -85,7 +85,6 @@ export const isExplicitlyRemoteOrVirtual = (location: string): boolean => {
   return true;
 }
 
-
 export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | null => {
   if (!jobs || !jobs.length) {
     console.error('greenhouseJobsHandler: invalid job array given');
@@ -101,4 +100,14 @@ export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | n
   }
 
   return filteredJobs.map(filteredJob => greenhouseMapper(filteredJob));
+};
+
+// -------- CSV parsing
+
+export const parseCsv = (fileContents: string): any => {
+  return fileContents
+    .split(/\r?\n/)
+    .map((row: string): string[] => {
+      return row.split(',');
+    });
 };

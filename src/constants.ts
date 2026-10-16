@@ -22,6 +22,7 @@ export const ROLE_MATCHERS = [
 export const ROLE_EXCLUSIONS = [
   // seniority levels or types that aren't a match
   'architect',
+  'associate',
   'director',
   'founding',
   'head',
