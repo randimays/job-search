@@ -39,7 +39,6 @@ export const cleanUpAPIString = (value?: string | null): string => {
 export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => {
   return {
     companyName: cleanUpAPIString(job.company_name),
-    deadline: job?.application_deadline ? new Date(job.application_deadline) : null,
     id: job?.id || null,
     published: new Date(job.first_published),
     title: cleanUpAPIString(job.title),

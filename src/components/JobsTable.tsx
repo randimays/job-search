@@ -7,7 +7,6 @@ interface JobsTableProps {
 }
 
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
-  console.log("🚀 ~ JobsTable ~ jobs:", jobs)
   if (!jobs || !jobs.length) {
     return <p className="mt-12">No suitable jobs found for today.</p>;
   }
@@ -26,20 +25,23 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
   });
 
   return (
-    <table className="table-auto mt-12 border border-gray-500 rounded-md">
-      <thead className="text-base text-left font-semibold">
-        <tr>
-          <th>Last Updated</th>
-          <th>Company Name</th>
-          <th>Title</th>
-          <th>Published</th>
-          <th>Deadline</th>
-        </tr>
-      </thead>
-      <tbody className="text-sm">
-        {sortedJobs.map(job => <JobRow key={job.id} job={job} />)}
-      </tbody>
-    </table>
+    <>
+      <p className="mt-12">You have {sortedJobs.length} jobs for today.</p>
+      <table className="table-auto mt-6 border border-gray-400 dark:border-gray-500">
+        <thead className="text-sm text-left font-semibold">
+          <tr>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">Last Updated</th>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">Company Name</th>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">Title</th>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">Published</th>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">Deadline</th>
+          </tr>
+        </thead>
+        <tbody className="text-sm">
+          {sortedJobs.map(job => <JobRow key={job.id} job={job} />)}
+        </tbody>
+      </table>
+    </>
   )
 }
 

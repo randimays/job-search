@@ -22,7 +22,7 @@ describe('formatDate', () => {
   });
 
   it('handles undefined dates', () => {
-    expect(formatDate(undefined)).toBe('October 14');
+    expect(formatDate(undefined)).toBe('10/14/2026');
   });
 
   it('handles new dates', () => {
@@ -34,7 +34,7 @@ describe('formatDate', () => {
   });
 
   it('handles valid dates', () => {
-    expect(formatDate(new Date('2026-10-02T10:14:01-04:00'))).toBe('October 2');
+    expect(formatDate(new Date('2026-10-02T10:14:01-04:00'))).toBe('10/2/2026');
   });
 });
 
@@ -80,7 +80,6 @@ describe('greenhouseMapper', () => {
   it('properly formats an API entry from Greenhouse', () => {
     expect(greenhouseMapper(mockEntry)).toEqual({
       companyName: 'Capital Technology Group',
-      deadline: null,
       id: 5187306007,
       published: new Date('2026-07-14T23:10:14-04:00'),
       title: 'Associate Recruiter',
@@ -216,25 +215,14 @@ describe('greenhouseJobsHandler', () => {
     expect(greenhouseJobsHandler(jobs)).toEqual([
       {
         companyName: 'Capital Technology Group',
-        deadline: null,
         id: 5147833007,
         published: new Date('2026-06-09T11:21:53-04:00'),
         title: 'Full Stack Engineer',
         updated: new Date('2026-09-18T07:18:55-04:00'),
         url: 'https://boards.greenhouse.io/capitaltg/jobs/5147833007?gh_jid=5147833007',
       },
-        {
+      {
         companyName: 'Capital Technology Group',
-        deadline: null,
-        id: 5239203007,
-        published: new Date('2026-09-15T16:44:52-04:00'),
-        title: 'PKI Engineer',
-        updated: new Date('2026-09-15T16:44:52-04:00'),
-        url: 'https://boards.greenhouse.io/capitaltg/jobs/5239203007?gh_jid=5239203007',
-      },
-        {
-        companyName: 'Capital Technology Group',
-        deadline: null,
         id: 5239695007,
         published: new Date('2026-09-16T08:59:35-04:00'),
         title: 'Software Developer',

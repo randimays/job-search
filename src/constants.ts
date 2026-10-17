@@ -15,12 +15,8 @@ export const ROLE_MATCHERS = [
   'web',
 ];
 
-// This represents keywords that would eliminate a match 
-// if it was captured by ROLE_MATCHERS. 
-// Example: I want "Software Engineer," 
-// but I don't want "Data Engineer"
-export const ROLE_EXCLUSIONS = [
-  // seniority levels or types that aren't a match
+// seniority levels or types that aren't a match
+const SENIORITY_EXCLUSIONS = [
   'apprentice',
   'architect',
   'associate',
@@ -39,38 +35,71 @@ export const ROLE_EXCLUSIONS = [
   'staff',
   'volunteer',
   'vp',
-  // Domains or role types that aren't a match
+];
+
+// Domains or role types that aren't a match
+const DOMAIN_OR_ROLE_EXCLUSIONS = [
+  'algorithm engineer',
   'analyst',
+  'analysis engineer',
+  'analytics engineer',
   'automation',
   'azure',
   'back end',
+  'business development representative',
+  'capture engineer',
+  'controls engineer',
+  'cybersecurity engineer',
   'data',
   'designer',
+  'detection engineer',
   'devops',
   'devsecops',
+  'distribution engineer',
+  'electrical engineer',
   'fuel performance',
   'help desk',
   'java',
   'machine learning',
   'mechanical design',
+  'mechanical engineer',
   'ml',
   'network', // also doubles for resume drop
   'pki',
+  'presales engineer',
+  'process engineer',
+  'product manager',
+  'project manager',
+  'professional services engineer',
   'python',
   'qa',
   'release',
   'reliability',
+  'safety engineer',
   'salesforce',
   'security engineer',
+  'solutions engineer',
   'support engineer',
   'systems',
   'wordpress',
   'writer',
-  // Resume drop links
+];
+
+const RESUME_DROP_KEYWORDS = [
   'evergreen',
   'future',
   'interest',
   'pool',
   'resume',
   'talent',
+];
+
+// This represents keywords that would eliminate a match 
+// if it was captured by ROLE_MATCHERS. 
+// Example: I want "Software Engineer," 
+// but I don't want "Data Engineer"
+export const ROLE_EXCLUSIONS = [
+  ...SENIORITY_EXCLUSIONS,
+  ...DOMAIN_OR_ROLE_EXCLUSIONS,
+  ...RESUME_DROP_KEYWORDS
 ];

@@ -2,7 +2,6 @@
 
 export interface GreenhouseJobApiFormat {
   absolute_url: string,
-  application_deadline: string | null,
   company_name: string,
   data_compliance: any[],
   first_published: string,
@@ -22,7 +21,6 @@ export interface GreenhouseJobApiFormat {
 
 export interface Job {
   companyName: string,
-  deadline: Date | null,
   id: number | null,
   published: Date,
   title: string,

@@ -85,9 +85,6 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<Response>
     jobs.push(...results
       .flatMap(result => result.status === 'fulfilled' ? [result.value] : [])
       .filter(arr => arr.length > 0));
-    console.log('this thing: ', results
-      .flatMap(result => result.status === 'fulfilled' ? [result.value] : [])
-      .filter(arr => arr.length > 0));
 
     failures.push(...results.flatMap((result, index) => 
       result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []

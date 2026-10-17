@@ -1,8 +1,27 @@
 # Job Search (WIP as of 10/14/26)
 
-This application uses Typescript, Tailwind, React and Vite to produce an application for viewing jobs relevant to my skill set.
+This application uses Typescript, Tailwind, React, Zustand and Vite to produce an application for viewing jobs relevant to my skill set and interests.
 
 I used AI to help me with parts of the code and troubleshooting, but this code is largely written by me! I wanted to sharpen my skills and write the code myself so I could learn how to use these technologies the old-fashioned way.
+
+## Requirements
+
+- A spreadsheet called `jobBoards.csv` in the `data` folder with data in three columns (do **NOT** add a row for column titles):
+  1. The job provider (e.g. "Greenhouse")
+  2. The company identifier used in the GET call to Greenhouse to retrieve jobs for the company (e.g. `capitaltg`)
+  3. The name of the company (optional, not used in the code but is helpful for reference when editing the spreadsheet)
+- Node v24+
+
+## How to run/use this project
+
+1. Pull down the code for the project from Github
+2. Run `npm install` within the `job-search` directory
+3. Confirm that you have version 24 or later of Node installed
+4. Create the spreadsheet as per the **Requirements** section above and replace the `data > jobBoards.csv` spreadsheet with your own
+5. Review the `src/constants.ts` file and add your `ROLE_MATCHERS`, which are keywords pertaining to job titles you'd like to see in your matches
+6. Next, add the components for `ROLE_EXCLUSIONS`, which are keywords pertaining to job titles you'd like to filter out of your matches
+7. Run `npm run dev` to spin up the local server
+8. Navigate to `http://localhost:5173` in your browser
 
 ## Acceptance Criteria (also WIP)
 
@@ -22,3 +41,5 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - If I mark that I am not a match or not interested in a job, it should be deleted from the database
 - The table displaying on the screen should be information from the SQLite database, not from the APIs themselves.
 - Have a section for omitted job titles so the person filling in the keywords can make sure they aren't filtering out anything they want to see
+- Add a loading state when the jobs are fetching so it's clear that service calls are being made. Should I add a progress bar for this?
+- Implement a dark mode
