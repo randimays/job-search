@@ -1,5 +1,4 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
-import type { GreenhouseJobApiFormat, Job } from '../types';
 import { useJobs } from '../store';
 
 // -------- Data formatting
@@ -35,17 +34,7 @@ export const cleanUpAPIString = (value?: string | null): string => {
   return value.trim();
 };
 
-// Used to map an API response to a Job type for easy formatting
-export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => {
-  return {
-    companyName: cleanUpAPIString(job.company_name),
-    id: job?.id || null,
-    published: new Date(job.first_published),
-    title: cleanUpAPIString(job.title),
-    updated: new Date(job?.updated_at),
-    url: cleanUpAPIString(job.absolute_url),
-  }
-};
+
 
 // -------- Job filtering
 
@@ -97,25 +86,28 @@ export const isPotentialJobMatch = (title: string): boolean => {
   return matches.test(normalized) && !exclusions.test(normalized);
 };
 
-export const isExplicitlyRemoteOrVirtual = (location: string): boolean => {
+export const isUnitedStates = (location: string): boolean => {
+  const commonHiringCountries = [
+    'UK', 'United Kingdom', 'Canada', 'Ireland', 'India', 'Mexico', 'Argentina',
+  ];
+
+  for (const country of commonHiringCountries) {
+    if (location.toLowerCase().includes(country.toLowerCase())) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+export const isRemoteOrVirtualUS = (location: string): boolean => {
   if (location && typeof location === 'string') {
-    return location.toLowerCase().includes('remote') || location.toLowerCase().includes('virtual');
+    return (location.toLowerCase().includes('remote') || location.toLowerCase().includes('virtual')) && isUnitedStates(location);
   }
 
   // Keep the net wide; we can really only filter out on-site and hybrid
   return true;
 }
-
-export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
-  if (jobs && jobs.length) {
-    return jobs
-      .filter(job => isExplicitlyRemoteOrVirtual(job?.location?.name))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
-      .map(filteredJob => greenhouseMapper(filteredJob));
-  }
-
-  return [];
-};
 
 // -------- CSV parsing
 

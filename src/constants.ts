@@ -37,52 +37,70 @@ const SENIORITY_EXCLUSIONS = [
   'vp',
 ];
 
+const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
+  const types = [
+    'algorithm',
+    'analysis',
+    'analytics',
+    'business value',
+    'capture',
+    'cloud security software',
+    'controls',
+    'core design',
+    'customer success',
+    'cybersecurity',
+    'detection',
+    'distribution',
+    'electrical',
+    'forecasting and optimization',
+    'hot cell design',
+    'mechanical',
+    'neutronics',
+    'presales',
+    'process',
+    'professional services',
+    'regulatory',
+    'safety',
+    'security',
+    'security risk',
+    'solutions',
+    'strike',
+    'support',
+  ];
+
+  return types.map(type => `${type} engineer`);
+}
+
 // Domains or role types that aren't a match
 const DOMAIN_OR_ROLE_EXCLUSIONS = [
-  'algorithm engineer',
   'analyst',
-  'analysis engineer',
-  'analytics engineer',
   'automation',
   'azure',
   'back end',
   'business development representative',
-  'capture engineer',
-  'controls engineer',
-  'cybersecurity engineer',
   'data',
   'designer',
-  'detection engineer',
   'devops',
   'devsecops',
-  'distribution engineer',
-  'electrical engineer',
   'fuel performance',
   'help desk',
   'java',
   'machine learning',
   'mechanical design',
-  'mechanical engineer',
   'ml',
   'network', // also doubles for resume drop
   'pki',
-  'presales engineer',
-  'process engineer',
   'product manager',
   'project manager',
-  'professional services engineer',
   'python',
   'qa',
   'release',
   'reliability',
-  'safety engineer',
   'salesforce',
-  'security engineer',
-  'solutions engineer',
-  'support engineer',
   'systems',
   'wordpress',
   'writer',
+  ...IRRELEVANT_TYPES_OF_ENGINEERS()
 ];
 
 const RESUME_DROP_KEYWORDS = [

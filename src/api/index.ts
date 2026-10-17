@@ -1,9 +1,10 @@
 import { GreenhouseMock } from '../mock/greenhouse';
 import type { Job } from '../types';
-import { flushOmittedTitles, greenhouseJobsHandler, toTitleCase } from '../utils';
+import { flushOmittedTitles, toTitleCase } from '../utils';
+import { greenhouseJobsHandler, leverJobsHandler } from '../utils/ats-specific-handlers';
 
 interface BoardConfig {
-  handler: (jobs: any[]) => Job[] | null, // TODO finish typing this properly to cover all types of API responses
+  handler: (jobs: any[], params?: any) => Job[] | null, // TODO finish typing this properly to cover all types of API responses
   name: string,
   url: (board_token: string) => string,
 }
@@ -15,6 +16,42 @@ const BOARD_CONFIGS: BoardConfig[] = [
     handler: greenhouseJobsHandler,
     name: 'Greenhouse',
     url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
+  },
+  {
+    handler: leverJobsHandler,
+    name: 'Lever',
+    url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Ashby',
+    url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Workable',
+    url: (board_token: string): string => `https://apply.workable.com/api/v1/accounts/${board_token}/jobs`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Paylocity',
+    url: (board_token: string): string => `https://recruiting.paylocity.com/Recruiting/Jobs/All/${board_token}`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Workday',
+    url: (board_token: string): string => `https://${board_token}.com/workday-jobs.json`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Rippling',
+    url: (board_token: string): string => `https://ats.rippling.com/en-US/${board_token}/jobs`
+  },
+  {
+    handler: () => {}, // TODO
+    name: 'Jobvite',
+    url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  
   }
 ];
 
@@ -29,10 +66,10 @@ const settleWithLimit = async <R>(
   const worker = async (): Promise<void> => {
     while (nextIndex < companiesToFetch.length) {
       const index = nextIndex++;
-      const [, companyIdentifier] = companiesToFetch[index];
+      const [, companyIdentifier, companyName] = companiesToFetch[index];
 
       try {
-        results[index] = { status: 'fulfilled', value: await fetchJobs(provider, companyIdentifier) };
+        results[index] = { status: 'fulfilled', value: await fetchJobs(provider, companyIdentifier, companyName) };
       } catch (reason) {
         results[index] = { status: 'rejected', reason };
       }
@@ -100,6 +137,7 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<Response>
 export const fetchJobs = async (
   boardName: string,
   companyIdentifier: string,
+  companyName: string
 ): Promise<any> => { // Fix the any type here
   const config = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
 
@@ -116,7 +154,7 @@ export const fetchJobs = async (
 
     const json = await response.json();
 
-    return config.handler(json.jobs);
+    return config.handler(json.jobs, companyName);
   } catch (error) {
     throw new Error(`Service call failed: ${error}`);
   }

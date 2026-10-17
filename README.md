@@ -43,3 +43,6 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Have a section for omitted job titles so the person filling in the keywords can make sure they aren't filtering out anything they want to see
 - Add a loading state when the jobs are fetching so it's clear that service calls are being made. Should I add a progress bar for this?
 - Implement a dark mode
+- Add filters, search for homepage
+- Refine the remote/virtual filter to filter out other countries
+- Create a button for "I've already applied" to remove a job from the list

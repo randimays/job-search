@@ -2,13 +2,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   cleanUpAPIString,
   formatDate,
-  greenhouseJobsHandler,
-  greenhouseMapper,
-  isExplicitlyRemoteOrVirtual,
+  isRemoteOrVirtualUS,
   isPotentialJobMatch,
+  isUnitedStates,
   toTitleCase,
 } from '../../utils';
-import { GreenhouseMock } from '../../mock/greenhouse';
 import { useJobs } from '../../store';
 
 describe('formatDate', () => {
@@ -62,30 +60,6 @@ describe('cleanUpAPIString', () => {
 
   it('handles strings with extra white space', () => {
     expect(cleanUpAPIString('  Front End Developer ')).toBe('Front End Developer');
-  });
-});
-
-describe('greenhouseMapper', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date(2026, 9, 14, 12, 0, 0));
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
-  const mockEntry = GreenhouseMock[0];
-
-  it('properly formats an API entry from Greenhouse', () => {
-    expect(greenhouseMapper(mockEntry)).toEqual({
-      companyName: 'Capital Technology Group',
-      id: 5187306007,
-      published: new Date('2026-07-14T23:10:14-04:00'),
-      title: 'Associate Recruiter',
-      updated: new Date('2026-10-02T10:14:01-04:00'),
-      url: 'https://boards.greenhouse.io/capitaltg/jobs/5187306007?gh_jid=5187306007'
-    });
   });
 });
 
@@ -179,7 +153,21 @@ describe('isPotentialJobMatch', () => {
   });
 });
 
-describe('isExplicitlyRemoteOrVirtual', () => {
+describe('isUnitedStates', () => {
+  it('handles locations correctly', () => {
+    expect(isUnitedStates('Canada')).toBe(false);
+    expect(isUnitedStates('ireland')).toBe(false);
+    expect(isUnitedStates('india')).toBe(false);
+    expect(isUnitedStates('ARGENTINA')).toBe(false);
+    expect(isUnitedStates('Mexico')).toBe(false);
+    expect(isUnitedStates('United States')).toBe(true);
+    expect(isUnitedStates('U.S.')).toBe(true);
+    expect(isUnitedStates('US')).toBe(true);
+    expect(isUnitedStates('North America')).toBe(true);
+  });
+});
+
+describe('isRemoteOrVirtualUS', () => {
   const testPermutations = (keyword: string) => {
     const permutations = [
       keyword,
@@ -194,41 +182,12 @@ describe('isExplicitlyRemoteOrVirtual', () => {
     ]
 
     permutations.forEach(permutation => {
-      expect(isExplicitlyRemoteOrVirtual(permutation)).toBe(true);
+      expect(isRemoteOrVirtualUS(permutation)).toBe(true);
     });
   };
 
   it('correctly identifies explicitly remote or virtual jobs', () => {
     testPermutations('remote');
     testPermutations('virtual');
-  });
-});
-
-describe('greenhouseJobsHandler', () => {
-  it('handles empty jobs array', () => {
-    expect(greenhouseJobsHandler([])).toEqual([]);
-  });
-
-  it('correctly filters a list of jobs per the given keywords', () => {
-    const jobs = GreenhouseMock;
-
-    expect(greenhouseJobsHandler(jobs)).toEqual([
-      {
-        companyName: 'Capital Technology Group',
-        id: 5147833007,
-        published: new Date('2026-06-09T11:21:53-04:00'),
-        title: 'Full Stack Engineer',
-        updated: new Date('2026-09-18T07:18:55-04:00'),
-        url: 'https://boards.greenhouse.io/capitaltg/jobs/5147833007?gh_jid=5147833007',
-      },
-      {
-        companyName: 'Capital Technology Group',
-        id: 5239695007,
-        published: new Date('2026-09-16T08:59:35-04:00'),
-        title: 'Software Developer',
-        updated: new Date('2026-09-16T08:59:35-04:00'),
-        url: 'https://boards.greenhouse.io/capitaltg/jobs/5239695007?gh_jid=5239695007',
-      }
-    ])
   });
 });
