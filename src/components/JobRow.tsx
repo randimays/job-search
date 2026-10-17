@@ -22,16 +22,12 @@ const JobRow = ({ job }: JobRowProps): ReactElement | null => {
 
   return (
     <tr>
-      <td>
-        {published ? <span>{formatDate(published)}</span> : null}
-      </td>
+      <td>{formatDate(updated)}</td>
       <td>{companyName}</td>
-      <td><a href={url}>{title} &#8250;</a></td>
+      <td><a href={url} target="_blank">{title} &#8250;</a></td>
+      <td>{formatDate(published)}</td>
       <td>
-        {updated ? <span>{formatDate(updated)}</span> : null}
-      </td>
-      <td>
-        {deadline ? <span>{formatDate(deadline)}</span> : null}
+        {deadline ? <span>{formatDate(deadline)}</span> : '--'}
       </td>
     </tr>
   );

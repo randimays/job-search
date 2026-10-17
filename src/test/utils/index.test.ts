@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   cleanUpAPIString,
-  convertAPIDate,
   formatDate,
   greenhouseJobsHandler,
   greenhouseMapper,
@@ -10,6 +9,7 @@ import {
   toTitleCase,
 } from '../../utils';
 import { GreenhouseMock } from '../../mock/greenhouse';
+import { useJobs } from '../../store';
 
 describe('formatDate', () => {
   beforeEach(() => {
@@ -48,26 +48,6 @@ describe('toTitleCase', () => {
     expect(toTitleCase('greenhouse')).toBe('Greenhouse');
     expect(toTitleCase('GREENHOUSE')).toBe('Greenhouse');
     expect(toTitleCase('greenhouse platform')).toBe('Greenhouse Platform');
-  });
-});
-
-describe('convertAPIDate', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date(2026, 9, 14, 12, 0, 0));
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
-  it('handles null dates', () => {
-    expect(convertAPIDate(null)).toBeNull();
-  });
-
-  it('handles defined dates correctly', () => {
-    expect(convertAPIDate('2026-10-14T10:43:28-04:00')?.toString()).toMatch(/Oct/);
-    expect(convertAPIDate('2026-10-14T10:43:28-04:00')!.toString()).toMatch(/Oct/);
   });
 });
 
@@ -111,6 +91,10 @@ describe('greenhouseMapper', () => {
 });
 
 describe('isPotentialJobMatch', () => {
+  beforeEach(() => {
+    useJobs.setState({ omittedTitles: new Set() })
+  });
+
   const MATCHING_JOB_TITLES = [
     'Development Engineer',
     'Digital Developer',

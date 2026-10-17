@@ -55,7 +55,6 @@
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
@@ -64,5 +63,5 @@
 }
 
 body {
-  margin: 16px;
+  margin: 16px auto;
 }

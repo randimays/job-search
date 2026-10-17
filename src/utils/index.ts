@@ -1,5 +1,6 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
 import type { GreenhouseJobApiFormat, Job } from '../types';
+import { useJobs } from '../store';
 
 // -------- Data formatting
 
@@ -9,7 +10,7 @@ export const formatDate = (date: Date = new Date()): string => {
     return 'Invalid date';
   }
 
-  return new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric'});
+  return new Date(date).toLocaleDateString();
 };
 
 export const toTitleCase = (value: string): string => {
@@ -26,14 +27,6 @@ export const toTitleCase = (value: string): string => {
 
 // -------- Job formatting (from API, for display)
 
-export const convertAPIDate = (date: string | null): Date | null => {
-  if (!date || typeof date !== 'string') {
-    return null;
-  }
-
-  return new Date(date);
-};
-
 export const cleanUpAPIString = (value?: string | null): string => {
   if (!value || typeof value !== 'string') {
     return '';
@@ -46,11 +39,11 @@ export const cleanUpAPIString = (value?: string | null): string => {
 export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => {
   return {
     companyName: cleanUpAPIString(job.company_name),
-    deadline: convertAPIDate(job.application_deadline),
+    deadline: job?.application_deadline ? new Date(job.application_deadline) : null,
     id: job?.id || null,
-    published: convertAPIDate(job.first_published),
+    published: new Date(job.first_published),
     title: cleanUpAPIString(job.title),
-    updated: convertAPIDate(job?.updated_at),
+    updated: new Date(job?.updated_at),
     url: cleanUpAPIString(job.absolute_url),
   }
 };
@@ -78,10 +71,19 @@ const buildRegexMatcher = (keywords: string[], wholeWord = false): RegExp =>
 
 const matches = buildRegexMatcher(ROLE_MATCHERS);
 const exclusions = buildRegexMatcher(ROLE_EXCLUSIONS, true);
+const omittedTitles: string[] = [];
+
+export const flushOmittedTitles = (): void => {
+  if (!omittedTitles.length) {
+    return;
+  }
+
+  useJobs.getState().addOmittedTitles(omittedTitles);
+};
 
 // Checks against the ROLE_MATCHERS and ROLE_EXCLUSIONS lists (in constants.ts)
 // to filter for potential matches by keywords
-export const isPotentialJobMatch = (title: string, omittedTitles: string[]): boolean => {
+export const isPotentialJobMatch = (title: string): boolean => {
   if (!title || typeof title !== 'string') {
     console.error('isPotentialJobMatch: invalid or missing job title');
     return true;
@@ -106,15 +108,11 @@ export const isExplicitlyRemoteOrVirtual = (location: string): boolean => {
 }
 
 export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
-  const omittedTitles: string[] = [];
-  let filteredJobs: GreenhouseJobApiFormat[] = [];
-
   if (jobs && jobs.length) {
-    filteredJobs = jobs
+    return jobs
       .filter(job => isExplicitlyRemoteOrVirtual(job?.location?.name))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, omittedTitles)) || [];
-
-    return filteredJobs.map(filteredJob => greenhouseMapper(filteredJob));
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+      .map(filteredJob => greenhouseMapper(filteredJob));
   }
 
   return [];

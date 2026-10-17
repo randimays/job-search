@@ -21,3 +21,4 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - If the job no longer returns from the API, it should be deleted from the database
 - If I mark that I am not a match or not interested in a job, it should be deleted from the database
 - The table displaying on the screen should be information from the SQLite database, not from the APIs themselves.
+- Have a section for omitted job titles so the person filling in the keywords can make sure they aren't filtering out anything they want to see

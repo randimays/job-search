@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
 export interface JobsState {
-  omittedTitles: string[],
+  omittedTitles: Set<string>,
   addOmittedTitles: (titles: string[]) => void
 }
 
 export const useJobs = create<JobsState>()(set => ({
-  omittedTitles: [],
+  omittedTitles: new Set(),
   addOmittedTitles: (titles: string[]) => 
-    set(state => ({ omittedTitles: [...state.omittedTitles, ...titles]}))
+    set(state => ({ omittedTitles: new Set([...state.omittedTitles, ...titles])}))
 }));

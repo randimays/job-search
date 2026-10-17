@@ -7,24 +7,37 @@ interface JobsTableProps {
 }
 
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
-  // console.log("🚀 ~ JobsTable ~ jobs:", jobs)
+  console.log("🚀 ~ JobsTable ~ jobs:", jobs)
   if (!jobs || !jobs.length) {
     return <p className="mt-12">No suitable jobs found for today.</p>;
   }
 
+  const flattenedJobs = jobs.flat();
+  const sortedJobs = flattenedJobs.sort((a: Job, b: Job) => {
+    if (a.updated < b.updated) {
+      return 1;
+    }
+
+    if (a.updated > b.updated) {
+      return -1;
+    }
+
+    return 0;
+  });
+
   return (
     <table className="table-auto mt-12 border border-gray-500 rounded-md">
-      <thead className="text-base font-semibold">
+      <thead className="text-base text-left font-semibold">
         <tr>
-          <th>Published</th>
+          <th>Last Updated</th>
           <th>Company Name</th>
           <th>Title</th>
-          <th>Last Updated</th>
+          <th>Published</th>
           <th>Deadline</th>
         </tr>
       </thead>
-      <tbody>
-        {jobs.map(job => <JobRow key={job.id} job={job} />)}
+      <tbody className="text-sm">
+        {sortedJobs.map(job => <JobRow key={job.id} job={job} />)}
       </tbody>
     </table>
   )

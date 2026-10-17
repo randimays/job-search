@@ -24,8 +24,8 @@ export interface Job {
   companyName: string,
   deadline: Date | null,
   id: number | null,
-  published: Date | null,
+  published: Date,
   title: string,
-  updated: Date | null,
+  updated: Date,
   url: string
 }

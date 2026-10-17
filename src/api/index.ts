@@ -1,6 +1,6 @@
 import { GreenhouseMock } from '../mock/greenhouse';
 import type { Job } from '../types';
-import { greenhouseJobsHandler, toTitleCase } from '../utils';
+import { flushOmittedTitles, greenhouseJobsHandler, toTitleCase } from '../utils';
 
 interface BoardConfig {
   handler: (jobs: any[]) => Job[] | null, // TODO finish typing this properly to cover all types of API responses
@@ -14,7 +14,7 @@ const BOARD_CONFIGS: BoardConfig[] = [
   {
     handler: greenhouseJobsHandler,
     name: 'Greenhouse',
-    url: (board_token: string): string => `https://api.greenhouse.io/v1/boards/${board_token}/jobs`
+    url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
   }
 ];
 
@@ -40,6 +40,8 @@ const settleWithLimit = async <R>(
   };
 
   await Promise.all(Array.from({ length: Math.min(limit, companiesToFetch.length) }, worker));
+
+  flushOmittedTitles();
 
   return results;
 };
@@ -80,13 +82,16 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<Response>
       5,
     );
 
-    jobs = results
+    jobs.push(...results
       .flatMap(result => result.status === 'fulfilled' ? [result.value] : [])
-      .filter(arr => arr.length > 0);
+      .filter(arr => arr.length > 0));
+    console.log('this thing: ', results
+      .flatMap(result => result.status === 'fulfilled' ? [result.value] : [])
+      .filter(arr => arr.length > 0));
 
-    failures = results.flatMap((result, index) => 
+    failures.push(...results.flatMap((result, index) => 
       result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []
-    );
+    ));
   }
 
   return {
@@ -95,7 +100,10 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<Response>
   };
 };
 
-export const fetchJobs = async (boardName: string, companyIdentifier: string): Promise<any> => { // Fix the any type here
+export const fetchJobs = async (
+  boardName: string,
+  companyIdentifier: string,
+): Promise<any> => { // Fix the any type here
   const config = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
 
   if (!config || !config.url) {
