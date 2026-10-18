@@ -3,17 +3,20 @@ import { prepareForApiCalls } from './api';
 import JobsTable from './components/JobsTable';
 import { formatDate, parseCsv } from './utils';
 import csv from './data/jobBoards.csv?raw';
-import type { Job } from './types';
+import type { Failure, Job } from './types';
 import { useJobs } from './store';
 import type { JobsState } from './store';
 import FailuresTable from './components/FailuresTable';
+import NoResults from './components/NoResults';
 
 function App() {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [failures, setFailures] = useState<Job[]>([]);
+  const [failures, setFailures] = useState<Failure[]>([]);
+  const [noResultsCompanies, setNoResultsCompanies] = useState<string[]>([]);
   const today = formatDate();
   const omittedTitlesSet = useJobs((state: JobsState) => state.omittedTitles);
   const omittedTitlesArray = [...omittedTitlesSet].sort();
+  const fetchingJobs = useJobs((state: JobsState) => state.fetchingJobs);
 
   useEffect(() => {
     if (!jobs.length) {
@@ -22,12 +25,18 @@ function App() {
       const fetchData = async () => {
         const response = await prepareForApiCalls(csvToArray);
 
+        console.log('response: ', response);
+
         if (response?.jobs) {
           setJobs(response.jobs);
         }
 
         if (response?.failures) {
           setFailures(response.failures);
+        }
+
+        if (response?.noResults) {
+          setNoResultsCompanies(response.noResults);
         }
       };
 
@@ -37,11 +46,13 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold">Job search for {today}</h1>
-      { jobs && (
+      <h1 className="text-3xl text-center font-bold">Job search for {today}</h1>
+      { !fetchingJobs && jobs && (
         <JobsTable jobs={jobs} />
       )}
-      <h2 className="text-2xl font-bold mt-20">Omitted Jobs</h2>
+      { fetchingJobs && <p className="mt-20">Attempting to retrieve job listings for today...</p> }
+      { noResultsCompanies.length && <NoResults noResultsCompanies={noResultsCompanies} /> }
+      <h2 className="text-2xl text-center font-bold mt-20">Omitted Jobs</h2>
       {!omittedTitlesArray.length && <p className="mt-12">If there are omitted titles when the search is completed, you'll see them here.</p>}
       {omittedTitlesArray.length ? (
         <>

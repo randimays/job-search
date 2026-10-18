@@ -1,7 +1,7 @@
-import { GreenhouseMock } from '../mock/greenhouse';
 import type { Failure, Job } from '../types';
 import { flushOmittedTitles, toTitleCase } from '../utils';
 import { ashbyJobsHandler, greenhouseJobsHandler, leverJobsHandler, paylocityJobsHandler, workableJobsHandler } from '../utils/ats-specific-handlers';
+import { useJobs } from '../store';
 
 interface BoardConfig {
   handler: (jobs: any[], params?: any) => Job[] | null, // TODO finish typing this properly to cover all types of API responses
@@ -15,44 +15,53 @@ type Batches = Record<string, string[][]>;
 
 // Comment out various sections to speed up local API calls while dev'ing
 const BOARD_CONFIGS: BoardConfig[] = [
-//   {
-//     handler: greenhouseJobsHandler,
-//     name: 'Greenhouse',
-//     url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
-//   },
-//   {
-//     handler: leverJobsHandler,
-//     name: 'Lever',
-//     url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`
-//   },
-//   {
-//     handler: ashbyJobsHandler,
-//     name: 'Ashby',
-//     url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`
-//   },
+  // {
+  //   handler: greenhouseJobsHandler,
+  //   name: 'Greenhouse',
+  //   url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
+  // },
+  {
+    handler: leverJobsHandler,
+    name: 'Lever',
+    url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`,
+    parse: async (response) => {
+      const data = await response.json();
+
+      if (!Array.isArray(data)) {
+        throw new Error('Unexpected Lever response shape');
+      }
+
+      return data.flatMap(department => department.postings);
+    }
+  },
+  // {
+  //   handler: ashbyJobsHandler,
+  //   name: 'Ashby',
+  //   url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`
+  // },
   // {
   //   handler: workableJobsHandler,
   //   name: 'Workable',
   //   url: (board_token: string): string => `https://apply.workable.com/api/v1/widget/accounts/${board_token}?details=true`
   // },
-  {
-    handler: paylocityJobsHandler,
-    name: 'Paylocity',
-    url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
-    parse: async (response) => {
-      const html = await response.text();
-      const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
+  // {
+  //   handler: paylocityJobsHandler,
+  //   name: 'Paylocity',
+  //   url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
+  //   parse: async (response) => {
+  //     const html = await response.text();
+  //     const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
 
-      if (!match) {
-        throw new Error('Paylocity pageData not found in response');
-      }
+  //     if (!match) {
+  //       throw new Error('Paylocity pageData not found in response');
+  //     }
 
-      const pageData = JSON.parse(match[1]);
+  //     const pageData = JSON.parse(match[1]);
       
-      return (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
-    },
-    concurrency: 2
-  },
+  //     return (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
+  //   },
+  //   concurrency: 2
+  // },
   // {
   //   handler: () => {}, // TODO
   //   name: 'Workday',
@@ -78,7 +87,7 @@ const settleWithLimit = async <R>(
 ): Promise<PromiseSettledResult<R>[]> => {
   const results: PromiseSettledResult<R>[] = new Array(companiesToFetch.length);
   let nextIndex = 0;
-
+  
   const worker = async (): Promise<void> => {
     while (nextIndex < companiesToFetch.length) {
       const index = nextIndex++;
@@ -99,15 +108,19 @@ const settleWithLimit = async <R>(
   return results;
 };
 
-interface Response {
+interface JobsResponse {
   jobs: Job[],
-  failures: Failure[]
+  failures: Failure[],
+  noResults: string[]
 }
 
-export const prepareForApiCalls = async (csvData: string[][]): Promise<Response> => {
+export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsResponse> => {
   let batches: Batches = {};
   let jobs: Job[] = [];
   let failures: Failure[] = [];
+  let noResults: string[] = [];
+
+  useJobs.getState().setFetchingJobs(true);
   
   // Create an object with key:value pairs where the key is a provider (e.g. Greenhouse)
   // and the value is all of the rows in the spreadsheet for companies that use that provider
@@ -125,24 +138,30 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<Response>
   }
 
   // Loop through each of the providers from the above object and create Promises for each,
-  // then call the API in batches of 5 to prevent rate-limiting. Return job results and failed
+  // then call the API in batches of 2-5 to prevent rate-limiting. Return job results and failed calls
   for (const provider in batches) {
     const rows = batches[provider];
-
     const config = BOARD_CONFIGS.find(c => c.name === provider)!;
     const results = await settleWithLimit<any>(rows, provider, config.concurrency ?? 5);  // Fix the type here when fetchJobs is fixed
 
     jobs.push(...results
       .flatMap(result => result.status === 'fulfilled' ? [result.value] : []));
 
+    noResults.push(...results.flatMap((result, index) =>
+      result.status === 'fulfilled' && !result.value?.length ? [rows[index][2]] : []
+    ));
+
     failures.push(...results.flatMap((result, index) => 
       result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []
     ));
   }
 
+  useJobs.getState().setFetchingJobs(false);
+
   return {
     jobs,
-    failures
+    failures,
+    noResults,
   };
 };
 
@@ -191,11 +210,6 @@ const fetchJobsUncached = async (
   } catch (error) {
     throw new Error(`Service call failed: ${error}`);
   }
-
-  // Uncomment the below to use a mock response instead of real API calls
-  // let response = GreenhouseMock;
-  // const formattedJobs = config.handler(response);
-  // return formattedJobs;
 }
 
 export const fetchJobs = (boardName: string, companyIdentifier: string, companyName: string): Promise<any> => {

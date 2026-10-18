@@ -87,6 +87,10 @@ export const isPotentialJobMatch = (title: string): boolean => {
 };
 
 export const isUnitedStates = (location: string): boolean => {
+  if (!location || typeof location !== 'string') {
+    console.error('isUnitedStates: invalid or missing job location');
+  }
+
   const commonHiringCountries = [
     'UK', 'United Kingdom', 'Canada', 'Ireland', 'India', 'Mexico', 'Argentina',
   ];
