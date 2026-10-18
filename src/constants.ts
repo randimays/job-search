@@ -33,6 +33,7 @@ const SENIORITY_EXCLUSIONS = [
   'principal',
   'sales',
   'staff',
+  'vice president',
   'volunteer',
   'vp',
 ];
@@ -49,6 +50,7 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'core design',
     'customer success',
     'cybersecurity',
+    'database',
     'detection',
     'distribution',
     'electrical',
@@ -73,11 +75,13 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
 
 // Domains or role types that aren't a match
 const DOMAIN_OR_ROLE_EXCLUSIONS = [
+  'ai platform',
   'analyst',
   'automation',
   'azure',
   'back end',
   'business development representative',
+  'computation',
   'data',
   'designer',
   'devops',
@@ -88,6 +92,7 @@ const DOMAIN_OR_ROLE_EXCLUSIONS = [
   'machine learning',
   'mechanical design',
   'ml',
+  'netsuite',
   'network', // also doubles for resume drop
   'pki',
   'product manager',

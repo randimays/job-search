@@ -33,7 +33,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - For each job, give me the option to evaluate it against my resume/cover letter qualifications and soft skills using a score from 0-100. Allow me to put a numerical threshold on the match percentage (say, minimum 65%) before recommending I apply to the job
 - If a job is older than a month, flag it as "Old post"
 - Group jobs by company
-- Implement caching so subsequent page reloads do not re-call any APIs (data should live for 24 hours)
+- Implement caching so subsequent page reloads do not re-call any APIs (data should live for 24 hours, how long does browser keep them around for?)
 - For later than MVP, create a spreadsheet of all of the companies by their job boards with their identifier and make constants for each one that has an API available (Greenhouse, Ashby, etc.)
 - Separate out bookmarks where there is no API to call the job board and I'll need to keep checking those manually
 - Use a local SQLite database to store data that is pulled that matches the requirements (is remote engineering job). The company name and ID for the posting should be unique
@@ -46,3 +46,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Add filters, search for homepage
 - Refine the remote/virtual filter to filter out other countries
 - Create a button for "I've already applied" to remove a job from the list
+
+## Notes
+
+- ADP does not have a publicly-accessible API to call for jobs

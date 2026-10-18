@@ -34,7 +34,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
             <th className="p-2 border border-gray-300 dark:border-gray-600">Company Name</th>
             <th className="p-2 border border-gray-300 dark:border-gray-600">Title</th>
             <th className="p-2 border border-gray-300 dark:border-gray-600">Published</th>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">Deadline</th>
+            <th className="p-2 border border-gray-300 dark:border-gray-600">ID</th>
           </tr>
         </thead>
         <tbody className="text-sm">
