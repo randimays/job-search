@@ -1,4 +1,4 @@
-import type { LeverJobApiFormat } from '../types';
+import type { LeverJobApiFormat } from '../types/job-api-format';
 
 export const LeverMock: LeverJobApiFormat[] = [
   {

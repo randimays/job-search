@@ -1,4 +1,4 @@
-import type { PaylocityJobApiFormat } from '../types';
+import type { PaylocityJobApiFormat } from '../types/job-api-format';
 
 export const PaylocityMock: PaylocityJobApiFormat[] = [
   {

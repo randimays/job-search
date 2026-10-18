@@ -1,84 +1,15 @@
 import type { Failure, Job } from '../types';
 import { flushOmittedTitles, toTitleCase } from '../utils';
-import { ashbyJobsHandler, greenhouseJobsHandler, leverJobsHandler, paylocityJobsHandler, workableJobsHandler } from '../utils/ats-specific-handlers';
 import { useJobs } from '../store';
-
-interface BoardConfig {
-  handler: (jobs: any[], params?: any) => Job[] | null, // TODO finish typing this properly to cover all types of API responses
-  name: string,
-  url: (board_token: string) => string,
-  parse?: (response: Response) => Promise<any[]>, // defaults to JSON .jobs
-  concurrency?: number
-}
+import { BOARD_CONFIGS } from './board-configs';
 
 type Batches = Record<string, string[][]>;
 
-// Comment out various sections to speed up local API calls while dev'ing
-const BOARD_CONFIGS: BoardConfig[] = [
-  // {
-  //   handler: greenhouseJobsHandler,
-  //   name: 'Greenhouse',
-  //   url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`
-  // },
-  {
-    handler: leverJobsHandler,
-    name: 'Lever',
-    url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`,
-    parse: async (response) => {
-      const data = await response.json();
-
-      if (!Array.isArray(data)) {
-        throw new Error('Unexpected Lever response shape');
-      }
-
-      return data.flatMap(department => department.postings);
-    }
-  },
-  // {
-  //   handler: ashbyJobsHandler,
-  //   name: 'Ashby',
-  //   url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`
-  // },
-  // {
-  //   handler: workableJobsHandler,
-  //   name: 'Workable',
-  //   url: (board_token: string): string => `https://apply.workable.com/api/v1/widget/accounts/${board_token}?details=true`
-  // },
-  // {
-  //   handler: paylocityJobsHandler,
-  //   name: 'Paylocity',
-  //   url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
-  //   parse: async (response) => {
-  //     const html = await response.text();
-  //     const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
-
-  //     if (!match) {
-  //       throw new Error('Paylocity pageData not found in response');
-  //     }
-
-  //     const pageData = JSON.parse(match[1]);
-      
-  //     return (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
-  //   },
-  //   concurrency: 2
-  // },
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Workday',
-  //   url: (board_token: string): string => `https://${board_token}.com/workday-jobs.json`
-  // },
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Rippling',
-  //   url: (board_token: string): string => `https://ats.rippling.com/en-US/${board_token}/jobs`
-  // },
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Jobvite',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
-  
-  // }
-];
+interface JobsResponse {
+  jobs: Job[],
+  failures: Failure[],
+  noResults: string[]
+}
 
 const settleWithLimit = async <R>(
   companiesToFetch: string[][],
@@ -107,12 +38,6 @@ const settleWithLimit = async <R>(
 
   return results;
 };
-
-interface JobsResponse {
-  jobs: Job[],
-  failures: Failure[],
-  noResults: string[]
-}
 
 export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsResponse> => {
   let batches: Batches = {};

@@ -1,4 +1,4 @@
-import type { WorkableJobApiFormat } from '../types';
+import type { WorkableJobApiFormat } from '../types/job-api-format';
 
 export const WorkableMock: WorkableJobApiFormat[] = [
   {

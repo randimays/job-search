@@ -1,4 +1,4 @@
-import type { GreenhouseJobApiFormat } from '../types';
+import type { GreenhouseJobApiFormat } from '../types/job-api-format';
 
 export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {

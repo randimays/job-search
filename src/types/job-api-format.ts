@@ -31,6 +31,62 @@ export interface AshbyJobApiFormat {
   }
 }
 
+export interface BambooHrJobApiFormat {
+  id: string,
+  jobOpeningName: string,
+  departmentId: string,
+  departmentLabel: string,
+  employmentStatusLabel: string,
+  employmentType: string | null,
+  location: {
+    city: string | null,
+    state: string | null
+  },
+  atsLocation: {
+    country: string | null,
+    state: string | null,
+    province: string | null,
+    city: string | null,
+  },
+  isRemote: boolean | null,
+  locationType: string
+}
+
+export interface GemJobsApiFormat {
+  absolute_url: string,
+  content: string,
+  content_plain: string,
+  created_at: Date,
+  departments: {
+    child_ids: string[],
+    id: string,
+    name: string,
+    parent_id: string | null
+  }[],
+  employment_type: string,
+  first_published_at: Date,
+  id: string,
+  internal_job_id: string,
+  location: {
+    name: string,
+  },
+  location_type: string,
+  offices: {
+    child_ids: string[],
+    child_office_external_ids: string[],
+    id: string,
+    location: {
+      name: string
+    },
+    name: string,
+    parent_id: string | null,
+    parent_office_external_id: string | null
+  }[],
+  requisition_id: string,
+  title: string,
+  updated_at: Date
+}
+
 export interface GreenhouseJobApiFormat {
   absolute_url: string,
   application_deadline: string | null,
@@ -116,6 +172,20 @@ export interface PaylocityJobApiFormat {
   IndeedRemoteType: number
 }
 
+export interface RipplingJobApiFormat {
+  uuid: string,
+  name: string,
+  department: {
+    id: string,
+    label: string
+  },
+  url: string,
+  workLocation: {
+    label: string,
+    id: string
+  }
+}
+
 export interface WorkableJobApiFormat {
   title: string,
   shortcode: string,
@@ -143,23 +213,4 @@ export interface WorkableJobApiFormat {
     hidden: boolean
   }[],
   description: string
-}
-
-// -------- App types
-
-export interface Job {
-  companyName: string,
-  id: string | null,
-  published: Date,
-  title: string,
-  updated: Date,
-  url: string
-}
-
-export interface Failure {
-  reason: {
-    message: string,
-    stack: string
-  },
-  row: string[]
 }

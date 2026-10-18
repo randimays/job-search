@@ -46,7 +46,9 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Add filters, search for homepage
 - Refine the remote/virtual filter to filter out other countries
 - Create a button for "I've already applied" to remove a job from the list
+- Add linting rules
+- Make sure that companies that are flagged as no jobs / no matching jobs actually have a successful service call
 
 ## Notes
 
-- ADP does not have a publicly-accessible API to call for jobs
+- ADP & ICIMS do not have a publicly-accessible API to call for jobs
