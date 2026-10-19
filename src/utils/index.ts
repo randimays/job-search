@@ -1,5 +1,6 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
 import { useJobs } from '../store';
+import { COMMON_HIRING_COUNTRIES } from '../constants';
 
 // -------- Data formatting
 
@@ -91,11 +92,7 @@ export const isUnitedStates = (location: string): boolean => {
     console.error('isUnitedStates: invalid or missing job location');
   }
 
-  const commonHiringCountries = [
-    'UK', 'United Kingdom', 'Canada', 'Ireland', 'India', 'Mexico', 'Argentina',
-  ];
-
-  for (const country of commonHiringCountries) {
+  for (const country of COMMON_HIRING_COUNTRIES) {
     if (location.toLowerCase().includes(country.toLowerCase())) {
       return false;
     }
@@ -121,4 +118,33 @@ export const parseCsv = (fileContents: string): any => {
     .map((row: string): string[] => {
       return row.split(',');
     });
+};
+
+// Job mapping
+
+export const determinePublishDateForWorkday = (postedOn: string, companyName: string): Date => {
+  const today = new Date();
+
+  if (postedOn.startsWith('Posted')) {
+    const parts = postedOn.split(' ');
+    let numberOfDaysAgo: number;
+
+    if (parts?.[1].includes('+')) { // It says 'Posted 30+ Days Ago'
+      numberOfDaysAgo = 30;
+    } else {
+      numberOfDaysAgo = +parts?.[1];
+    }
+    
+    if (isNaN(numberOfDaysAgo)) {
+      console.error(`determinePublishDateForWorkday: ${numberOfDaysAgo} for ${companyName} is NaN`);
+      return today;
+    }
+
+    const pastDate = new Date(today);
+    pastDate.setDate(pastDate.getDate() - numberOfDaysAgo);
+
+    return pastDate; 
+  }
+
+  return today;
 };

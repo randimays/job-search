@@ -6,10 +6,11 @@ import type {
   LeverJobPosting,
   PaylocityJobApiFormat,
   RipplingJobApiFormat,
-  WorkableJobApiFormat
+  WorkableJobApiFormat,
+  WorkdayJobApiFormat
 } from '../types/job-api-format';
 import type { Job } from '../types';
-import { cleanUpAPIString } from '.';
+import { cleanUpAPIString, determinePublishDateForWorkday } from '.';
 
 // -------- Mappers
 // Used to map an API response to a Job type for easy formatting
@@ -98,6 +99,17 @@ export const workableMapper = (job: WorkableJobApiFormat, companyName: string): 
     published: new Date(job?.created_at),
     title: cleanUpAPIString(job.title),
     updated: new Date(job.published_on),
+    url: job?.url
+  };
+};
+
+export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Job => {
+  return {
+    companyName,
+    id: job?.bulletFields[0],
+    published: determinePublishDateForWorkday(job?.postedOn, companyName),
+    title: cleanUpAPIString(job.title),
+    updated: determinePublishDateForWorkday(job?.postedOn, companyName),
     url: job?.url
   };
 };

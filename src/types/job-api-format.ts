@@ -214,3 +214,12 @@ export interface WorkableJobApiFormat {
   }[],
   description: string
 }
+
+export interface WorkdayJobApiFormat {
+  title: string,
+  externalPath: string,
+  locationsText: string,
+  postedOn: string,
+  bulletFields: string[],
+  url: string
+}

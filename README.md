@@ -48,6 +48,9 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Create a button for "I've already applied" to remove a job from the list
 - Add linting rules
 - Make sure that companies that are flagged as no jobs / no matching jobs actually have a successful service call
+- Test for performance, see where bottlenecks are and improve caching, fetching and retries
+- Fix all the "any" types
+- Make links out of the omitted jobs so if anything comes up in there that I'm interested in, I can go directly to it
 
 ## Notes
 

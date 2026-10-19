@@ -92,9 +92,9 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const fetchWithRetry = async (url: string, retries = 3): Promise<globalThis.Response> => {
+const fetchWithRetry = async (url: string, retries = 3, options = {}): Promise<globalThis.Response> => {
   for (let attempt = 0; ; attempt++) {
-    const response = await fetch(url);
+    const response = await fetch(url, { ...options });
 
     if (response.status !== 429 || attempt >= retries) return response;
 
@@ -137,15 +137,57 @@ const fetchJobsUncached = async (
   }
 }
 
+export const fetchWorkdayJobs = async (rowData: string, companyName: string): Promise<any> => {
+  const config = BOARD_CONFIGS.filter(board => board.name === 'Workday')?.[0];
+  const companyUrl = config.url(rowData);
+  const limit = 20;
+  const postings: any[] = [];
+  let total = Infinity;
+
+  for (let offset = 0; offset < total; offset += limit) {
+    const response = await fetchWithRetry(`/api/workday?url=${encodeURIComponent(companyUrl)}`, 3, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ appliedFacets: {}, limit, offset, searchText: '' })
+    });
+
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText} for ${companyUrl}`);
+    }
+
+    const data = await response.json();
+
+    if (offset === 0) {
+      total = data.total; // total is reliable on the first page only
+    }
+
+    if (!data.jobPostings?.length) {
+      break;
+    }
+
+    postings.push(...data.jobPostings);
+  }
+
+  const { origin } = new URL(companyUrl);
+  const site = companyUrl.split('/')[6]; // https:, '', host, wday, cxs, tenant, site
+  
+  return config.handler(
+    postings.map(p => ({ ...p, url: `${origin}/${site}${p.externalPath}` })),
+    companyName,
+  );
+};
+
 export const fetchJobs = (boardName: string, companyIdentifier: string, companyName: string): Promise<any> => {
   const key = `${boardName}:${companyIdentifier}`;
 
   if (!cache.has(key)) {
-    const request = fetchJobsUncached(boardName, companyIdentifier, companyName)
-      .catch(error => {
-        cache.delete(key); // allow a retry after failures
-        throw error;
-      });
+    const request = (boardName === 'Workday'
+      ? fetchWorkdayJobs(companyIdentifier, companyName)
+      : fetchJobsUncached(boardName, companyIdentifier, companyName)
+    ).catch(error => {
+      cache.delete(key); // allow a retry after failures
+      throw error;
+    });
 
     cache.set(key, request);
   }

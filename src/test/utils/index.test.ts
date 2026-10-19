@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   cleanUpAPIString,
+  determinePublishDateForWorkday,
   formatDate,
   isRemoteOrVirtualUS,
   isPotentialJobMatch,
@@ -189,5 +190,24 @@ describe('isRemoteOrVirtualUS', () => {
   it('correctly identifies explicitly remote or virtual jobs', () => {
     testPermutations('remote');
     testPermutations('virtual');
+  });
+});
+
+describe('determinePublishDateForWorkday', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date(2026, 9, 14, 12, 0, 0));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('handles a variety of dates correctly', () => {
+    expect(determinePublishDateForWorkday('Posted Today', 'Bonterra').getDate()).toBe(14);
+    expect(determinePublishDateForWorkday('Posted 7 Days Ago', 'Bonterra').getDate()).toBe(7);
+    expect(determinePublishDateForWorkday('Posted 1 Days Ago', 'Bonterra').getDate()).toBe(13);
+    expect(determinePublishDateForWorkday('Posted 16 Days Ago', 'Bonterra').getDate()).toBe(28);
+    expect(determinePublishDateForWorkday('Posted 30+ Days Ago', 'Bonterra').getDate()).toBe(14);
   });
 });

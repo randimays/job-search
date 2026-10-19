@@ -8,6 +8,7 @@ export const ROLE_MATCHERS = [
   'front end',
   'full stack',
   'javascript',
+  'mid-level',
   'programmer',
   'react',
   'software',
@@ -27,12 +28,13 @@ const SENIORITY_EXCLUSIONS = [
   'intern',
   'internship',
   'junior',
-  'engineering manager',
   'lead',
-  'manager, software',
+  'leader',
+  'manager',
   'principal',
   'sales',
   'staff',
+  'supervisor',
   'vice president',
   'volunteer',
   'vp',
@@ -43,8 +45,10 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'algorithm',
     'analysis',
     'analytics',
+    'aws connect',
     'business value',
     'capture',
+    'clinical',
     'cloud operations',
     'cloud security software',
     'controls',
@@ -54,13 +58,19 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'customer success',
     'cybersecurity',
     'database',
+    'database platform',
     'detection',
     'distribution',
     'electrical',
     'forecasting and optimization',
+    'gemini enterprise',
     'hot cell design',
+    'imaging',
+    'imaging service',
+    'infrastructure',
     'mechanical',
     'neutronics',
+    'power platform',
     'presales',
     'process',
     'professional services',
@@ -71,6 +81,7 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'solutions',
     'strike',
     'support',
+    'vulnerability management',
   ];
 
   return types.map(type => `${type} engineer`);
@@ -91,6 +102,7 @@ const DOMAIN_OR_ROLE_EXCLUSIONS = [
   'designer',
   'devops',
   'devsecops',
+  'enterprise development',
   'fuel performance',
   'help desk',
   'java',
@@ -111,6 +123,7 @@ const DOMAIN_OR_ROLE_EXCLUSIONS = [
   'rust',
   'salesforce',
   'systems',
+  'technician',
   'wordpress',
   'writer',
   ...IRRELEVANT_TYPES_OF_ENGINEERS()
@@ -125,6 +138,24 @@ const RESUME_DROP_KEYWORDS = [
   'talent',
 ];
 
+export const COMMON_HIRING_COUNTRIES = [
+  'UK',
+  'United Kingdom',
+  'Canada',
+  'Ireland',
+  'India',
+  'Mexico',
+  'Argentina',
+  'Poland',
+  'Spain',
+];
+
+const ROLE_LOCATION_KEYWORDS = [
+  'hybrid',
+  'onsite',
+  ...COMMON_HIRING_COUNTRIES,
+];
+
 // This represents keywords that would eliminate a match 
 // if it was captured by ROLE_MATCHERS. 
 // Example: I want "Software Engineer," 
@@ -132,5 +163,6 @@ const RESUME_DROP_KEYWORDS = [
 export const ROLE_EXCLUSIONS = [
   ...SENIORITY_EXCLUSIONS,
   ...DOMAIN_OR_ROLE_EXCLUSIONS,
-  ...RESUME_DROP_KEYWORDS
+  ...RESUME_DROP_KEYWORDS,
+  ...ROLE_LOCATION_KEYWORDS
 ];

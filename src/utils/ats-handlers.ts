@@ -6,7 +6,8 @@ import type {
   LeverJobPosting,
   PaylocityJobApiFormat,
   RipplingJobApiFormat,
-  WorkableJobApiFormat
+  WorkableJobApiFormat,
+  WorkdayJobApiFormat
 } from '../types/job-api-format';
 import type { Job } from '../types';
 import { isRemoteOrVirtualUS, isPotentialJobMatch, isUnitedStates } from '.';
@@ -18,7 +19,8 @@ import {
   leverMapper,
   paylocityMapper,
   ripplingMapper,
-  workableMapper
+  workableMapper,
+  workdayMapper
 } from './ats-mappers';
 
 // -------- Handlers
@@ -40,7 +42,7 @@ export const bambooHrJobsHandler = (jobs: BambooHrJobApiFormat[], companyName: s
     return jobs
       // Remote filtering is skipped for Bamboo jobs because so far I've only seen
       // them `null` for `isRemote` and with no location information
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.jobOpeningName))
+      .filter(job => isPotentialJobMatch(job?.jobOpeningName))
       .map(filteredJob => bambooHrMapper(filteredJob, companyName));
   }
 
@@ -78,7 +80,7 @@ export const leverJobsHandler = (jobs: LeverJobPosting[], companyName: string): 
   } 
   
   return [];
-}
+};
 
 export const paylocityJobsHandler = (jobs: PaylocityJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
@@ -89,7 +91,7 @@ export const paylocityJobsHandler = (jobs: PaylocityJobApiFormat[], companyName:
   } 
   
   return [];
-}
+};
 
 export const ripplingJobsHandler = (jobs: RipplingJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
@@ -100,7 +102,7 @@ export const ripplingJobsHandler = (jobs: RipplingJobApiFormat[], companyName: s
   } 
   
   return [];
-}
+};
 
 
 export const workableJobsHandler = (jobs: WorkableJobApiFormat[], companyName: string): Job[] | [] => {
@@ -112,4 +114,16 @@ export const workableJobsHandler = (jobs: WorkableJobApiFormat[], companyName: s
   } 
   
   return [];
-}
+};
+
+export const workdayJobsHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      // Remote job filtering is skipped for Workday because the listing doesn't return
+      // enough information for us to deterimine this
+      .filter(job => isPotentialJobMatch(job?.title))
+      .map(filteredJob => workdayMapper(filteredJob, companyName));
+  } 
+  
+  return [];
+};
