@@ -3,6 +3,7 @@ import type {
   BambooHrJobApiFormat,
   GemJobsApiFormat,
   GreenhouseJobApiFormat,
+  KulaJobApiFormat,
   LeverJobPosting,
   PaylocityJobApiFormat,
   RipplingJobApiFormat,
@@ -56,6 +57,17 @@ export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => {
     title: cleanUpAPIString(job.title),
     updated: new Date(job?.updated_at),
     url: cleanUpAPIString(job.absolute_url),
+  };
+};
+
+export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => {
+  return {
+    companyName,
+    id: job?.id.toString() || null,
+    published: new Date(job.launch_at),
+    title: cleanUpAPIString(job.title),
+    updated: new Date(job?.launch_at),
+    url: 'https://www.akkio.com/jobs', // No distinct URLs for job postings
   };
 };
 

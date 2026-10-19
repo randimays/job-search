@@ -105,6 +105,56 @@ export interface GreenhouseJobApiFormat {
   updated_at: string
 }
 
+export interface KulaJobApiFormat {
+  id: number,
+  account_id: number,
+  title: string,
+  listed: boolean,
+  kind: string,
+  is_confidential: boolean,
+  launch_at: Date,
+  end_at: Date | null,
+  eeco: {
+    enabled: boolean
+  },
+  coordinator_enabled: string | null,
+  jobs_cbv_settings_enabled: boolean,
+  ats_job: {
+    job_description: string,
+    workplace: string,
+    employment_type: string,
+    work_type_name: string,
+    ats_department: {
+      id: number,
+      name: string,
+      depth: number
+    },
+    offices: {
+      id: number,
+      name: string,
+      location: string,
+      location_key: string,
+      country: string,
+      country_code: string,
+      state: string | null,
+      city: string | null,
+      remote: boolean,
+      workplace: string
+    }[],
+    compensation: {
+      base_salary: {
+        currency: string,
+        currency_name: string,
+        currency_symbol: string,
+        interval: string,
+        min_amount: string,
+        mid_amount: string,
+        max_amount: string
+      }
+    }
+  }
+}
+
 export interface LeverJobApiFormat {
   title: string,
   postings: {

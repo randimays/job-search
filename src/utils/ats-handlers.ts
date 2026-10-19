@@ -3,6 +3,7 @@ import type {
   BambooHrJobApiFormat,
   GemJobsApiFormat,
   GreenhouseJobApiFormat,
+  KulaJobApiFormat,
   LeverJobPosting,
   PaylocityJobApiFormat,
   RipplingJobApiFormat,
@@ -16,6 +17,7 @@ import {
   bambooHrMapper,
   gemMapper,
   greenhouseMapper,
+  kulaMapper,
   leverMapper,
   paylocityMapper,
   ripplingMapper,
@@ -69,6 +71,15 @@ export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [
   }
 
   return [];
+};
+
+export const kulaJobsHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => job?.ats_job.workplace === 'remote' && isUnitedStates(job?.ats_job?.offices?.[0].location))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+      .map(filteredJob => kulaMapper(filteredJob, companyName));
+  }
 };
 
 export const leverJobsHandler = (jobs: LeverJobPosting[], companyName: string): Job[] | [] => {

@@ -74,8 +74,8 @@ export const flushOmittedTitles = (): void => {
 // to filter for potential matches by keywords
 export const isPotentialJobMatch = (title: string): boolean => {
   if (!title || typeof title !== 'string') {
-    console.error('isPotentialJobMatch: invalid or missing job title');
-    return true;
+    console.error(`isPotentialJobMatch: invalid or missing job title: ${title}`);
+    return false;
   }
 
   const normalized = title.trim();
@@ -89,7 +89,7 @@ export const isPotentialJobMatch = (title: string): boolean => {
 
 export const isUnitedStates = (location: string): boolean => {
   if (!location || typeof location !== 'string') {
-    console.error('isUnitedStates: invalid or missing job location');
+    console.error(`isUnitedStates: invalid or missing job location: ${location}`);
   }
 
   for (const country of COMMON_HIRING_COUNTRIES) {
@@ -124,6 +124,10 @@ export const parseCsv = (fileContents: string): any => {
 
 export const determinePublishDateForWorkday = (postedOn: string, companyName: string): Date => {
   const today = new Date();
+
+  if (!postedOn) {
+    return today;
+  }
 
   if (postedOn.startsWith('Posted')) {
     const parts = postedOn.split(' ');
