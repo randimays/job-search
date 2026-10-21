@@ -54,7 +54,7 @@ function App() {
           <div className="w-full flex justify-center">
             <CircularProgress aria-label="Loading..." className="mt-20" />
           </div>
-          <p className="mt-8 text-center">Retrieving job listings. This may take a minute or two.</p>
+          <p className="mt-8 text-center">Retrieving job listings. This will take a few minutes.</p>
         </>)
         : null}
       {noResultsCompanies.length ? <NoResults noResultsCompanies={noResultsCompanies} /> : null}

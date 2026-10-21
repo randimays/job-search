@@ -116,12 +116,21 @@ export const workableMapper = (job: WorkableJobApiFormat, companyName: string): 
 };
 
 export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Job => {
+  let id = '';
+
+  const slug = job?.url ? job.url : ''; 
+
+  if (slug) {
+    const splitSlug = slug.split('_');
+    id = splitSlug[splitSlug.length - 1];
+  }
+  
   return {
     companyName,
-    id: job?.bulletFields[1],
+    id,
     published: determinePublishDateForWorkday(job?.postedOn, companyName),
     title: cleanUpAPIString(job.title),
     updated: determinePublishDateForWorkday(job?.postedOn, companyName),
-    url: job?.url ? job.url : ''
+    url: slug
   };
 };
