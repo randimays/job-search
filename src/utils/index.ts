@@ -1,6 +1,6 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
 import { useJobs } from '../store';
-import { COMMON_HIRING_COUNTRIES } from '../constants';
+import { NON_US_LOCATIONS } from '../constants';
 
 // -------- Data formatting
 
@@ -90,9 +90,10 @@ export const isPotentialJobMatch = (title: string): boolean => {
 export const isUnitedStates = (location: string): boolean => {
   if (!location || typeof location !== 'string') {
     console.error(`isUnitedStates: invalid or missing job location: ${location}`);
+    return true;
   }
 
-  for (const country of COMMON_HIRING_COUNTRIES) {
+  for (const country of NON_US_LOCATIONS) {
     if (location.toLowerCase().includes(country.toLowerCase())) {
       return false;
     }

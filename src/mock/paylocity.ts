@@ -7,7 +7,7 @@ export const PaylocityMock: PaylocityJobApiFormat[] = [
     "LocationName": "San Diego, CA",
     "ShouldDisplayLocation": true,
     "PublishedDate": "2026-10-16T12:32:17-05:00",
-    "Description": " About Us: eSimplicity is a modern digital services company that partners with government agencies to improve",
+    "Description": " About Us: eSimplicity is a modern digital services company that partners with government agencies to improve",
     "IsInternal": false,
     "HiringDepartment": "Engineering",
     "JobLocation": {

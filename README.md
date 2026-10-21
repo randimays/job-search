@@ -51,6 +51,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Test for performance, see where bottlenecks are and improve caching, fetching and retries
 - Fix all the "any" types
 - Make links out of the omitted jobs so if anything comes up in there that I'm interested in, I can go directly to it
+  -Troubleshoot the Paylocity listings, they don't all fire even after retries, or come back blank
 
 ## Notes
 

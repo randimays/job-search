@@ -26,7 +26,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
 
   return (
     <>
-      <p className="mt-12">You have {sortedJobs.length} jobs for today.</p>
+      <p className="mt-12">You have {sortedJobs.length} jobs to review.</p>
       <table className="table-auto mt-6 border border-gray-400 dark:border-gray-500">
         <thead className="text-sm text-left font-semibold">
           <tr>

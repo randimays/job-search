@@ -46,7 +46,7 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
   let noResults: string[] = [];
 
   useJobs.getState().setFetchingJobs(true);
-  
+
   // Create an object with key:value pairs where the key is a provider (e.g. Greenhouse)
   // and the value is all of the rows in the spreadsheet for companies that use that provider
   // e.g. { Greenhouse: [['Greenhouse', 'capitaltg', 'Capital Technology Group']]}
@@ -56,6 +56,7 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
 
       return toTitleCase(boardName) === config.name;
     });
+
 
     if (companiesForThisBatch.length) {
       batches[config.name] = companiesForThisBatch;

@@ -1,0 +1,565 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/mock/ashby.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/mock</a> ashby.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { AshbyJobApiFormat } from '../types/job-api-format';
+&nbsp;
+export const AshbyMock: AshbyJobApiFormat[] = [
+  {
+    "id": "e82ed042-535b-4b0c-b1e9-417e4060c356",
+    "title": "General Interest Job Form",
+    "department": "General Interest",
+    "team": "General Interest",
+    "employmentType": "FullTime",
+    "location": "Remote (United States)",
+    "shouldDisplayCompensationOnJobPostings": false,
+    "secondaryLocations": [],
+    "publishedAt": "2025-10-06T15:12:04.879+00:00",
+    "isListed": true,
+    "isRemote": true,
+    "workplaceType": "Remote",
+    "address": {
+      "postalAddress": {
+        "addressCountry": "United States"
+      }
+    },
+    "jobUrl": "https://jobs.ashbyhq.com/aidkit/e82ed042-535b-4b0c-b1e9-417e4060c356",
+    "applyUrl": "https://jobs.ashbyhq.com/aidkit/e82ed042-535b-4b0c-b1e9-417e4060c356/application",
+    "descriptionHtml": "&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;About AidKit&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked. From simplifying complex benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps it’s partners deliver aid with dignity.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;We were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;As we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful work in an environment that trusts your judgment and values your unique contributions.&lt;/p&gt;&lt;h3&gt;&lt;strong&gt;Interested in working with us?&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;As we continue to grow rapidly, the opportunity for impact is immense. We continuously seek dedicated, values-driven professionals to help us expand our impact. &lt;em&gt;While this is not a specific job opening&lt;/em&gt;, we frequently review our talent pool when new opportunities arise. If you are interested in contributing to our mission, we welcome you to share your information with us for future consideration.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Our Teams:&lt;/em&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Program Management&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Engineering&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Applicant Support&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Marketing&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Sales&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Finance&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Operations&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Contracts and Compliance&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;Design&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Benefits at AidKit&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;We reinforce a culture of dignity, autonomy, and trust by actively taking an interest in and supporting employee’s lives outside of work. We also provide equity, which varies by position and experience, and a comprehensive benefits package including:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Fair Salaries that are transparent and competitive, with a maximum ratio of 3:1 between the highest and lowest paid employees at the company.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Fully remote work setting with home office setup and maintenance stipends.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Unlimited paid time off&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Retirement plan with 401K contribution&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Health benefits (for you and your family)&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Flexible schedule&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Generous 16-week paid parental leave&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Professional development support&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;About Our Team&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit is a fully-remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.&lt;/p&gt;&lt;h3&gt;&lt;strong&gt;How to Apply&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;To apply for this position, please submit your resume and&lt;strong&gt; &lt;/strong&gt;answer the questions below, being specific but succinct. Note that AidKit values authenticity and reviews your answers with an eye towards learning something real about you and your interest in joining our team. The more we can learn about you, the better able we are to match your profile with open positions. Note that candidates who are a strong match for open positions will be prioritized. If you don't hear from us right away, it might just be because we haven't been able to find the right fit yet!&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;If you have already applied for a specific job opening, please do not apply here a second time.&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;em&gt;We encourage candidates from all backgrounds, regardless of race, ethnicity, gender, age, sexual orientation, disability, or any other dimension of diversity, to apply. We understand that diversity goes beyond checkboxes and that true innovation thrives when a variety of voices and ideas come together. You don't need to meet every criteria listed to apply. We value unique experiences and believe that diversity drives innovation.&lt;/em&gt;&lt;/p&gt;",
+    "descriptionPlain": "About AidKit\n\n\n\nAidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked. From simplifying complex benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps it’s partners deliver aid with dignity.\n\n\n\nWe were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.\n\n\n\nAs we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful work in an environment that trusts your judgment and values your unique contributions.\n\n\nINTERESTED IN WORKING WITH US?\n\nAs we continue to grow rapidly, the opportunity for impact is immense. We continuously seek dedicated, values-driven professionals to help us expand our impact. While this is not a specific job opening, we frequently review our talent pool when new opportunities arise. If you are interested in contributing to our mission, we welcome you to share your information with us for future consideration.\n\nOur Teams:\n\n - Program Management\n\n - Engineering\n\n - Applicant Support\n\n - Marketing\n\n - Sales\n\n - Finance\n\n - Operations\n\n - Contracts and Compliance\n\n - Design\n\nBenefits at AidKit\n\n\n\nWe reinforce a culture of dignity, autonomy, and trust by actively taking an interest in and supporting employee’s lives outside of work. We also provide equity, which varies by position and experience, and a comprehensive benefits package including:\n\n - Fair Salaries that are transparent and competitive, with a maximum ratio of 3:1 between the highest and lowest paid employees at the company.\n\n - Fully remote work setting with home office setup and maintenance stipends.\n\n - Unlimited paid time off\n\n - Retirement plan with 401K contribution\n\n - Health benefits (for you and your family)\n\n - Flexible schedule\n\n - Generous 16-week paid parental leave\n\n - Professional development support\n\n\nABOUT OUR TEAM\n\nAidKit is a fully-remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.\n\n\nHOW TO APPLY\n\nTo apply for this position, please submit your resume and answer the questions below, being specific but succinct. Note that AidKit values authenticity and reviews your answers with an eye towards learning something real about you and your interest in joining our team. The more we can learn about you, the better able we are to match your profile with open positions. Note that candidates who are a strong match for open positions will be prioritized. If you don't hear from us right away, it might just be because we haven't been able to find the right fit yet!\n\n\n\nIf you have already applied for a specific job opening, please do not apply here a second time.\n\n\n\nWe encourage candidates from all backgrounds, regardless of race, ethnicity, gender, age, sexual orientation, disability, or any other dimension of diversity, to apply. We understand that diversity goes beyond checkboxes and that true innovation thrives when a variety of voices and ideas come together. You don't need to meet every criteria listed to apply. We value unique experiences and believe that diversity drives innovation.",
+    "compensation": {
+      "compensationTierSummary": null,
+      "scrapeableCompensationSalarySummary": null,
+      "compensationTiers": [],
+      "summaryComponents": []
+    }
+  },
+  {
+    "id": "c05f270b-e045-4b1e-8bf1-3f5025c176ee",
+    "title": "Controller",
+    "department": "Finance",
+    "team": "Finance",
+    "employmentType": "FullTime",
+    "location": "Remote (United States)",
+    "shouldDisplayCompensationOnJobPostings": true,
+    "secondaryLocations": [],
+    "publishedAt": "2026-10-07T23:54:01.434+00:00",
+    "isListed": true,
+    "isRemote": true,
+    "workplaceType": "Remote",
+    "address": {
+      "postalAddress": {
+        "addressCountry": "United States"
+      }
+    },
+    "jobUrl": "https://jobs.ashbyhq.com/aidkit/c05f270b-e045-4b1e-8bf1-3f5025c176ee",
+    "applyUrl": "https://jobs.ashbyhq.com/aidkit/c05f270b-e045-4b1e-8bf1-3f5025c176ee/application",
+    "descriptionHtml": "&lt;h1&gt;Controller&lt;/h1&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;h3&gt;Full Time&lt;/h3&gt;&lt;h3&gt;Remote (United States)&lt;/h3&gt;&lt;h3&gt;$130,000 - $160,000 plus equity&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;h2&gt;About AidKit&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked. From simplifying complex benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps it’s partners deliver aid with dignity.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;We were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;As we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful work in an environment that trusts your judgment and values your unique contributions.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;h2&gt;About the Role&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;The Controller is AidKit's senior internal accounting leader and is accountable for the integrity of our books, accounting judgments, financial close, financial reporting, controls, and audit readiness. This is a hands-on Controller role in a small company. You will personally lead core accounting work while also owning the systems, processes, and controls that allow the function to operate reliably at scale.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;At AidKit, the Controller role also has meaningful responsibility for treasury and payment operations, with support. Because our platform supports tens of thousands of payments each month, our accounting function cannot be disconnected from how money actually moves through the business. You will own the financial lifecycle of company and program funds, including treasury, banking, payment-provider reconciliation, AR, AP, and the connection between operational payment activity and the general ledger.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;You are not expected to manually execute every transaction or personally resolve every routine payment exception. You are expected to maintain and improve the systems in which those activities are controlled, reconciled, visible, appropriately delegated, and escalated when necessary.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;The role will generally break down as follows:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Approximately 60% — Accounting &amp;amp; Controller responsibilities&lt;/strong&gt;&lt;br /&gt;Financial close, general ledger, accounting judgments, revenue accounting, reconciliations, financial reporting, audit readiness, AR/AP accounting, and financial controls.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Approximately 20% — Treasury &amp;amp; payment operations oversight&lt;/strong&gt;&lt;br /&gt;Cash and banking oversight, program funds, payment-provider reconciliation, payment controls, funding readiness, treasury operations, and material payment or funding exceptions.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Approximately 10% — Systems, automation &amp;amp; process improvement&lt;/strong&gt;&lt;br /&gt;Improving financial systems, reducing manual work, strengthening documentation and controls, creating scalable workflows, and partnering with Engineering and Business Operations on financial infrastructure.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Approximately 10% — Tax preparation &amp;amp; compliance&lt;/strong&gt;&lt;br /&gt;Coordinating corporate income tax preparation with external tax advisors, managing sales and franchise tax obligations, maintaining accurate supporting records and filing calendars, and ensuring required filings and payments are completed accurately and on time.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p style=\"min-height:1.5em\"&gt;The Controller reports directly to the CEO and works closely with AidKit's fractional CFO, who owns FP&amp;amp;A and advises the company on forecasting, pricing, financial planning, scenario modeling, and other strategic finance matters.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;h2&gt;What You'll Own&lt;/h2&gt;&lt;h3&gt;Accounting and Financial Close&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will be fully accountable for the accuracy and integrity of AidKit's books.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own the monthly and annual financial close process along with subsidiary ledgers&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain the general ledger and ensure transactions are accurately recorded and classified&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Prepare and review balance sheet reconciliations and supporting schedules&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own accounting for accruals, pre-paids, payroll, receivables, payables, deferred items, program funds, and other significant accounts&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Make and document accounting judgments and ensure consistent application of accounting policies&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own revenue accounting and ensure revenue schedules tie to underlying contracts, operational activity, and source systems&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Review financial statements for completeness and accuracy before close&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Identify and resolve accounting issues before they result in post-close adjustments&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Produce reliable monthly financial reporting and supporting analysis&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain an accounting environment that is continuously audit-ready&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Reconciliation&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will own the complete financial reconciliation framework connecting operational systems to AidKit's books.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Establish reconciliation standards, schedules, documentation, and exception-management processes&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure bank accounts reconcile to the general ledger&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure payment-provider balances reconcile to underlying transaction activity and the general ledger&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure program-fund records reconcile to funding received, payments made, fees, returns, and remaining balances&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure AR and AP sub-ledgers reconcile to the general ledger&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Investigate unexplained or aged reconciling items and drive them to resolution&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Build controls that identify discrepancies quickly rather than discovering them months later&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p style=\"min-height:1.5em\"&gt;There should not be a gap between operational reconciliation and accounting reconciliation. The Controller is ultimately responsible for ensuring the entire chain reconciles.&lt;/p&gt;&lt;h3&gt;Accounts Receivable&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will own the financial integrity of AidKit's billing and collections processes.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain billing schedules based on executed contracts and confirmed program milestones&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Partner with Program Management and Contracts to confirm billing triggers where necessary and ensure ASC 606 revenue recognition alignment&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Prepare and send invoices and routine collections follow-ups; apply cash receipts; reconcile AR aging; and resolve billing and payment discrepancies.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain visibility into expected and overdue partner payments&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Escalate material collection issues&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure AR activity is accurately reflected in the general ledger and revenue schedules&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Improve and automate billing and collection workflows wherever practical&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Accounts Payable and Spend Operations&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will own AidKit's AP and spend-control environment.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Prepare vendor records and bills; own final accounting review, expense classification, the Ramp-to-Rillet sync, and payment preparation and release within established approval controls.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Partner with People Operations on employee cards, receipt collection, reimbursements, and preliminary expense coding (we use Ramp).&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure expenditures are appropriately authorized, documented, classified, and recorded&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own AP cutoff and expense accrual processes&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain accurate vendor and payable records&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain appropriate segregation of duties and approval controls&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Improve and automate recurring AP and expense workflows&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Program Funds and Payment Operations&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit's partners entrust us with significant amounts of money that ultimately need to reach program participants accurately and reliably. The Controller owns the financial integrity of that lifecycle.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain financial oversight of program funds from receipt through disbursement and final closeout&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Verify receipt and availability of partner funding before payments begin; complete financial payment-readiness checks; and administer RoboController fund anticipation and program subledgers.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own financial account and subledger setup for new programs, coordinating launch timing and requirements with Operations.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain visibility into program balances, disbursements, fees, returned payments, outstanding transactions, and remaining funds&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Oversee financial controls around participant payment operations and funds movement&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Reconcile program funding, participant disbursements, bank activity, payment-provider balances, fees, returns, and remaining funds&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure payment activity and program-fund activity are accurately reflected in the general ledger&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Investigate discrepancies and drive them through resolution&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own financial closeout of programs, including final reconciliation, preparation of partner financial reports, calculation of unused funds, and execution of authorized returns where required.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Partner with Program Management to anticipate upcoming funding and payment needs&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Treasury and Cash Operations&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will own AidKit's day-to-day treasury environment.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Oversee company cash and banking operations&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Log and deposit checks under documented controls, record cash receipts in the cash tracker, and reconcile receipts in Rillet, coordinating financial-mail handoff with People Operations.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Manage bank-account administration, authorities, access, and approval structures&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Execute authorized transfers between bank accounts and payment partners across payment rails and update the Fund Movement Log accordingly&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain strong controls around cash movement and authorization&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Establish escalation procedures for unusual, high-value, or higher-risk transactions&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain accurate visibility into cash balances, upcoming obligations, expected receipts, and known commitments&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Provide reliable cash and working-capital information to the CEO and fractional CFO&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ensure treasury activities are completed accurately, securely, and on time&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Controls, Audit, and Financial Readiness&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;You will build and maintain a financial-control environment appropriate for a company entrusted with both corporate and program funds.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own accounting controls and documentation&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Follow internal controls policies to prevent fraud and ensure proper checks and balances on financial transactions with support from the executive team&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain appropriate authorization, approval, and access controls across financial systems&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Periodically review banking, accounting, payment, and spend permissions&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Maintain a clear evidence trail supporting significant balances and transactions&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own financial preparation for annual audits and other accounting reviews&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Coordinate accounting support for tax preparation, diligence, insurance, compliance reviews, and other external requests&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own operational tax-compliance workflows, including filing and payment calendars, jurisdiction-level financial-data preparation, tax-portal administration, and authorized payment execution, coordinating with Contracts &amp;amp; Compliance and external tax advisers.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Identify weaknesses in financial processes and implement practical controls to address them&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Surface material accounting, treasury, payment, fraud, or control risks promptly to the CEO&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Systems and Automation&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;We do not want to solve increasing financial complexity by continually adding manual work.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Own Rillet and other finance-system administration, accounting configuration, and finance-system vendor escalations, coordinating access and security requirements with the relevant systems owners.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Build reliable and auditable spreadsheets when spreadsheets are the right tool&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Improve mappings, integrations, reporting, templates, and checks across financial systems&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Identify recurring manual processes that create risk or consume unnecessary time&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Automate reconciliation, reporting, invoicing, collections, balance monitoring, and other recurring processes where practical&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Partner with Engineering and Business Operations when financial workflows require product or technical improvements&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Build systems capable of supporting increased payment and program volume without proportional increases in finance headcount&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;How This Role Works With the Rest of AidKit&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;CEO&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;The Controller reports directly to the CEO and is the CEO's primary internal owner for the integrity of AidKit's accounting and day-to-day financial operations. The Controller is expected to surface material financial, accounting, treasury, payment, and control issues early and provide clear, decision-ready information.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Fractional CFO&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit's fractional CFO owns FP&amp;amp;A and supports the CEO and leadership team with forecasting, financial planning, pricing analysis, scenario modeling, and other strategic finance questions. The Controller provides the accurate accounting, cash, revenue, AR, AP, and operational data that makes this work possible.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;The relationship should be highly collaborative, but the accountability is distinct: &lt;strong&gt;the Controller owns the accuracy of the financial record and financial operations; the fractional CFO owns forward-looking financial analysis and strategic finance advice.&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Program Management&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;Program Management owns program delivery, program requirements, partner relationships, participant eligibility, and programmatic payment decisions. The Controller owns the financial systems and controls required to receive, safeguard, move, reconcile, and account for the associated funds.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Engineering&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;Engineering owns payment-system architecture, integrations, and technical implementation. The Controller defines the accounting, financial-control, treasury, and reconciliation requirements those systems need to satisfy.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Mission Control&lt;/strong&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Sr. Director of Operations:&lt;/strong&gt; coordinates program funding needs, timing, partner commitments, and contractual changes. The Controller owns financial validation, execution, recording, reconciliation, and controls.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Director of Risk, Compliance, and Contracts:&lt;/strong&gt; owns the respective legal, regulatory, contractual, and compliance areas. The Controller ensures financial processes adhere to established requirements and works with these teams when financial operations introduce risk or control considerations.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;People Operations Manager:&lt;/strong&gt; owns employee-facing Ramp administration, cards, receipt follow-up, reimbursement workflows, and preliminary expense coding. The Controller owns final accounting review, the Rillet sync, reconciliation, and financial approval controls.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;About You&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;We expect the right person will bring much of the following:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;7+ years of progressive accounting experience, including ownership of month-end close&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Experience operating as a Controller, Assistant Controller, senior Accounting Manager, or equivalent accounting leader&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Strong knowledge of accrual accounting, general ledger accounting, balance sheet reconciliations, revenue accounting, AR, AP, and financial controls&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Sound accounting judgment and the ability to independently research, reach, and document accounting conclusions&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Experience preparing a company for audit and working directly with auditors&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Experience with cash management, banking, treasury, payments, or other financial operations&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Comfort operating in an environment with substantial transaction volume and complex reconciliation requirements&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Advanced Excel or Google Sheets skills, including the ability to build structured, auditable financial analyses and reconciliations&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Experience using modern accounting and finance systems; familiarity with tools such as Rillet and Ramp is a plus&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;A track record of improving processes and automating recurring financial work&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Strong documentation habits&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Exceptional attention to detail without losing sight of the larger financial picture&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;The ability to work independently and take clear ownership of outcomes&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Strong judgment about when an issue requires escalation&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Clear, direct communication and a \"no surprises\" approach&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Comfort working directly with a CEO and partnering with an external or fractional CFO&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;A commitment to AidKit's mission and to handling funds intended for people in need with extraordinary care&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;What Success Looks Like&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;You are successful in this role when:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit's books are accurate and close occurs on a predictable schedule.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Accounting judgments are well-reasoned, documented, and consistently applied.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;The CEO and fractional CFO can rely on financial information without independently reconstructing or validating the underlying accounting.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Audits and diligence do not require a scramble to reconstruct financial records.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Company cash, program funds, payment-provider balances, AR, AP, and the GL reconcile consistently.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit can quickly explain where program funds are, what has been disbursed, what remains outstanding, and what remains available.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Payment and funding discrepancies are identified quickly and resolved rather than accumulating.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Material financial and payment risks surface before they become emergencies.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;AR and AP are timely, accurate, and controlled.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Banking and payment-provider relationships are actively managed.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Critical financial processes are documented and have appropriate backup coverage.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Manual financial work declines as systems and automation improve.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit can support increasing payment volume without financial operations becoming more fragile or requiring proportional growth in headcount.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Above all, AidKit can trust its numbers and trust its money movement.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;&lt;strong&gt;Benefits at AidKit&lt;/strong&gt;&lt;/h2&gt;&lt;p style=\"min-height:1.5em\"&gt;We reinforce a culture of dignity, autonomy, and trust by actively taking an interest in and supporting employee’s lives outside of work. We also provide equity, which varies by position and experience, and a comprehensive benefits package including:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Fair Salaries that are transparent and competitive, with a maximum ratio of 3:1 between the highest and lowest paid employees at the company.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Fully remote work setting&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Unlimited PTO&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Retirement plan with 401K contribution&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Health benefits&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Flexible schedule&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Professional development support&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;About Our Team&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit is a fully-remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.&lt;/p&gt;",
+    "descriptionPlain": "CONTROLLER\n\n\n\n\nFULL TIME\n\n\nREMOTE (UNITED STATES)\n\n\n$130,000 - $160,000 PLUS EQUITY\n\n\n\n\nABOUT AIDKIT\n\nAidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked. From simplifying complex benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps it’s partners deliver aid with dignity.\n\nWe were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.\n\nAs we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful work in an environment that trusts your judgment and values your unique contributions.\n\n\n\n\nABOUT THE ROLE\n\nThe Controller is AidKit's senior internal accounting leader and is accountable for the integrity of our books, accounting judgments, financial close, financial reporting, controls, and audit readiness. This is a hands-on Controller role in a small company. You will personally lead core accounting work while also owning the systems, processes, and controls that allow the function to operate reliably at scale.\n\nAt AidKit, the Controller role also has meaningful responsibility for treasury and payment operations, with support. Because our platform supports tens of thousands of payments each month, our accounting function cannot be disconnected from how money actually moves through the business. You will own the financial lifecycle of company and program funds, including treasury, banking, payment-provider reconciliation, AR, AP, and the connection between operational payment activity and the general ledger.\n\nYou are not expected to manually execute every transaction or personally resolve every routine payment exception. You are expected to maintain and improve the systems in which those activities are controlled, reconciled, visible, appropriately delegated, and escalated when necessary.\n\nThe role will generally break down as follows:\n\n - Approximately 60% — Accounting &amp; Controller responsibilities\n   Financial close, general ledger, accounting judgments, revenue accounting, reconciliations, financial reporting, audit readiness, AR/AP accounting, and financial controls.\n\n - Approximately 20% — Treasury &amp; payment operations oversight\n   Cash and banking oversight, program funds, payment-provider reconciliation, payment controls, funding readiness, treasury operations, and material payment or funding exceptions.\n\n - Approximately 10% — Systems, automation &amp; process improvement\n   Improving financial systems, reducing manual work, strengthening documentation and controls, creating scalable workflows, and partnering with Engineering and Business Operations on financial infrastructure.\n\n - Approximately 10% — Tax preparation &amp; compliance\n   Coordinating corporate income tax preparation with external tax advisors, managing sales and franchise tax obligations, maintaining accurate supporting records and filing calendars, and ensuring required filings and payments are completed accurately and on time.\n\nThe Controller reports directly to the CEO and works closely with AidKit's fractional CFO, who owns FP&amp;A and advises the company on forecasting, pricing, financial planning, scenario modeling, and other strategic finance matters.\n\n\n\n\nWHAT YOU'LL OWN\n\n\nACCOUNTING AND FINANCIAL CLOSE\n\nYou will be fully accountable for the accuracy and integrity of AidKit's books.\n\n - Own the monthly and annual financial close process along with subsidiary ledgers\n\n - Maintain the general ledger and ensure transactions are accurately recorded and classified\n\n - Prepare and review balance sheet reconciliations and supporting schedules\n\n - Own accounting for accruals, pre-paids, payroll, receivables, payables, deferred items, program funds, and other significant accounts\n\n - Make and document accounting judgments and ensure consistent application of accounting policies\n\n - Own revenue accounting and ensure revenue schedules tie to underlying contracts, operational activity, and source systems\n\n - Review financial statements for completeness and accuracy before close\n\n - Identify and resolve accounting issues before they result in post-close adjustments\n\n - Produce reliable monthly financial reporting and supporting analysis\n\n - Maintain an accounting environment that is continuously audit-ready\n\n\nRECONCILIATION\n\nYou will own the complete financial reconciliation framework connecting operational systems to AidKit's books.\n\n - Establish reconciliation standards, schedules, documentation, and exception-management processes\n\n - Ensure bank accounts reconcile to the general ledger\n\n - Ensure payment-provider balances reconcile to underlying transaction activity and the general ledger\n\n - Ensure program-fund records reconcile to funding received, payments made, fees, returns, and remaining balances\n\n - Ensure AR and AP sub-ledgers reconcile to the general ledger\n\n - Investigate unexplained or aged reconciling items and drive them to resolution\n\n - Build controls that identify discrepancies quickly rather than discovering them months later\n\nThere should not be a gap between operational reconciliation and accounting reconciliation. The Controller is ultimately responsible for ensuring the entire chain reconciles.\n\n\nACCOUNTS RECEIVABLE\n\nYou will own the financial integrity of AidKit's billing and collections processes.\n\n - Maintain billing schedules based on executed contracts and confirmed program milestones\n\n - Partner with Program Management and Contracts to confirm billing triggers where necessary and ensure ASC 606 revenue recognition alignment\n\n - Prepare and send invoices and routine collections follow-ups; apply cash receipts; reconcile AR aging; and resolve billing and payment discrepancies.\n\n - Maintain visibility into expected and overdue partner payments\n\n - Escalate material collection issues\n\n - Ensure AR activity is accurately reflected in the general ledger and revenue schedules\n\n - Improve and automate billing and collection workflows wherever practical\n\n\nACCOUNTS PAYABLE AND SPEND OPERATIONS\n\nYou will own AidKit's AP and spend-control environment.\n\n - Prepare vendor records and bills; own final accounting review, expense classification, the Ramp-to-Rillet sync, and payment preparation and release within established approval controls.\n\n - Partner with People Operations on employee cards, receipt collection, reimbursements, and preliminary expense coding (we use Ramp).\n\n - Ensure expenditures are appropriately authorized, documented, classified, and recorded\n\n - Own AP cutoff and expense accrual processes\n\n - Maintain accurate vendor and payable records\n\n - Maintain appropriate segregation of duties and approval controls\n\n - Improve and automate recurring AP and expense workflows\n\n\nPROGRAM FUNDS AND PAYMENT OPERATIONS\n\nAidKit's partners entrust us with significant amounts of money that ultimately need to reach program participants accurately and reliably. The Controller owns the financial integrity of that lifecycle.\n\n - Maintain financial oversight of program funds from receipt through disbursement and final closeout\n\n - Verify receipt and availability of partner funding before payments begin; complete financial payment-readiness checks; and administer RoboController fund anticipation and program subledgers.\n\n - Own financial account and subledger setup for new programs, coordinating launch timing and requirements with Operations.\n\n - Maintain visibility into program balances, disbursements, fees, returned payments, outstanding transactions, and remaining funds\n\n - Oversee financial controls around participant payment operations and funds movement\n\n - Reconcile program funding, participant disbursements, bank activity, payment-provider balances, fees, returns, and remaining funds\n\n - Ensure payment activity and program-fund activity are accurately reflected in the general ledger\n\n - Investigate discrepancies and drive them through resolution\n\n - Own financial closeout of programs, including final reconciliation, preparation of partner financial reports, calculation of unused funds, and execution of authorized returns where required.\n\n - Partner with Program Management to anticipate upcoming funding and payment needs\n\n\nTREASURY AND CASH OPERATIONS\n\nYou will own AidKit's day-to-day treasury environment.\n\n - Oversee company cash and banking operations\n\n - Log and deposit checks under documented controls, record cash receipts in the cash tracker, and reconcile receipts in Rillet, coordinating financial-mail handoff with People Operations.\n\n - Manage bank-account administration, authorities, access, and approval structures\n\n - Execute authorized transfers between bank accounts and payment partners across payment rails and update the Fund Movement Log accordingly\n\n - Maintain strong controls around cash movement and authorization\n\n - Establish escalation procedures for unusual, high-value, or higher-risk transactions\n\n - Maintain accurate visibility into cash balances, upcoming obligations, expected receipts, and known commitments\n\n - Provide reliable cash and working-capital information to the CEO and fractional CFO\n\n - Ensure treasury activities are completed accurately, securely, and on time\n\n\nCONTROLS, AUDIT, AND FINANCIAL READINESS\n\nYou will build and maintain a financial-control environment appropriate for a company entrusted with both corporate and program funds.\n\n - Own accounting controls and documentation\n\n - Follow internal controls policies to prevent fraud and ensure proper checks and balances on financial transactions with support from the executive team\n\n - Maintain appropriate authorization, approval, and access controls across financial systems\n\n - Periodically review banking, accounting, payment, and spend permissions\n\n - Maintain a clear evidence trail supporting significant balances and transactions\n\n - Own financial preparation for annual audits and other accounting reviews\n\n - Coordinate accounting support for tax preparation, diligence, insurance, compliance reviews, and other external requests\n\n - Own operational tax-compliance workflows, including filing and payment calendars, jurisdiction-level financial-data preparation, tax-portal administration, and authorized payment execution, coordinating with Contracts &amp; Compliance and external tax advisers.\n\n - Identify weaknesses in financial processes and implement practical controls to address them\n\n - Surface material accounting, treasury, payment, fraud, or control risks promptly to the CEO\n\n\nSYSTEMS AND AUTOMATION\n\nWe do not want to solve increasing financial complexity by continually adding manual work.\n\n - Own Rillet and other finance-system administration, accounting configuration, and finance-system vendor escalations, coordinating access and security requirements with the relevant systems owners.\n\n - Build reliable and auditable spreadsheets when spreadsheets are the right tool\n\n - Improve mappings, integrations, reporting, templates, and checks across financial systems\n\n - Identify recurring manual processes that create risk or consume unnecessary time\n\n - Automate reconciliation, reporting, invoicing, collections, balance monitoring, and other recurring processes where practical\n\n - Partner with Engineering and Business Operations when financial workflows require product or technical improvements\n\n - Build systems capable of supporting increased payment and program volume without proportional increases in finance headcount\n\n\nHOW THIS ROLE WORKS WITH THE REST OF AIDKIT\n\nCEO\n\nThe Controller reports directly to the CEO and is the CEO's primary internal owner for the integrity of AidKit's accounting and day-to-day financial operations. The Controller is expected to surface material financial, accounting, treasury, payment, and control issues early and provide clear, decision-ready information.\n\nFractional CFO\n\nAidKit's fractional CFO owns FP&amp;A and supports the CEO and leadership team with forecasting, financial planning, pricing analysis, scenario modeling, and other strategic finance questions. The Controller provides the accurate accounting, cash, revenue, AR, AP, and operational data that makes this work possible.\n\nThe relationship should be highly collaborative, but the accountability is distinct: the Controller owns the accuracy of the financial record and financial operations; the fractional CFO owns forward-looking financial analysis and strategic finance advice.\n\nProgram Management\n\nProgram Management owns program delivery, program requirements, partner relationships, participant eligibility, and programmatic payment decisions. The Controller owns the financial systems and controls required to receive, safeguard, move, reconcile, and account for the associated funds.\n\nEngineering\n\nEngineering owns payment-system architecture, integrations, and technical implementation. The Controller defines the accounting, financial-control, treasury, and reconciliation requirements those systems need to satisfy.\n\nMission Control\n\n - Sr. Director of Operations: coordinates program funding needs, timing, partner commitments, and contractual changes. The Controller owns financial validation, execution, recording, reconciliation, and controls.\n\n - Director of Risk, Compliance, and Contracts: owns the respective legal, regulatory, contractual, and compliance areas. The Controller ensures financial processes adhere to established requirements and works with these teams when financial operations introduce risk or control considerations.\n\n - People Operations Manager: owns employee-facing Ramp administration, cards, receipt follow-up, reimbursement workflows, and preliminary expense coding. The Controller owns final accounting review, the Rillet sync, reconciliation, and financial approval controls.\n\n\nABOUT YOU\n\nWe expect the right person will bring much of the following:\n\n - 7+ years of progressive accounting experience, including ownership of month-end close\n\n - Experience operating as a Controller, Assistant Controller, senior Accounting Manager, or equivalent accounting leader\n\n - Strong knowledge of accrual accounting, general ledger accounting, balance sheet reconciliations, revenue accounting, AR, AP, and financial controls\n\n - Sound accounting judgment and the ability to independently research, reach, and document accounting conclusions\n\n - Experience preparing a company for audit and working directly with auditors\n\n - Experience with cash management, banking, treasury, payments, or other financial operations\n\n - Comfort operating in an environment with substantial transaction volume and complex reconciliation requirements\n\n - Advanced Excel or Google Sheets skills, including the ability to build structured, auditable financial analyses and reconciliations\n\n - Experience using modern accounting and finance systems; familiarity with tools such as Rillet and Ramp is a plus\n\n - A track record of improving processes and automating recurring financial work\n\n - Strong documentation habits\n\n - Exceptional attention to detail without losing sight of the larger financial picture\n\n - The ability to work independently and take clear ownership of outcomes\n\n - Strong judgment about when an issue requires escalation\n\n - Clear, direct communication and a \"no surprises\" approach\n\n - Comfort working directly with a CEO and partnering with an external or fractional CFO\n\n - A commitment to AidKit's mission and to handling funds intended for people in need with extraordinary care\n\n\nWHAT SUCCESS LOOKS LIKE\n\nYou are successful in this role when:\n\n - AidKit's books are accurate and close occurs on a predictable schedule.\n\n - Accounting judgments are well-reasoned, documented, and consistently applied.\n\n - The CEO and fractional CFO can rely on financial information without independently reconstructing or validating the underlying accounting.\n\n - Audits and diligence do not require a scramble to reconstruct financial records.\n\n - Company cash, program funds, payment-provider balances, AR, AP, and the GL reconcile consistently.\n\n - AidKit can quickly explain where program funds are, what has been disbursed, what remains outstanding, and what remains available.\n\n - Payment and funding discrepancies are identified quickly and resolved rather than accumulating.\n\n - Material financial and payment risks surface before they become emergencies.\n\n - AR and AP are timely, accurate, and controlled.\n\n - Banking and payment-provider relationships are actively managed.\n\n - Critical financial processes are documented and have appropriate backup coverage.\n\n - Manual financial work declines as systems and automation improve.\n\n - AidKit can support increasing payment volume without financial operations becoming more fragile or requiring proportional growth in headcount.\n\n - Above all, AidKit can trust its numbers and trust its money movement.\n\n\nBENEFITS AT AIDKIT\n\nWe reinforce a culture of dignity, autonomy, and trust by actively taking an interest in and supporting employee’s lives outside of work. We also provide equity, which varies by position and experience, and a comprehensive benefits package including:\n\n - Fair Salaries that are transparent and competitive, with a maximum ratio of 3:1 between the highest and lowest paid employees at the company.\n\n - Fully remote work setting\n\n - Unlimited PTO\n\n - Retirement plan with 401K contribution\n\n - Health benefits\n\n - Flexible schedule\n\n - Professional development support\n\n\nABOUT OUR TEAM\n\nAidKit is a fully-remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.",
+    "compensation": {
+      "compensationTierSummary": "$130K – $160K • Offers Equity",
+      "scrapeableCompensationSalarySummary": "$130K - $160K",
+      "compensationTiers": [
+        {
+          "id": "1e484c99-019a-431b-b75b-5146564fc36b",
+          "tierSummary": "$130K – $160K • Offers Equity",
+          "title": null,
+          "additionalInformation": null,
+          "components": [
+            {
+              "id": "ed0116c0-6855-4bca-b961-19a3ae6dec7a",
+              "summary": "$130K – $160K",
+              "compensationType": "Salary",
+              "interval": "1 YEAR",
+              "currencyCode": "USD",
+              "minValue": 130000,
+              "maxValue": 160000
+            },
+            {
+              "id": "d2759282-32f3-4e8d-b679-1de071bb8dba",
+              "summary": "Offers Equity",
+              "compensationType": "EquityPercentage",
+              "interval": "NONE",
+              "currencyCode": null,
+              "minValue": null,
+              "maxValue": null
+            }
+          ]
+        }
+      ],
+      "summaryComponents": [
+        {
+          "compensationType": "Salary",
+          "interval": "1 YEAR",
+          "currencyCode": "USD",
+          "minValue": 130000,
+          "maxValue": 160000
+        },
+        {
+          "compensationType": "EquityPercentage",
+          "interval": "NONE",
+          "currencyCode": null,
+          "minValue": null,
+          "maxValue": null
+        }
+      ]
+    }
+  },
+  {
+    "id": "21182c6e-458b-4318-bba0-aabcd47cc96d",
+    "title": "Review &amp; Support Specialist",
+    "department": "Impact",
+    "team": "Applicant Support",
+    "employmentType": "PartTime",
+    "location": "Maui County, Hawaii",
+    "shouldDisplayCompensationOnJobPostings": true,
+    "secondaryLocations": [],
+    "publishedAt": "2026-08-17T20:17:52.115+00:00",
+    "isListed": true,
+    "isRemote": true,
+    "workplaceType": "Hybrid",
+    "address": {
+      "postalAddress": {
+        "addressRegion": "Hawaii",
+        "addressCountry": "United States",
+        "addressLocality": "Maui"
+      }
+    },
+    "jobUrl": "https://jobs.ashbyhq.com/aidkit/21182c6e-458b-4318-bba0-aabcd47cc96d",
+    "applyUrl": "https://jobs.ashbyhq.com/aidkit/21182c6e-458b-4318-bba0-aabcd47cc96d/application",
+    "descriptionHtml": "&lt;h3&gt;&lt;strong&gt;Overview&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit is revolutionizing how aid reaches those who need it most. We're on a mission to empower nonprofits and governments to deliver aid with unprecedented efficiency. We are seeking &lt;strong&gt;bilingual English/Ilocano Review &lt;/strong&gt;&amp;amp;&lt;strong&gt; Support Specialists &lt;/strong&gt;to join our remote dynamic team on a fixed-term, W2 position for a Maui United Way pilot program serving the ALICE demographic providing financial &amp;amp; resource support. This position is hybrid in Maui County, Hawaii, with most work performed remotely but requested availability for occasional in-person outreach and other events as needed.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;About AidKit&lt;/strong&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked individuals. From simplifying benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps its partners deliver aid with dignity.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;We were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;As we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful, flexible, and impactful work.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;h3&gt;&lt;strong&gt;About the Role&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;The Review &amp;amp; Support Specialist (RSS) will use AidKit’s platform to provide remote support for the Kamaʻāina Credit for ALICE Households, a program led by Maui United Way serving Maui County, Hawaii. This pilot program will support Maui County’s &lt;a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.unitedforalice.org/\"&gt;&lt;u&gt;Asset Limited Income Employed (ALICE)&lt;/u&gt;&lt;/a&gt; households by providing financial assistance and access to essential resources. The role may also require attending occasional in-person events such as outreach or meetings with the County or Community Based Organizations.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Key Responsibilities&lt;/strong&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Respond to applicant support tickets via phone, email, and text using AidKit's custom tools, ensuring accurate, friendly, and timely responses.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Leverage AidKit’s custom platform to conduct thorough application reviews carefully and quickly, validating correct documents, flagging where corrected documentation is needed or potential fraud to ensure compliance with program and documentation requirements.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Participate in program-specific training sessions and RSS team meetings.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Collaborate with other RSS and Managers to identify common applicant issues, reduce fraud, and improve AidKit’s overall recipient support process.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Troubleshoot applicant issues during the application and payment processes to ensure timely resolution.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Perform additional applicant support &amp;amp; review tasks as needed based on program demands&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;About You&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;These are not firm qualifications; we value skills and a growth mindset over checking boxes:&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Required Skills &amp;amp; Experience:&lt;/strong&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Live in Maui County with deep knowledge of local culture and &lt;a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.unitedforalice.org\"&gt;ALICE population&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Self-motivated and effective in managing tasks autonomously in high-volume settings&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Strong interpersonal and verbal communication skills, with the confidence and professionalism to represent AidKit in person to partners such as county agencies and nonprofit organizations&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Quick analytical thinking to decide whether documents are valid, need re-submission or fraud is suspected&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Keen eye for detail and adherence to protocol.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Tech-savvy and able to quickly learn AidKit's systems (training provided).&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Excellent oral and written communication skills.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Compassionate and sensitive to the nuances of working with vulnerable populations.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Nice to Have:&lt;/strong&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Experience in customer service and application review in large scale programs&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Flexible schedule and ability to adjust to changing circumstances&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Bilingual proficiency in English and Ilocano for effective communication&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Additional Requirements:&lt;/strong&gt;&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Reliable computer and stable internet connection.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Available to work up to 19 hours per week.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Ability to support in-person application assistance events with partners as requested throughout Maui County.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;Compensation and Location&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;This is a hybrid, fixed-term, part-time W-2 position with potential for occasional in-person events as needed.&lt;/p&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Hourly Rate:&lt;/strong&gt; $33/hour, paid bi-weekly.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Hours:&lt;/strong&gt; up to 19 hours/week (flexible schedule but may require set shifts to ensure coverage). Please note that hours may fluctuate based on program demand, and AidKit cannot guarantee a minimum number of hours.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;&lt;strong&gt;Role Duration:&lt;/strong&gt; September 28th 2026 - December 31st 2026. There is potential for the role to continue based on AidKit’s program and company needs.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/h3&gt;&lt;ul style=\"min-height:1.5em\"&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Flexible schedule.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p style=\"min-height:1.5em\"&gt;Meaningful work that directly impacts individuals and communities in need.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;About Our Team&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit is a fully remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.&lt;/p&gt;&lt;h3&gt;&lt;strong&gt;How to Apply&lt;/strong&gt;&lt;/h3&gt;&lt;p style=\"min-height:1.5em\"&gt;To apply for this position, please submit a cover letter and resume.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;Applications will be accepted until the positions are filled, with the review and interview process beginning September 15 2026.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;AidKit is an equal opportunity employer. We encourage candidates from all backgrounds, regardless of race, ethnicity, gender, age, sexual orientation, disability, or any other dimension of diversity, to apply. We believe true innovation thrives when a variety of voices and ideas come together.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;You don't need to meet every criterion listed to apply—we value unique experiences and perspectives.&lt;/p&gt;&lt;p style=\"min-height:1.5em\"&gt;Thank you for your interest in joining the AidKit team!&lt;/p&gt;",
+    "descriptionPlain": "OVERVIEW\n\nAidKit is revolutionizing how aid reaches those who need it most. We're on a mission to empower nonprofits and governments to deliver aid with unprecedented efficiency. We are seeking bilingual English/Ilocano Review &amp; Support Specialists to join our remote dynamic team on a fixed-term, W2 position for a Maui United Way pilot program serving the ALICE demographic providing financial &amp; resource support. This position is hybrid in Maui County, Hawaii, with most work performed remotely but requested availability for occasional in-person outreach and other events as needed.\n\nAbout AidKit\n\nAidKit’s cutting-edge technology transforms complex cash assistance programs into streamlined, secure, and dignified experiences. By seamlessly connecting applicants to vital resources, we're making aid radically accessible for diverse populations—including unhoused and unbanked individuals. From simplifying benefits modernization projects for state agencies to standing up efficient disaster relief programs, AidKit helps its partners deliver aid with dignity.\n\nWe were our own first customer—AidKit started as a nonprofit initiative born from the need to support systematically excluded workers during the early days of the COVID-19 pandemic. Today, AidKit provides the technology backbone for some of the nation's most innovative public safety net programs, having distributed hundreds of millions of dollars to people in need.\n\nAs we continue to grow rapidly, the opportunity for impact is immense. Apply to join our team if you're seeking meaningful, flexible, and impactful work.\n\n\n\n\nABOUT THE ROLE\n\nThe Review &amp; Support Specialist (RSS) will use AidKit’s platform to provide remote support for the Kamaʻāina Credit for ALICE Households, a program led by Maui United Way serving Maui County, Hawaii. This pilot program will support Maui County’s Asset Limited Income Employed (ALICE) https://www.unitedforalice.org/ households by providing financial assistance and access to essential resources. The role may also require attending occasional in-person events such as outreach or meetings with the County or Community Based Organizations.\n\n\n\nKey Responsibilities\n\n - Respond to applicant support tickets via phone, email, and text using AidKit's custom tools, ensuring accurate, friendly, and timely responses.\n\n - Leverage AidKit’s custom platform to conduct thorough application reviews carefully and quickly, validating correct documents, flagging where corrected documentation is needed or potential fraud to ensure compliance with program and documentation requirements.\n\n - Participate in program-specific training sessions and RSS team meetings.\n\n - Collaborate with other RSS and Managers to identify common applicant issues, reduce fraud, and improve AidKit’s overall recipient support process.\n\n - Troubleshoot applicant issues during the application and payment processes to ensure timely resolution.\n\n - Perform additional applicant support &amp; review tasks as needed based on program demands\n\n\nABOUT YOU\n\nThese are not firm qualifications; we value skills and a growth mindset over checking boxes:\n\n - Required Skills &amp; Experience:\n   \n   - Live in Maui County with deep knowledge of local culture and ALICE population https://www.unitedforalice.org\n   \n   - Self-motivated and effective in managing tasks autonomously in high-volume settings\n   \n   - Strong interpersonal and verbal communication skills, with the confidence and professionalism to represent AidKit in person to partners such as county agencies and nonprofit organizations\n   \n   - Quick analytical thinking to decide whether documents are valid, need re-submission or fraud is suspected\n   \n   - Keen eye for detail and adherence to protocol.\n   \n   - Tech-savvy and able to quickly learn AidKit's systems (training provided).\n   \n   - Excellent oral and written communication skills.\n   \n   - Compassionate and sensitive to the nuances of working with vulnerable populations.\n\n - Nice to Have:\n   \n   - Experience in customer service and application review in large scale programs\n   \n   - Flexible schedule and ability to adjust to changing circumstances\n   \n   - Bilingual proficiency in English and Ilocano for effective communication\n\n - Additional Requirements:\n   \n   - Reliable computer and stable internet connection.\n   \n   - Available to work up to 19 hours per week.\n   \n   - Ability to support in-person application assistance events with partners as requested throughout Maui County.\n\n\nCOMPENSATION AND LOCATION\n\nThis is a hybrid, fixed-term, part-time W-2 position with potential for occasional in-person events as needed.\n\n - Hourly Rate: $33/hour, paid bi-weekly.\n\n - Hours: up to 19 hours/week (flexible schedule but may require set shifts to ensure coverage). Please note that hours may fluctuate based on program demand, and AidKit cannot guarantee a minimum number of hours.\n\n - Role Duration: September 28th 2026 - December 31st 2026. There is potential for the role to continue based on AidKit’s program and company needs.\n\n\nBENEFITS\n\n - Flexible schedule.\n\n - Meaningful work that directly impacts individuals and communities in need.\n\n\nABOUT OUR TEAM\n\nAidKit is a fully remote workplace with virtual headquarters in Colorado, with employees from coast to coast in the continental United States.\n\n\nHOW TO APPLY\n\nTo apply for this position, please submit a cover letter and resume.\n\nApplications will be accepted until the positions are filled, with the review and interview process beginning September 15 2026.\n\nAidKit is an equal opportunity employer. We encourage candidates from all backgrounds, regardless of race, ethnicity, gender, age, sexual orientation, disability, or any other dimension of diversity, to apply. We believe true innovation thrives when a variety of voices and ideas come together.\n\nYou don't need to meet every criterion listed to apply—we value unique experiences and perspectives.\n\nThank you for your interest in joining the AidKit team!",
+    "compensation": {
+      "compensationTierSummary": "$33 per hour",
+      "scrapeableCompensationSalarySummary": null,
+      "compensationTiers": [
+        {
+          "id": "89b8d6df-9ca4-4ced-bbfb-867acf53b6d4",
+          "tierSummary": "$33/hour $33 per hour",
+          "title": null,
+          "additionalInformation": null,
+          "components": [
+            {
+              "id": "8db9df87-60ab-45ff-811a-f26e4dbf3ef5",
+              "summary": "$33/hour $33 per hour",
+              "compensationType": "Salary",
+              "interval": "1 HOUR",
+              "currencyCode": "USD",
+              "minValue": 33,
+              "maxValue": 33
+            }
+          ]
+        }
+      ],
+      "summaryComponents": [
+        {
+          "compensationType": "Salary",
+          "interval": "1 HOUR",
+          "currencyCode": "USD",
+          "minValue": 33,
+          "maxValue": 33
+        }
+      ]
+    }
+  }
+]</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-10-21T00:45:43.417Z
+            </div>
+        <script src="../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
+    </body>
+</html>
+    

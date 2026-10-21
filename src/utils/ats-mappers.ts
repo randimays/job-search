@@ -67,7 +67,7 @@ export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => {
     published: new Date(job.launch_at),
     title: cleanUpAPIString(job.title),
     updated: new Date(job?.launch_at),
-    url: 'https://www.akkio.com/jobs', // No distinct URLs for job postings
+    url: '', // No distinct URLs for job postings
   };
 };
 
@@ -118,10 +118,10 @@ export const workableMapper = (job: WorkableJobApiFormat, companyName: string): 
 export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Job => {
   return {
     companyName,
-    id: job?.bulletFields[0],
+    id: job?.bulletFields[1],
     published: determinePublishDateForWorkday(job?.postedOn, companyName),
     title: cleanUpAPIString(job.title),
     updated: determinePublishDateForWorkday(job?.postedOn, companyName),
-    url: job?.url
+    url: job?.url ? job.url : ''
   };
 };

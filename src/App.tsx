@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { prepareForApiCalls } from './api';
+import { prepareForApiCalls } from './api/fetch-jobs-external';
 import JobsTable from './components/JobsTable';
 import { formatDate, parseCsv } from './utils';
 import csv from './data/jobBoards.csv?raw';

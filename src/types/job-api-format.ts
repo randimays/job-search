@@ -6,7 +6,7 @@ export interface AshbyJobApiFormat {
   team: string,
   employmentType: string,
   location: string,
-  shouldDisplayCompensationOnJobPostings: string,
+  shouldDisplayCompensationOnJobPostings: boolean,
   secondaryLocations: string[],
   publishedAt: string,
   isListed: boolean,
@@ -14,9 +14,9 @@ export interface AshbyJobApiFormat {
   workplaceType: string,
   address: {
     postalAddress: {
-      addressRegion: string,
+      addressRegion?: string,
       addressCountry: string,
-      addressLocality: string
+      addressLocality?: string
     }
   },
   jobUrl: string,
@@ -26,8 +26,28 @@ export interface AshbyJobApiFormat {
   compensation: {
     compensationTierSummary: string | null,
     scrapeableCompensationSalarySummary: string | null,
-    compensationTiers: string[],
-    summaryComponents: string[]
+    compensationTiers: {
+      id: string,
+      tierSummary: string,
+      title: string | null,
+      additionalInformation: string | null,
+      components: {
+        id: string,
+        summary: string,
+        compensationType: string,
+        interval: string,
+        currencyCode: string | null,
+        minValue: number | null,
+        maxValue: number | null
+      }[]
+    }[],
+    summaryComponents: {
+      compensationType: string,
+      interval: string,
+      currencyCode: string | null,
+      minValue: number | null,
+      maxValue: number | null
+    }[]
   }
 }
 
@@ -56,7 +76,7 @@ export interface GemJobsApiFormat {
   absolute_url: string,
   content: string,
   content_plain: string,
-  created_at: Date,
+  created_at: string,
   departments: {
     child_ids: string[],
     id: string,
@@ -64,7 +84,7 @@ export interface GemJobsApiFormat {
     parent_id: string | null
   }[],
   employment_type: string,
-  first_published_at: Date,
+  first_published_at: string,
   id: string,
   internal_job_id: string,
   location: {
@@ -84,7 +104,7 @@ export interface GemJobsApiFormat {
   }[],
   requisition_id: string,
   title: string,
-  updated_at: Date
+  updated_at: string
 }
 
 export interface GreenhouseJobApiFormat {
@@ -112,9 +132,9 @@ export interface KulaJobApiFormat {
   listed: boolean,
   kind: string,
   is_confidential: boolean,
-  launch_at: Date,
-  end_at: Date | null,
-  eeco: {
+  launch_at: string,
+  end_at: string | null,
+  eeoc: {
     enabled: boolean
   },
   coordinator_enabled: string | null,
@@ -175,6 +195,8 @@ export interface LeverJobApiFormat {
       text: string,
       content: string
     }[],
+    salaryDescription?: string,
+    salaryDescriptionPlain?: string,
     salaryRange: {
       max: number,
       currency: string,
@@ -251,7 +273,7 @@ export interface WorkableJobApiFormat {
   country: string,
   city: string,
   state: string,
-  education: string,
+  education: string | null,
   experience: string,
   function: string,
   industry: string,
@@ -268,8 +290,9 @@ export interface WorkableJobApiFormat {
 export interface WorkdayJobApiFormat {
   title: string,
   externalPath: string,
-  locationsText: string,
+  locationsText?: string,
   postedOn: string,
   bulletFields: string[],
-  url: string
+  remoteType: string,
+  url?: string
 }

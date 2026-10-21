@@ -45,12 +45,15 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'algorithm',
     'analysis',
     'analytics',
+    'appian',
     'aws connect',
     'business value',
     'capture',
     'clinical',
+    'cloud',
     'cloud operations',
     'cloud security software',
+    'containerization',
     'controls',
     'core design',
     'cuda',
@@ -64,27 +67,40 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'electrical',
     'forecasting and optimization',
     'gemini enterprise',
+    'geospatial',
     'hot cell design',
     'imaging',
     'imaging service',
     'infrastructure',
+    'infrastructure and cluster',
+    'infrastructure & cluster',
     'mechanical',
+    'mechatronics',
     'neutronics',
+    'oracle',
     'power platform',
+    'power platform application',
     'presales',
     'process',
     'professional services',
     'regulatory',
     'safety',
+    'sap abap',
     'security',
     'security risk',
+    'servicenow',
+    'sharepoint',
     'solutions',
     'strike',
+    'system',
     'support',
     'vulnerability management',
   ];
 
-  return types.map(type => `${type} engineer`);
+  return [
+    ...types.map(type => `${type} engineer`),
+    ...types.map(type => `${type} developer`),
+  ];
 }
 
 // Domains or role types that aren't a match
@@ -97,11 +113,12 @@ const DOMAIN_OR_ROLE_EXCLUSIONS = [
   'azure',
   // 'back end',
   'business development representative',
+  'c#',
   'computation',
   'data',
   'designer',
   // 'devops',
-  // 'devsecops',
+  'devsecops',
   'enterprise development',
   'fuel performance',
   'help desk',
@@ -118,12 +135,16 @@ const DOMAIN_OR_ROLE_EXCLUSIONS = [
   'project manager',
   'python',
   // 'qa',
+  'rcdd',
   'release',
   'reliability',
   'rust',
   'salesforce',
+  'spectrum',
   'systems',
   'technician',
+  'ts/sci',
+  'vdi',
   'wordpress',
   'writer',
   ...IRRELEVANT_TYPES_OF_ENGINEERS()
@@ -138,14 +159,18 @@ const RESUME_DROP_KEYWORDS = [
   'talent',
 ];
 
-export const COMMON_HIRING_COUNTRIES = [
+export const NON_US_LOCATIONS = [
   'Argentina',
   'Canada',
+  'Germany',
   'India',
   'Ireland',
+  'LATAM',
   'Mexico',
   'Poland',
+  'Romania',
   'Spain',
+  'Sweden',
   'UK',
   'United Kingdom',
 ];
@@ -153,7 +178,7 @@ export const COMMON_HIRING_COUNTRIES = [
 const ROLE_LOCATION_KEYWORDS = [
   'hybrid',
   'onsite',
-  ...COMMON_HIRING_COUNTRIES,
+  ...NON_US_LOCATIONS,
 ];
 
 // This represents keywords that would eliminate a match 
