@@ -7,6 +7,7 @@ db.pragma('foreign_keys = ON');
 db.exec(`
   CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_id TEXT NOT NULL,
     company TEXT NOT NULL,
     title TEXT NOT NULL,
     url TEXT UNIQUE,

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 import { prepareForApiCalls } from './api/fetch-jobs-external';
 import JobsTable from './components/JobsTable';
 import { formatDate, parseCsv } from './utils';
@@ -48,7 +49,14 @@ function App() {
     <>
       <h1 className="text-3xl text-center font-bold">Job search for {today}</h1>
       {(!fetchingJobs && jobs) ? <JobsTable jobs={jobs} /> : null}
-      {fetchingJobs ? <p className="mt-20">Attempting to retrieve job listings for today...</p> : null}
+      {fetchingJobs ? (
+        <>
+          <div className="w-full flex justify-center">
+            <CircularProgress aria-label="Loading..." className="mt-20" />
+          </div>
+          <p className="mt-8 text-center">Retrieving job listings. This may take a minute or two.</p>
+        </>)
+        : null}
       {noResultsCompanies.length ? <NoResults noResultsCompanies={noResultsCompanies} /> : null}
       <h2 className="text-2xl text-center font-bold mt-20">Omitted Jobs</h2>
       {!omittedTitlesArray.length ? <p className="mt-12">If there are omitted titles when the search is completed, you'll see them here.</p> : null}

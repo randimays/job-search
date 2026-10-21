@@ -18,6 +18,8 @@ const settleWithLimit = async <R>(
 ): Promise<PromiseSettledResult<R>[]> => {
   const results: PromiseSettledResult<R>[] = new Array(companiesToFetch.length);
   let nextIndex = 0;
+
+  console.log('companiesToFetch: ', companiesToFetch.length)
   
   const worker = async (): Promise<void> => {
     while (nextIndex < companiesToFetch.length) {
@@ -64,7 +66,7 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
   }
 
   // Loop through each of the providers from the above object and create Promises for each,
-  // then call the API in batches of 2-5 to prevent rate-limiting. Return job results and failed calls
+  // then call the API in batches to prevent rate-limiting. Return job results and failed calls
   for (const provider in batches) {
     const rows = batches[provider];
     const config = BOARD_CONFIGS.find(c => c.name === provider)!;

@@ -26,7 +26,6 @@ import {
 } from './ats-mappers';
 
 // -------- Handlers
-// TODO refactor these to be a generic handler?
 
 export const ashbyJobsHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
