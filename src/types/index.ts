@@ -1,6 +1,6 @@
 export interface Job {
   companyName: string,
-  id: string | null,
+  id: string,
   published: Date,
   title: string,
   updated: Date,

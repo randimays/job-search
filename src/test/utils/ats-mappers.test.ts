@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ashbyMapper,
+  bambooMapper,
   gemMapper,
   greenhouseMapper,
   kulaMapper,
@@ -19,6 +20,7 @@ import { PaylocityMock } from '../../mock/paylocity';
 import { RipplingMock } from '../../mock/rippling';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
+import { BambooMock } from '../../mock/bamboo';
 
 describe('mappers', () => {
   beforeEach(() => {
@@ -31,141 +33,246 @@ describe('mappers', () => {
   });
 
   describe('ashbyMapper', () => {
-    const mockEntry = AshbyMock[1];
+    const expectedAshbyReturn = {
+      companyName: 'Vanta',
+      id: '1513e1ac-5dca-4acb-a99d-8b5461115651',
+      published: new Date('2025-03-13T22:25:56.507+00:00'),
+      title: 'Senior Fullstack Software Engineer, GRC',
+      updated: new Date('2025-03-13T22:25:56.507+00:00'),
+      url: 'https://jobs.ashbyhq.com/vanta/1513e1ac-5dca-4acb-a99d-8b5461115651'
+    };
 
     it('properly formats an API entry from Ashby', () => {
-      expect(ashbyMapper(mockEntry, 'AidKit')).toEqual({
-        companyName: 'AidKit',
-        id: 'c05f270b-e045-4b1e-8bf1-3f5025c176ee',
-        published: new Date('2026-10-07T23:54:01.434+00:00'),
-        title: 'Controller',
-        updated: new Date('2026-10-07T23:54:01.434+00:00'),
-        url: 'https://jobs.ashbyhq.com/aidkit/c05f270b-e045-4b1e-8bf1-3f5025c176ee'
+      const mockEntry = AshbyMock[1];
+      expect(ashbyMapper(mockEntry, 'Vanta')).toEqual(expectedAshbyReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...AshbyMock[1],
+        id: '',
+      };
+
+      expect(ashbyMapper(mockWithoutId, 'Vanta')).toEqual({
+        ...expectedAshbyReturn,
+        id: ''
       });
     });
   });
 
   describe('bambooMapper', () => {
+    const expectedBambooReturn = {
+      companyName: 'Maisha Meds',
+      id: '173',
+      published: new Date('2026-10-14T17:00:00.000Z'),
+      title: 'Senior Software Engineer',
+      updated: new Date('2026-10-14T17:00:00.000Z'),
+      url: 'https://maishameds.bamboohr.com/careers/173'
+    };
+
     it('properly formats an API entry from Bamboo', () => {
-      // TODO
+      const mockEntry = BambooMock[0];
+      expect(bambooMapper(mockEntry, 'Maisha Meds')).toEqual(expectedBambooReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...BambooMock[0],
+        id: '',
+      };
+
+      expect(bambooMapper(mockWithoutId, 'Maisha Meds')).toEqual({
+        ...expectedBambooReturn,
+        url: 'https://maishameds.bamboohr.com/careers/',
+        id: ''
+      });
     });
   });
 
   describe('gemMapper', () => {
-    const mockEntry = GemMock[3];
+    const expectedGemReturn = {
+      companyName: 'Snout',
+      id: 'am9icG9zdDqQjNG0z9Cfaj7woaSEXnLq',
+      published: new Date('2025-11-25T18:54:50.362Z'),
+      title: 'Senior Software Engineer',
+      updated: new Date('2026-06-27T05:37:51.859Z'),
+      url: 'https://jobs.gem.com/snout/am9icG9zdDqQjNG0z9Cfaj7woaSEXnLq',
+    };
 
     it('properly formats an API entry from Gem', () => {
-      expect(gemMapper(mockEntry, 'Snout')).toEqual({
-        companyName: 'Snout',
-        id: 'am9icG9zdDqQjNG0z9Cfaj7woaSEXnLq',
-        published: new Date('2025-11-25T18:54:50.362Z'),
-        title: 'Senior Software Engineer',
-        updated: new Date('2026-06-27T05:37:51.859Z'),
-        url: 'https://jobs.gem.com/snout/am9icG9zdDqQjNG0z9Cfaj7woaSEXnLq',
+      const mockEntry = GemMock[3];
+      expect(gemMapper(mockEntry, 'Snout')).toEqual(expectedGemReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...GemMock[3],
+        id: '',
+      };
+
+      expect(gemMapper(mockWithoutId, 'Snout')).toEqual({
+        ...expectedGemReturn,
+        id: ''
       });
     });
   });
 
   describe('greenhouseMapper', () => {
-    const mockEntry = GreenhouseMock[0];
-  
+    const expectedGreenhouseReturn = {
+      companyName: 'Capital Technology Group',
+      id: '5187306007',
+      published: new Date('2026-07-14T23:10:14-04:00'),
+      title: 'Associate Recruiter',
+      updated: new Date('2026-10-02T10:14:01-04:00'),
+      url: 'https://boards.greenhouse.io/capitaltg/jobs/5187306007?gh_jid=5187306007'
+    };
+
     it('properly formats an API entry from Greenhouse', () => {
-      expect(greenhouseMapper(mockEntry)).toEqual({
-        companyName: 'Capital Technology Group',
-        id: '5187306007',
-        published: new Date('2026-07-14T23:10:14-04:00'),
-        title: 'Associate Recruiter',
-        updated: new Date('2026-10-02T10:14:01-04:00'),
-        url: 'https://boards.greenhouse.io/capitaltg/jobs/5187306007?gh_jid=5187306007'
-      });
+      const mockEntry = GreenhouseMock[0];
+      expect(greenhouseMapper(mockEntry)).toEqual(expectedGreenhouseReturn);
     });
   });
 
   describe('kulaMapper', () => {
-    const mockEntry = KulaMock[0];
-  
+    const expectedKulaReturn = {
+      companyName: 'Akkio',
+      id: '19319',
+      published: new Date('2025-11-18T20:16:46.000Z'),
+      title: 'Senior Forward Deployed Engineer',
+      updated: new Date('2025-11-18T20:16:46.000Z'),
+      url: 'https://careers.kula.ai/hire',
+    };
+    
     it('properly formats an API entry from Kula', () => {
-      expect(kulaMapper(mockEntry, 'Akkio')).toEqual({
-        companyName: 'Akkio',
-        id: '19319',
-        published: new Date('2025-11-18T20:16:46.000Z'),
-        title: 'Senior Forward Deployed Engineer',
-        updated: new Date('2025-11-18T20:16:46.000Z'),
-        url: '',
-      });
+      const mockEntry = KulaMock[0];
+      expect(kulaMapper(mockEntry, 'Akkio')).toEqual(expectedKulaReturn);
     });
   });
 
   describe('leverMapper', () => {
-    const mockEntry = LeverMock[0];
-  
+    const expectedLeverReturn = {
+      companyName: 'Ellevation',
+      id: '63d5bd17-5957-4562-8971-5a096dc28079',
+      published: new Date(1787671018630),
+      title: 'Senior Forward Deployed Engineer',
+      updated: new Date(1787671018630),
+      url: 'https://jobs.lever.co/ellevationeducation/63d5bd17-5957-4562-8971-5a096dc28079',
+    };
+
     it('properly formats an API entry from Lever', () => {
-      expect(leverMapper(mockEntry, 'Ellevation')).toEqual({
-        companyName: 'Ellevation',
-        id: '63d5bd17-5957-4562-8971-5a096dc28079',
-        published: new Date(1787671018630),
-        title: 'Revenue Enablement Manager',
-        updated: new Date(1787671018630),
-        url: 'https://jobs.lever.co/ellevationeducation/63d5bd17-5957-4562-8971-5a096dc28079',
+      const mockEntry = LeverMock[0];
+      expect(leverMapper(mockEntry, 'Ellevation')).toEqual(expectedLeverReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...LeverMock[0],
+        id: '',
+      };
+
+      expect(leverMapper(mockWithoutId, 'Ellevation')).toEqual({
+        ...expectedLeverReturn,
+        id: ''
       });
     });
   });
 
   describe('paylocityMapper', () => {
-    const mockEntry = PaylocityMock[0];
-  
+    const expectedPaylocityReturn = {
+      companyName: 'Ellevation',
+      id: '4314622',
+      published: new Date('2026-10-16T12:32:17-05:00'),
+      title: 'Senior Spectrum Manager',
+      updated: new Date('2026-10-16T12:32:17-05:00'),
+      url: 'https://recruiting.paylocity.com/Recruiting/Jobs/Details/4314622',
+    };
+    
     it('properly formats an API entry from Paylocity}', () => {
-      expect(paylocityMapper(mockEntry, 'Ellevation')).toEqual({
-        companyName: 'Ellevation',
-        id: '4314622',
-        published: new Date('2026-10-16T12:32:17-05:00'),
-        title: 'Senior Spectrum Manager',
-        updated: new Date('2026-10-16T12:32:17-05:00'),
-        url: 'https://recruiting.paylocity.com/Recruiting/Jobs/Details/4314622',
-      });
+      const mockEntry = PaylocityMock[0];
+      expect(paylocityMapper(mockEntry, 'Ellevation')).toEqual(expectedPaylocityReturn);
     });
   });
 
   describe('ripplingMapper', () => {
-    const mockEntry = RipplingMock[0];
-  
+    const expectedRipplingReturn = {
+      companyName: 'MCCi',
+      id: '77db9e1f-dd55-4517-a2da-3945425e34d6',
+      published: new Date('2026-10-14T17:00:00.000Z'),
+      title: 'Cloud Operations Engineer',
+      updated: new Date('2026-10-14T17:00:00.000Z'),
+      url: 'https://ats.rippling.com/mccicareers/jobs/77db9e1f-dd55-4517-a2da-3945425e34d6',
+    };
+    
     it('properly formats an API entry from Rippling', () => {
-      expect(ripplingMapper(mockEntry, 'MCCi')).toEqual({
-        companyName: 'MCCi',
-        id: '77db9e1f-dd55-4517-a2da-3945425e34d6',
-        published: new Date(),
-        title: 'Cloud Operations Engineer',
-        updated: new Date(),
-        url: 'https://ats.rippling.com/mccicareers/jobs/77db9e1f-dd55-4517-a2da-3945425e34d6',
+      const mockEntry = RipplingMock[0];
+      expect(ripplingMapper(mockEntry, 'MCCi')).toEqual(expectedRipplingReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...RipplingMock[0],
+        uuid: '',
+      };
+
+      expect(ripplingMapper(mockWithoutId, 'MCCi')).toEqual({
+        ...expectedRipplingReturn,
+        id: ''
       });
     });
   });
 
   describe('workableMapper', () => {
-    const mockEntry = WorkableMock[0];
-  
+    const expectedWorkableReturn = {
+      companyName: 'Atria Health',
+      id: '96D3C67C3E',
+      published: new Date('2026-10-13'),
+      title: 'Chief of Staff to the CEO',
+      updated: new Date('2026-10-13'),
+      url: 'https://apply.workable.com/j/96D3C67C3E',
+    };
+    
     it('properly formats an API entry from Workable', () => {
-      expect(workableMapper(mockEntry, 'Atria Health')).toEqual({
-        companyName: 'Atria Health',
-        id: '96D3C67C3E',
-        published: new Date('2026-10-13'),
-        title: 'Chief of Staff to the CEO',
-        updated: new Date('2026-10-13'),
-        url: 'https://apply.workable.com/j/96D3C67C3E',
+      const mockEntry = WorkableMock[0];
+      expect(workableMapper(mockEntry, 'Atria Health')).toEqual(expectedWorkableReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...WorkableMock[0],
+        shortcode: '',
+      };
+
+      expect(workableMapper(mockWithoutId, 'Atria Health')).toEqual({
+        ...expectedWorkableReturn,
+        id: ''
       });
     });
   });
 
   describe('workdayMapper', () => {
-    const mockEntry = WorkdayMock[0];
-  
+    const expectedWorkdayReturn = {
+      companyName: 'Atria Health',
+      id: 'JR101655',
+      published: new Date('2026-09-29T17:00:00.000Z'),
+      title: 'Sr. Manager of Support Operations, Inspection',
+      updated: new Date('2026-09-29T17:00:00.000Z'),
+      url: '/job/US-WA-Remote---Non-Seattle/Sr-Manager-of-Support-Operations--Inspection_JR101655',
+    };
+
     it('properly formats an API entry from Workday', () => {
-      expect(workdayMapper(mockEntry, 'Atria Health')).toEqual({
-        companyName: 'Atria Health',
-        id: 'JR101655',
-        published: new Date('2026-09-29T17:00:00.000Z'),
-        title: 'Sr. Manager of Support Operations, Inspection',
-        updated: new Date('2026-09-29T17:00:00.000Z'),
+      const mockEntry = WorkdayMock[0];
+      expect(workdayMapper(mockEntry, 'Atria Health')).toEqual(expectedWorkdayReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...WorkdayMock[0],
+        externalPath: '',
+      };
+
+      expect(workdayMapper(mockWithoutId, 'Atria Health')).toEqual({
+        ...expectedWorkdayReturn,
+        id: '',
         url: '',
       });
     });

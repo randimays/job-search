@@ -41,7 +41,7 @@ export const LeverMock: LeverJobPosting[] = [
       "interval": "per-year-salary",
       "min": 105000
     },
-    "text": "Revenue Enablement Manager",
+    "text": "Senior Forward Deployed Engineer",
     "country": "US",
     "workplaceType": "remote",
     "opening": "",

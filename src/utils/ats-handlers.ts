@@ -14,7 +14,7 @@ import type { Job } from '../types';
 import { isRemoteOrVirtualUS, isPotentialJobMatch, isUnitedStates } from '.';
 import {
   ashbyMapper,
-  bambooHrMapper,
+  bambooMapper,
   gemMapper,
   greenhouseMapper,
   kulaMapper,
@@ -38,13 +38,13 @@ export const ashbyJobsHandler = (jobs: AshbyJobApiFormat[], companyName: string)
   return [];
 };
 
-export const bambooHrJobsHandler = (jobs: BambooHrJobApiFormat[], companyName: string): Job[] | [] => {
+export const bambooJobsHandler = (jobs: BambooHrJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       // Remote filtering is skipped for Bamboo jobs because so far I've only seen
       // them `null` for `isRemote` and with no location information
       .filter(job => isPotentialJobMatch(job?.jobOpeningName))
-      .map(filteredJob => bambooHrMapper(filteredJob, companyName));
+      .map(filteredJob => bambooMapper(filteredJob, companyName));
   }
 
   return [];
@@ -79,6 +79,8 @@ export const kulaJobsHandler = (jobs: KulaJobApiFormat[], companyName: string): 
       .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => kulaMapper(filteredJob, companyName));
   }
+
+  return [];
 };
 
 export const leverJobsHandler = (jobs: LeverJobPosting[], companyName: string): Job[] | [] => {

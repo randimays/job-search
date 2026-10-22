@@ -1,6 +1,6 @@
 import {
   ashbyJobsHandler,
-  bambooHrJobsHandler,
+  bambooJobsHandler,
   gemJobsHandler,
   greenhouseJobsHandler,
   kulaJobsHandler,
@@ -31,7 +31,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
     }
   },
   {
-    handler: bambooHrJobsHandler,
+    handler: bambooJobsHandler,
     name: 'Bamboo',
     url: (board_token: string): string => `/bamboohr/${board_token}/careers/list`,
     parse: async response => {

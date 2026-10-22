@@ -164,6 +164,7 @@ export const NON_US_LOCATIONS = [
   'Argentina',
   'Canada',
   'Germany',
+  'Hungary',
   'India',
   'Ireland',
   'LATAM',

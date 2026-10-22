@@ -28,3 +28,4 @@ src/data/jobBoards.csv
 jobs.db
 jobs.db-wal
 jobs.db-shm
+coverage

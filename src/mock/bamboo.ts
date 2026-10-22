@@ -3,7 +3,7 @@ import type { BambooHrJobApiFormat } from '../types/job-api-format';
 export const BambooMock: BambooHrJobApiFormat[] = [
   {
     "id": "173",
-    "jobOpeningName": "Engineering Manager",
+    "jobOpeningName": "Senior Software Engineer",
     "departmentId": "18782",
     "departmentLabel": "Engineering",
     "employmentStatusLabel": "Full-Time",
