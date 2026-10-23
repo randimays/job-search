@@ -268,6 +268,7 @@ describe('mappers', () => {
       const mockWithoutId = {
         ...WorkdayMock[0],
         externalPath: '',
+        url: '',
       };
 
       expect(workdayMapper(mockWithoutId, 'Atria Health')).toEqual({

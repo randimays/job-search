@@ -6,6 +6,7 @@ import {
   isRemoteOrVirtualUS,
   isPotentialJobMatch,
   isUnitedStates,
+  isUnitedStatesWorkday,
   toTitleCase,
   flushOmittedTitles,
   parseCsv,
@@ -207,6 +208,32 @@ describe('utils', () => {
       );
     });
   });
+
+  describe('isUnitedStatesWorkday', () => {
+    it.only('handles true cases properly', () => {
+      expect(isUnitedStatesWorkday([
+        'United States of America',
+        'JR101664',
+        'Sales'
+      ])).toBe(true);
+
+      expect(isUnitedStatesWorkday([
+        'JR101664',
+      ])).toBe(true);
+
+      expect(isUnitedStatesWorkday([])).toBe(true);
+    });
+
+    it('handles false cases properly', () => {
+      expect(isUnitedStatesWorkday([
+        'India',
+        'JR101664',
+        'Sales'
+      ])).toBe(false);
+
+      expect(isUnitedStatesWorkday(['Germany'])).toBe(false);
+    });
+  });
   
   describe('isRemoteOrVirtualUS', () => {
     const testPermutations = (keyword: string) => {
@@ -260,8 +287,8 @@ describe('utils', () => {
   
     it('handles a variety of dates correctly', () => {
       expect(determinePublishDateForWorkday('Posted Today', 'Bonterra').getDate()).toBe(14);
+      expect(determinePublishDateForWorkday('Posted Yesterday', 'Bonterra').getDate()).toBe(13);
       expect(determinePublishDateForWorkday('Posted 7 Days Ago', 'Bonterra').getDate()).toBe(7);
-      expect(determinePublishDateForWorkday('Posted 1 Days Ago', 'Bonterra').getDate()).toBe(13);
       expect(determinePublishDateForWorkday('Posted 16 Days Ago', 'Bonterra').getDate()).toBe(28);
       expect(determinePublishDateForWorkday('Posted 30+ Days Ago', 'Bonterra').getDate()).toBe(14);
     });

@@ -294,5 +294,5 @@ export interface WorkdayJobApiFormat {
   postedOn: string,
   bulletFields: string[],
   remoteType: string,
-  url?: string
+  url: string
 }

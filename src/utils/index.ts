@@ -102,6 +102,16 @@ export const isUnitedStates = (location: string): boolean => {
   return true;
 };
 
+export const isUnitedStatesWorkday = (location: string[]): boolean => {
+  if (!location.length) {
+    return true;
+  }
+
+  return !NON_US_LOCATIONS.some(country =>
+    location.some(part => part.includes(country))
+  );
+};
+
 export const isRemoteOrVirtualUS = (location: string): boolean => {
   if (location && typeof location === 'string') {
     return (location.toLowerCase().includes('remote') || location.toLowerCase().includes('virtual')) && isUnitedStates(location);
@@ -126,18 +136,21 @@ export const parseCsv = (fileContents: string): any => {
 export const determinePublishDateForWorkday = (postedOn: string, companyName: string): Date => {
   const today = new Date();
 
-  if (!postedOn) {
+  if (!postedOn || postedOn === 'Posted Today') {
     return today;
   }
 
   if (postedOn.startsWith('Posted')) {
     const parts = postedOn.split(' ');
+    const numberInString = parts?.[1];
     let numberOfDaysAgo: number;
 
-    if (parts?.[1].includes('+')) { // It says 'Posted 30+ Days Ago'
+    if (numberInString.includes('+')) { // It says 'Posted 30+ Days Ago'
       numberOfDaysAgo = 30;
+    } else if (numberInString === 'Yesterday') {
+      numberOfDaysAgo = 1;
     } else {
-      numberOfDaysAgo = +parts?.[1];
+      numberOfDaysAgo = +numberInString;
     }
     
     if (isNaN(numberOfDaysAgo)) {

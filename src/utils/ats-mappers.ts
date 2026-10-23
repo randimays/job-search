@@ -99,8 +99,13 @@ export const workableMapper = (job: WorkableJobApiFormat, companyName: string): 
 
 export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Job => {
   let id = '';
+  let slug: string = '';
 
-  const slug = job?.externalPath ? job.externalPath : ''; 
+  if (job?.externalPath) {
+    slug = job.externalPath;
+  } else if (job?.url) {
+    slug = job.url;
+  }
 
   if (slug) {
     const splitSlug = slug.split('_');
@@ -113,6 +118,6 @@ export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Jo
     published: determinePublishDateForWorkday(job?.postedOn, companyName),
     title: cleanUpAPIString(job.title),
     updated: determinePublishDateForWorkday(job?.postedOn, companyName),
-    url: slug
+    url: job.url
   };
 };

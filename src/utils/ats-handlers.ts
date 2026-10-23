@@ -11,7 +11,12 @@ import type {
   WorkdayJobApiFormat
 } from '../types/job-api-format';
 import type { Job } from '../types';
-import { isRemoteOrVirtualUS, isPotentialJobMatch, isUnitedStates } from '.';
+import {
+  isRemoteOrVirtualUS,
+  isPotentialJobMatch,
+  isUnitedStates,
+  isUnitedStatesWorkday
+} from '.';
 import {
   ashbyMapper,
   bambooMapper,
@@ -133,6 +138,7 @@ export const workdayJobsHandler = (jobs: WorkdayJobApiFormat[], companyName: str
     return jobs
       // Remote job filtering is skipped for Workday because the listing doesn't return
       // enough information for us to deterimine this
+      .filter(job => isUnitedStatesWorkday(job.bulletFields))
       .filter(job => isPotentialJobMatch(job?.title))
       .map(filteredJob => workdayMapper(filteredJob, companyName));
   } 

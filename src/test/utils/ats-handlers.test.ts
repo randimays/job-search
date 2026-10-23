@@ -269,14 +269,6 @@ describe('handlers', () => {
           title: 'Senior Software Engineer I, Insurance Services',
           updated: new Date('2026-09-19T17:00:00.000Z'),
           url: '/job/IN-Remote/Senior-Software-Engineer-I--Insurance-Services_JR101609',
-        },
-        {
-          companyName: 'Capital One',
-          id: 'JR101613-1',
-          published: new Date('2026-09-19T17:00:00.000Z'),
-          title: 'Senior Software Engineer I, Insurance Services',
-          updated: new Date('2026-09-19T17:00:00.000Z'),
-          url: '/job/IN-Remote/Senior-Software-Engineer-I--Insurance-Services_JR101613-1',
         }
       ]);
     });

@@ -19,8 +19,6 @@ const settleWithLimit = async <R>(
   const results: PromiseSettledResult<R>[] = new Array(companiesToFetch.length);
   let nextIndex = 0;
 
-  console.log('companiesToFetch: ', companiesToFetch.length)
-  
   const worker = async (): Promise<void> => {
     while (nextIndex < companiesToFetch.length) {
       const index = nextIndex++;
@@ -173,7 +171,7 @@ export const fetchWorkdayJobs = async (rowData: string, companyName: string): Pr
 
   const { origin } = new URL(companyUrl);
   const site = companyUrl.split('/')[6]; // https:, '', host, wday, cxs, tenant, site
-  
+
   return config.handler(
     postings.map(p => ({ ...p, url: `${origin}/${site}${p.externalPath}` })),
     companyName,

@@ -22,6 +22,26 @@ interface BoardConfig {
 
 // Comment out various sections to speed up local API calls while dev'ing
 export const BOARD_CONFIGS: BoardConfig[] = [
+  // {
+  //   handler: () => {}, // TODO
+  //   name: 'Dayforce',
+  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  // },
+  // {
+  //   handler: () => {}, // TODO
+  //   name: 'Gusto',
+  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  // },
+  //   {
+  //   handler: () => {}, // TODO
+  //   name: 'JazzHR',
+  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  // },
+  // {
+  //   handler: () => {}, // TODO
+  //   name: 'Jobvite',
+  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  // },
   {
     handler: ashbyJobsHandler,
     name: 'Ashby',
@@ -38,6 +58,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
        return (await response.json()).result;
     }
   },
+
   {
     handler: gemJobsHandler,
     name: 'Gem',
@@ -63,11 +84,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
       return (await response.json()).data;
     },
   },
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Jobvite',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
-  // },
+ 
   {
     handler: leverJobsHandler,
     name: 'Lever',

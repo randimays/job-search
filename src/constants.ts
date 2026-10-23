@@ -49,9 +49,11 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'aws connect',
     'business value',
     'capture',
+    'change management training',
     'clinical',
     'cloud',
     'cloud operations',
+    'cloud platform',
     'cloud security software',
     'containerization',
     'controls',
@@ -66,6 +68,7 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'detection',
     'distribution',
     'electrical',
+    'field service',
     'forecasting and optimization',
     'gemini enterprise',
     'geospatial',
@@ -76,6 +79,7 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'infrastructure',
     'infrastructure and cluster',
     'infrastructure & cluster',
+    'knowledge graph',
     'mechanical',
     'mechatronics',
     'neutronics',
@@ -92,6 +96,8 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
     'security risk',
     'servicenow',
     'sharepoint',
+    'shopify',
+    'siem',
     'solutions',
     'strike',
     'system',
@@ -101,6 +107,8 @@ const IRRELEVANT_TYPES_OF_ENGINEERS = () => {
 
   return [
     ...types.map(type => `${type} engineer`),
+    ...types.map(type => `${type} sr engineer`),
+    ...types.map(type => `${type} senior engineer`),
     ...types.map(type => `${type} developer`),
   ];
 }
@@ -163,6 +171,7 @@ const RESUME_DROP_KEYWORDS = [
 export const NON_US_LOCATIONS = [
   'Argentina',
   'Canada',
+  'Colombia',
   'Germany',
   'Hungary',
   'India',
