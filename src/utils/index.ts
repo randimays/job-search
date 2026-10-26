@@ -70,6 +70,24 @@ export const flushOmittedTitles = (): void => {
   useJobs.getState().addOmittedTitles(omittedTitles);
 };
 
+// We can't say for certain that a listing is in the United States without
+// calling other API endpoints in certain cases. But here we just check that we
+// aren't finding non-US countries in the title or location
+export const isUnitedStates = (titleOrLocation: string): boolean => {
+  if (!titleOrLocation || typeof titleOrLocation !== 'string') {
+    console.error(`isUnitedStates: invalid or missing job title or location: ${location}`);
+    return true;
+  }
+
+  for (const country of NON_US_LOCATIONS) {
+    if (titleOrLocation.toLowerCase().includes(country.toLowerCase())) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 // Checks against the ROLE_MATCHERS and ROLE_EXCLUSIONS lists (in constants.ts)
 // to filter for potential matches by keywords
 export const isPotentialJobMatch = (title: string): boolean => {
@@ -80,26 +98,15 @@ export const isPotentialJobMatch = (title: string): boolean => {
 
   const normalized = title.trim();
 
+  if (!isUnitedStates(title)) {
+    return false;
+  }
+
   if (!matches.test(normalized) || exclusions.test(normalized)) {
     omittedTitles.push(normalized);
   }
 
   return matches.test(normalized) && !exclusions.test(normalized);
-};
-
-export const isUnitedStates = (location: string): boolean => {
-  if (!location || typeof location !== 'string') {
-    console.error(`isUnitedStates: invalid or missing job location: ${location}`);
-    return true;
-  }
-
-  for (const country of NON_US_LOCATIONS) {
-    if (location.toLowerCase().includes(country.toLowerCase())) {
-      return false;
-    }
-  }
-
-  return true;
 };
 
 export const isUnitedStatesWorkday = (location: string[]): boolean => {

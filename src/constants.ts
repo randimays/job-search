@@ -179,6 +179,7 @@ export const NON_US_LOCATIONS = [
   'LATAM',
   'Mexico',
   'Poland',
+  'Portugal',
   'Romania',
   'Spain',
   'Sweden',

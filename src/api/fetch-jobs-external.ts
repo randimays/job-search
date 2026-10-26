@@ -2,6 +2,7 @@ import type { Failure, Job } from '../types';
 import { flushOmittedTitles, toTitleCase } from '../utils';
 import { useJobs } from '../store';
 import { BOARD_CONFIGS } from './board-configs';
+import { batchCompaniesByProvider } from '../utils/api-prep';
 
 type Batches = Record<string, string[][]>;
 
@@ -40,55 +41,43 @@ const settleWithLimit = async <R>(
 };
 
 export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsResponse> => {
-  let batches: Batches = {};
+  const batches: Batches = batchCompaniesByProvider(csvData);
   let jobs: Job[] = [];
   let failures: Failure[] = [];
   let noResults: string[] = [];
 
   useJobs.getState().setFetchingJobs(true);
 
-  // Create an object with key:value pairs where the key is a provider (e.g. Greenhouse)
-  // and the value is all of the rows in the spreadsheet for companies that use that provider
-  // e.g. { Greenhouse: [['Greenhouse', 'capitaltg', 'Capital Technology Group']]}
-  for (const config of BOARD_CONFIGS) {
-    const companiesForThisBatch = csvData.filter(row => {
-      const boardName = row[0];
-
-      return toTitleCase(boardName) === config.name;
-    });
-
-
-    if (companiesForThisBatch.length) {
-      batches[config.name] = companiesForThisBatch;
+  if (Object.keys(batches).length) {
+    // Loop through each of the providers from the above object and create Promises for each,
+    // then call the API in batches to prevent rate-limiting. Return job results and failed calls
+    for (const provider in batches) {
+      const rows = batches[provider];
+      const config = BOARD_CONFIGS.find(c => c.name === provider)!;
+      const results = await settleWithLimit<any>(rows, provider, config.concurrency ?? 5);  // Fix the type here when fetchJobs is fixed
+  
+      jobs.push(...results
+        .flatMap(result => result.status === 'fulfilled' ? [result.value] : []));
+  
+      noResults.push(...results.flatMap((result, index) =>
+        result.status === 'fulfilled' && !result.value?.length ? [rows[index][2]] : []
+      ));
+  
+      failures.push(...results.flatMap((result, index) => 
+        result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []
+      ));
     }
+  
+    useJobs.getState().setFetchingJobs(false);
+  
+    return {
+      jobs,
+      failures,
+      noResults,
+    };
   }
 
-  // Loop through each of the providers from the above object and create Promises for each,
-  // then call the API in batches to prevent rate-limiting. Return job results and failed calls
-  for (const provider in batches) {
-    const rows = batches[provider];
-    const config = BOARD_CONFIGS.find(c => c.name === provider)!;
-    const results = await settleWithLimit<any>(rows, provider, config.concurrency ?? 5);  // Fix the type here when fetchJobs is fixed
-
-    jobs.push(...results
-      .flatMap(result => result.status === 'fulfilled' ? [result.value] : []));
-
-    noResults.push(...results.flatMap((result, index) =>
-      result.status === 'fulfilled' && !result.value?.length ? [rows[index][2]] : []
-    ));
-
-    failures.push(...results.flatMap((result, index) => 
-      result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []
-    ));
-  }
-
-  useJobs.getState().setFetchingJobs(false);
-
-  return {
-    jobs,
-    failures,
-    noResults,
-  };
+  return null;
 };
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
