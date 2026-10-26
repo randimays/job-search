@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { prepareForApiCalls } from './api/fetch-jobs-external';
 import JobsTable from './components/JobsTable';
-import { formatDate, parseCsv } from './utils';
+import { formatDate } from './utils';
+import { parseCsv } from './utils/parseCsv'; // TODO fix this
 import csv from './data/jobBoards.csv?raw';
 import type { Failure, Job } from './types';
 import { useJobs } from './store';

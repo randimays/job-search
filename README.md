@@ -1,6 +1,6 @@
 # Job Search (WIP as of 10/14/26)
 
-This application uses Typescript, Tailwind, React, Zustand, MaterialUI and Vite to produce an application for viewing jobs relevant to my skill set and interests.
+This application uses Typescript, Tailwind, React, Zustand, MaterialUI, Node and Vite to produce an application for viewing jobs relevant to my skill set and interests.
 
 I used AI to help me with parts of the code and troubleshooting, but this code is largely written by me! I wanted to sharpen my skills and write the code myself so I could learn how to use these technologies the old-fashioned way.
 

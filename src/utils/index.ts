@@ -121,16 +121,6 @@ export const isRemoteOrVirtualUS = (location: string): boolean => {
   return true;
 }
 
-// -------- CSV parsing
-
-export const parseCsv = (fileContents: string): any => {
-  return fileContents
-    .split(/\r?\n/)
-    .map((row: string): string[] => {
-      return row.split(',');
-    });
-};
-
 // Job mapping
 
 export const determinePublishDateForWorkday = (postedOn: string, companyName: string): Date => {
