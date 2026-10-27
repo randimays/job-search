@@ -57,7 +57,7 @@ export const GemMock: GemJobsApiFormat[] = [
     "location": {
       "name": "United States"
     },
-    "location_type": "remote",
+    "location_type": "hybrid",
     "title": "Principal Software Engineer",
     "updated_at": "2026-06-27T03:50:13.474Z"
   },
@@ -69,7 +69,7 @@ export const GemMock: GemJobsApiFormat[] = [
     "location": {
       "name": "United States"
     },
-    "location_type": "remote",
+    "location_type": "hybrid",
     "title": "Analytics Engineer",
     "updated_at": "2026-06-27T03:11:33.360Z"
   },
@@ -81,7 +81,7 @@ export const GemMock: GemJobsApiFormat[] = [
     "location": {
       "name": "United States"
     },
-    "location_type": "remote",
+    "location_type": "hybrid",
     "title": "Product Manager, Growth",
     "updated_at": "2026-07-10T03:17:22.734Z"
   },
@@ -117,7 +117,7 @@ export const GemMock: GemJobsApiFormat[] = [
     "location": {
       "name": "United States"
     },
-    "location_type": "remote",
+    "location_type": "hybrid",
     "title": "Founding Data Engineer",
     "updated_at": "2026-09-25T23:31:10.963Z"
   },

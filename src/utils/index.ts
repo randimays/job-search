@@ -79,19 +79,35 @@ export const flushOmittedTitles = (): void => {
 // We can't say for certain that a listing is in the United States without
 // calling other API endpoints in certain cases. But here we just check that we
 // aren't finding non-US countries in the title or location
-export const isUnitedStates = (titleOrLocation: string, companyName: string, job: ApiJob): boolean => {
+export const isUnitedStates = (
+  titleOrLocation: string | null | undefined,
+  companyName: string,
+  job: ApiJob
+): boolean => {
+  const US_ABBREV = /\b(?:USA|US)\b|U\.S\./;
+  const US_NAME = /united states/i;
+  const NEW_MEXICO = /\bnew mexico\b/gi;
+  const NON_US_PATTERNS = NON_US_LOCATIONS.map(
+    country => new RegExp(`\\b${escapeRegExp(country)}\\b`, 'i')
+  );
+
+  const mentionsNonUSLocation = (text: string): boolean => {
+    const withoutNewMexico = text.replace(NEW_MEXICO, '');
+
+    return NON_US_PATTERNS.some(pattern => pattern.test(withoutNewMexico));
+  };
+
   if (!titleOrLocation || typeof titleOrLocation !== 'string') {
     console.error(`isUnitedStates: invalid or missing job title or location for ${companyName}: ${JSON.stringify(job)}`);
     return true;
   }
 
-  for (const country of NON_US_LOCATIONS) {
-    if (titleOrLocation.toLowerCase().includes(country.toLowerCase())) {
-      return false;
-    }
+  // Any explicit US mention wins, so "Remote - US or Canada" is kept
+  if (US_ABBREV.test(titleOrLocation) || US_NAME.test(titleOrLocation)) {
+    return true;
   }
 
-  return true;
+  return !mentionsNonUSLocation(titleOrLocation);
 };
 
 // Checks against the ROLE_MATCHERS and ROLE_EXCLUSIONS lists (in constants.ts)
@@ -115,23 +131,19 @@ export const isPotentialJobMatch = (title: string, companyName: string, job: Api
   return matches.test(normalized) && !exclusions.test(normalized);
 };
 
-export const isUnitedStatesWorkday = (location: string[]): boolean => {
-  if (!location.length) {
-    return true;
+export const isHybridOrOnsite = (value?: string | null): boolean => {
+  if (!value || typeof value !== 'string') {
+    return false;
   }
 
-  return !NON_US_LOCATIONS.some(country =>
-    location.some(part => part.includes(country))
-  );
+  const text = value.toLowerCase();
+
+  if (text.includes('remote')) {
+    return false;
+  }
+  
+  return /\b(hybrid|on[\s_-]?site|in[\s_-]?office)\b/.test(text);
 };
-
-export const isHybridOrOnsite = (location: string): boolean => {
-  if (location && typeof location === 'string') {
-    return (location.toLowerCase().includes('hybrid') || location.toLowerCase().includes('on-site'));
-  }
-
-  return false;
-}
 
 // Job mapping
 

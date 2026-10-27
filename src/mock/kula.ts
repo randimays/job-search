@@ -10,6 +10,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
             "country": "United States",
+            "name": "Remote(United States)"
         }
       ],
     }
@@ -23,6 +24,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
           "country": "United States",
+          "name": "Remote(United States)"
         }
       ],
     }
@@ -36,6 +38,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
           "country": "United States",
+          "name": "Remote(United States)"
         }
       ],
     }
@@ -49,6 +52,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
           "country": "United States",
+          "name": "Remote(United States)"
         }
       ],
     }
@@ -62,6 +66,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
           "country": "United States",
+          "name": "Remote(United States)"
         }
       ],
     }
@@ -75,6 +80,7 @@ export const KulaMock: KulaJobApiFormat[] = [
       "offices": [
         {
           "country": "United States",
+          "name": "Remote(United States)"
         }
       ],
     }

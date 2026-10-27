@@ -6,7 +6,9 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/US-WA-Remote---Non-Seattle/Sr-Manager-of-Support-Operations--Inspection_JR101655",
     "postedOn": "Posted 15 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "United States of America",
     "bulletFields": [
+      "On-site",
       "United States of America",
       "JR101655",
       "Customer Support"
@@ -18,6 +20,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/US-WA-Remote---Non-Seattle/Inside-Sales-Representative--AHP_JR101664",
     "postedOn": "Posted 18 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "United States of America",
     "bulletFields": [
       "United States of America",
       "JR101664",
@@ -30,6 +33,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Customer-Onboarding-Specialist--IRE_JR101641",
     "postedOn": "Posted 18 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101641",
@@ -42,6 +46,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Digital-Marketing---Social-Media-Coordinator--iRoofing_JR101650",
     "postedOn": "Posted 18 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101650",
@@ -54,6 +59,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/MSP-Recruiter-I--PMG_JR101513",
     "postedOn": "Posted 19 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101513",
@@ -66,6 +72,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Virtual-Assistant--ACC_JR101252",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101252",
@@ -78,6 +85,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Sr-Database-Engineer_JR101644",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101644",
@@ -90,6 +98,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Graphic-Designer--WW_JR101623",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101623",
@@ -102,7 +111,9 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/US-WA-Remote---Non-Seattle/Product-Operation-Consultant_JR101074",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "United States of America",
     "bulletFields": [
+      "On-site",
       "United States of America",
       "JR101074",
       "Product Management"
@@ -114,6 +125,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Campaign-Marketing-Manager_JR101645",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101645",
@@ -126,6 +138,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Marketing-Coordinator_JR101646",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101646",
@@ -149,6 +162,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Senior-Software-Engineer-I--Insurance-Services_JR101613-1",
     "postedOn": "Posted 25 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101613",
@@ -161,6 +175,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Client-Support-Specialist--Rynoh_JR101516",
     "postedOn": "Posted 27 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101516",
@@ -173,6 +188,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Technical-Support-Specialist--IRE_JR101323",
     "postedOn": "Posted 29 Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101323",
@@ -185,6 +201,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Sr-Data-Engineer_JR101596",
     "postedOn": "Posted 30+ Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101596",
@@ -197,6 +214,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/IN-Remote/Data-Engineer_JR101523",
     "postedOn": "Posted 30+ Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "India",
     "bulletFields": [
       "India",
       "JR101523",
@@ -209,6 +227,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Senior-Marketing-Designer--PMG_JR101324",
     "postedOn": "Posted 30+ Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101324",
@@ -221,6 +240,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Account-Executive--IRE_JR101576",
     "postedOn": "Posted 30+ Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101576",
@@ -233,6 +253,7 @@ export const WorkdayMock: WorkdayJobApiFormat[] = [
     "externalPath": "/job/CO-Remote/Business-Development-Representative--IRE_JR101575",
     "postedOn": "Posted 30+ Days Ago",
     "remoteType": "Full Remote",
+    "locationsText": "Colombia",
     "bulletFields": [
       "Colombia",
       "JR101575",

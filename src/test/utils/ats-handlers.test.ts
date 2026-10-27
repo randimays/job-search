@@ -88,7 +88,7 @@ describe('handlers', () => {
           published: new Date('2026-10-13T17:00:00.000Z'),
           title: 'Senior Software Engineer',
           updated: new Date('2026-10-13T17:00:00.000Z'),
-          url: 'https://maishameds.bamboohr.com/careers/173'
+          url: ''
         }
       ])
     });
@@ -96,13 +96,13 @@ describe('handlers', () => {
 
   describe('breezyHandler', () => {
     it('handles empty jobs array', () => {
-      expect(breezyHandler([])).toEqual([]);
+      expect(breezyHandler([], 'Switchboard')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = BreezyMock;
   
-      expect(breezyHandler(jobs)).toEqual([
+      expect(breezyHandler(jobs, 'Switchboard')).toEqual([
         {
           companyName: 'Switchboard',
           id: '5720a5741f80',
@@ -117,13 +117,13 @@ describe('handlers', () => {
 
   describe('clearCompanyHandler', () => {
     it('handles empty jobs array', () => {
-      expect(clearCompanyHandler([])).toEqual([]);
+      expect(clearCompanyHandler([], 'Ad Hoc')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = ClearCompanyMock;
   
-      expect(clearCompanyHandler(jobs)).toEqual([
+      expect(clearCompanyHandler(jobs, 'Ad Hoc')).toEqual([
         {
           companyName: 'Ad Hoc',
           id: 'f71c1213-fe6a-9202-9704-206536d822c5',
@@ -162,13 +162,13 @@ describe('handlers', () => {
 
   describe('dayforceHandler', () => {
     it('handles empty jobs array', () => {
-      expect(dayforceHandler([])).toEqual([]);
+      expect(dayforceHandler([], 'Stretto')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = DayforceMock;
   
-      expect(dayforceHandler(jobs)).toEqual([
+      expect(dayforceHandler(jobs, 'Stretto')).toEqual([
         {
           companyName: 'Stretto',
           id: '179',
@@ -204,13 +204,13 @@ describe('handlers', () => {
   
   describe('greenhouseHandler', () => {
     it('handles empty jobs array', () => {
-      expect(greenhouseHandler([])).toEqual([]);
+      expect(greenhouseHandler([], 'Capital Technology Group')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = GreenhouseMock;
   
-      expect(greenhouseHandler(jobs)).toEqual([
+      expect(greenhouseHandler(jobs, 'Capital Technology Group')).toEqual([
         {
           companyName: 'Capital Technology Group',
           id: '5147833007',

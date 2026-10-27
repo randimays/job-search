@@ -11,9 +11,9 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "hybrid",
+        "name": "hybrid"
       }
-    ],
+    ]
   },
   {
     "id": 86564,
@@ -25,9 +25,9 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "on_site",
+        "name": "remote"
       }
-    ],
+    ]
   },
   {
     "id": 86563,
@@ -39,7 +39,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "on_site",
+        "name": "on_site"
       }
     ]
   },
@@ -53,7 +53,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "hybrid",
+        "name": "hybrid"
       }
     ]
   },
@@ -67,7 +67,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "hybrid",
+        "name": "hybrid"
       }
     ]
   },
@@ -81,7 +81,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "remote",
+        "name": "remote"
       }
     ]
   },
@@ -95,7 +95,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "on_site",
+        "name": "on_site"
       }
     ]
   },
@@ -109,7 +109,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "remote",
+        "name": "remote"
       }
     ]
   },
@@ -123,7 +123,7 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "remote",
+        "name": "remote"
       }
     ]
   },
@@ -137,8 +137,8 @@ export const WordpressMock: WordpressJobApiFormat[] = [
     },
     "workplace_type_details": [
       {
-        "name": "remote",
+        "name": "remote"
       }
     ]
   }
-]
+];

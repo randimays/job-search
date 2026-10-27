@@ -7,7 +7,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "Pune, Maharashtra, India",
     "date": "8/5/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oaDlAfws",
-    "created_x0020_on": "6/16/2026",
+    "created_x0020_on": "6/16/2026"
   },
   {
     "id": "oaDlAfws-CfzBYfw7",
@@ -15,7 +15,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "India",
     "date": "8/5/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oaDlAfws",
-    "created_x0020_on": "6/16/2026",
+    "created_x0020_on": "6/16/2026"
   },
   {
     "id": "oxaVAfwW",
@@ -23,7 +23,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "Pune, Maharashtra, India",
     "date": "10/7/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oxaVAfwW",
-    "created_x0020_on": "10/7/2026",
+    "created_x0020_on": "10/7/2026"
   },
   {
     "id": "oxaVAfwW-CfzBYfw7",
@@ -31,7 +31,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "India",
     "date": "10/7/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oxaVAfwW",
-    "created_x0020_on": "10/7/2026",
+    "created_x0020_on": "10/7/2026"
   },
   {
     "id": "oTxMAfww",
@@ -39,7 +39,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "United States",
     "date": "9/10/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oTxMAfww",
-    "created_x0020_on": "9/10/2026",
+    "created_x0020_on": "9/10/2026"
   },
   {
     "id": "oPTRAfwT",
@@ -48,6 +48,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "date": "9/29/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oPTRAfwT",
     "created_x0020_on": "9/29/2026",
+    "remote_x0020_type": "No Remote"
   },
   {
     "id": "oqDQAfwd",
@@ -56,6 +57,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "date": "9/24/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oqDQAfwd",
     "created_x0020_on": "9/24/2026",
+    "remote_x0020_type": "No Remote"
   },
   {
     "id": "o6UHAfw1",
@@ -63,7 +65,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "United States",
     "date": "9/1/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=o6UHAfw1",
-    "created_x0020_on": "8/26/2026",
+    "created_x0020_on": "8/26/2026"
   },
   {
     "id": "oJgNAfw6",
@@ -71,7 +73,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "United States",
     "date": "9/14/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oJgNAfw6",
-    "created_x0020_on": "9/14/2026",
+    "created_x0020_on": "9/14/2026"
   },
   {
     "id": "oWDeAfw7",
@@ -79,7 +81,7 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "United States",
     "date": "7/28/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oWDeAfw7",
-    "created_x0020_on": "6/3/2026",
+    "created_x0020_on": "6/3/2026"
   },
   {
     "id": "oMAOAfwu",
@@ -87,6 +89,6 @@ export const JobviteMock: JobviteJobApiFormat[] = [
     "location": "United States",
     "date": "9/17/2026",
     "detail-url": "http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oMAOAfwu",
-    "created_x0020_on": "9/17/2026",
+    "created_x0020_on": "9/17/2026"
   }
-]
+];

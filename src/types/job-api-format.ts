@@ -16,6 +16,7 @@ export interface BambooHrJobApiFormat {
     country: string | null,
   },
   isRemote: boolean | null,
+  locationType: string
 }
 
 export interface BreezyJobApiFormat {
@@ -24,10 +25,10 @@ export interface BreezyJobApiFormat {
   url: string,
   published_date: string,
   location: {
-    country: {
+    country?: {
       name: string,
     },
-    is_remote: boolean,
+    is_remote: boolean | null,
   },
   company: {
     name: string,
@@ -44,6 +45,7 @@ export interface ClearCompanyJobApiFormat {
   location: string,
   locations: {
     country: string,
+    isRemote: boolean
   }[],
   brandName: string,
   applyLink: string,
@@ -52,7 +54,9 @@ export interface ClearCompanyJobApiFormat {
 export interface DayforceJobApiFormat {
   Title: string,
   CompanyName: string,
+  Description?: string,
   JobDetailsUrl: string,
+  CultureCode?: string,
   Country?: string,
   DatePosted: string,
   LastUpdated: string,
@@ -102,6 +106,7 @@ export interface KulaJobApiFormat {
   ats_job: {
     workplace: string,
     offices: {
+      name: string,
       country: string,
     }[],
   }
@@ -109,13 +114,16 @@ export interface KulaJobApiFormat {
 
 export interface LeverJobApiFormat {
   createdAt: number,
+  categories: {
+    allLocations?: string[],
+    location: string
+  },
   id: string,
   text: string,
   country: string,
   workplaceType: string,
   hostedUrl: string,
 }
-
 
 export interface PaylocityJobApiFormat {
   JobId: number,

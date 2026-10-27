@@ -37,7 +37,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5262369007?gh_jid=5262369007",
     "location": {
-      "name": "Remote"
+      "name": "Hybrid"
     },
     "id": 5262369007,
     "updated_at": "2026-10-09T12:35:07-04:00",
@@ -48,7 +48,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5248632007?gh_jid=5248632007",
     "location": {
-      "name": "Remote"
+      "name": "Hybrid"
     },
     "id": 5248632007,
     "updated_at": "2026-10-01T09:19:03-04:00",
@@ -70,7 +70,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5239724007?gh_jid=5239724007",
     "location": {
-      "name": "Remote (US)"
+      "name": "Hybrid"
     },
     "id": 5239724007,
     "updated_at": "2026-10-08T15:17:20-04:00",
@@ -81,7 +81,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5239203007?gh_jid=5239203007",
     "location": {
-      "name": "Remote (US)"
+      "name": "Hybrid"
     },
     "id": 5239203007,
     "updated_at": "2026-09-15T16:44:52-04:00",
@@ -92,7 +92,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5235742007?gh_jid=5235742007",
     "location": {
-      "name": "Remote (US)"
+      "name": "Hybrid"
     },
     "id": 5235742007,
     "updated_at": "2026-09-21T15:43:11-04:00",
@@ -114,7 +114,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5195543007?gh_jid=5195543007",
     "location": {
-      "name": "Remote"
+      "name": "Hybrid"
     },
     "id": 5195543007,
     "updated_at": "2026-09-25T07:19:25-04:00",
@@ -147,7 +147,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5148853007?gh_jid=5148853007",
     "location": {
-      "name": "Remote (US)"
+      "name": "Hybrid"
     },
     "id": 5148853007,
     "updated_at": "2026-10-01T12:28:19-04:00",
@@ -158,7 +158,7 @@ export const GreenhouseMock: GreenhouseJobApiFormat[] = [
   {
     "absolute_url": "https://boards.greenhouse.io/capitaltg/jobs/5212363007?gh_jid=5212363007",
     "location": {
-      "name": "Remote (US)"
+      "name": "Hybrid"
     },
     "id": 5212363007,
     "updated_at": "2026-10-08T16:21:36-04:00",

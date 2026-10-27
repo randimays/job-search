@@ -6,11 +6,11 @@ import {
   isHybridOrOnsite,
   isPotentialJobMatch,
   isUnitedStates,
-  isUnitedStatesWorkday,
   flushOmittedTitles,
   parseCsv,
 } from '../../utils';
 import { useJobs } from '../../store';
+import { AshbyMock } from '../../mock/ashby';
 
 describe('utils', () => {
   let errorSpy: ReturnType<typeof vi.spyOn>;
@@ -175,50 +175,26 @@ describe('utils', () => {
   });
   
   describe('isUnitedStates', () => {
+    const job = AshbyMock[0];
+
     it('handles locations correctly', () => {
-      expect(isUnitedStates('Canada')).toBe(false);
-      expect(isUnitedStates('ireland')).toBe(false);
-      expect(isUnitedStates('india')).toBe(false);
-      expect(isUnitedStates('ARGENTINA')).toBe(false);
-      expect(isUnitedStates('Mexico')).toBe(false);
-      expect(isUnitedStates('United States')).toBe(true);
-      expect(isUnitedStates('U.S.')).toBe(true);
-      expect(isUnitedStates('US')).toBe(true);
-      expect(isUnitedStates('North America')).toBe(true);
+      expect(isUnitedStates('Canada', 'Vanta', job)).toBe(false);
+      expect(isUnitedStates('ireland', 'Vanta', job)).toBe(false);
+      expect(isUnitedStates('india', 'Vanta', job)).toBe(false);
+      expect(isUnitedStates('ARGENTINA', 'Vanta', job)).toBe(false);
+      expect(isUnitedStates('Mexico', 'Vanta', job)).toBe(false);
+      expect(isUnitedStates('United States', 'Vanta', job)).toBe(true);
+      expect(isUnitedStates('U.S.', 'Vanta', job)).toBe(true);
+      expect(isUnitedStates('US', 'Vanta', job)).toBe(true);
+      expect(isUnitedStates('North America', 'Vanta', job)).toBe(true);
     });
   
     it('handles invalid locations', () => {
-      isUnitedStates('');
+      isUnitedStates('', 'Vanta', job);
       expect(errorSpy).toHaveBeenCalledTimes(1);
       expect(errorSpy).toHaveBeenCalledWith(
         expect.stringContaining('invalid or missing job location')
       );
-    });
-  });
-
-  describe('isUnitedStatesWorkday', () => {
-    it.only('handles true cases properly', () => {
-      expect(isUnitedStatesWorkday([
-        'United States of America',
-        'JR101664',
-        'Sales'
-      ])).toBe(true);
-
-      expect(isUnitedStatesWorkday([
-        'JR101664',
-      ])).toBe(true);
-
-      expect(isUnitedStatesWorkday([])).toBe(true);
-    });
-
-    it('handles false cases properly', () => {
-      expect(isUnitedStatesWorkday([
-        'India',
-        'JR101664',
-        'Sales'
-      ])).toBe(false);
-
-      expect(isUnitedStatesWorkday(['Germany'])).toBe(false);
     });
   });
   

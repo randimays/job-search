@@ -37,7 +37,7 @@ export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Jo
   published: createAPIDate(), // BambooHR does not have published dates
   title: cleanUpAPIString(job.jobOpeningName),
   updated: createAPIDate(), // BambooHR does not have updated dates
-  url: `https://maishameds.bamboohr.com/careers/${job.id}`
+  url: ''
 });
 
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
