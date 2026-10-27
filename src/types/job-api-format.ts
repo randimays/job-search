@@ -127,12 +127,6 @@ export interface PaylocityJobApiFormat {
   IsRemote: boolean,
 }
 
-interface RecruiteeBodyTranslations {
-  [languageCode: string]: {
-    body: string
-  }
-}
-
 export interface RecruiteeJobApiFormat {
   id: number,
   title: string,
@@ -184,3 +178,21 @@ export interface WorkdayJobApiFormat {
   remoteType: string,
   url: string
 }
+
+export type ApiJob =
+  AshbyJobApiFormat |
+  BambooHrJobApiFormat |
+  BreezyJobApiFormat |
+  ClearCompanyJobApiFormat |
+  DayforceJobApiFormat |
+  GemJobsApiFormat | 
+  GreenhouseJobApiFormat |
+  JobviteJobApiFormat |
+  KulaJobApiFormat |
+  LeverJobApiFormat |
+  PaylocityJobApiFormat |
+  RecruiteeJobApiFormat |
+  RipplingJobApiFormat |
+  WordpressJobApiFormat |
+  WorkableJobApiFormat |
+  WorkdayJobApiFormat;

@@ -1,6 +1,7 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
 import { useJobs } from '../store';
 import { NON_US_LOCATIONS } from '../constants';
+import type { ApiJob } from '../types/job-api-format';
 
 // -------- Data formatting
 
@@ -78,9 +79,9 @@ export const flushOmittedTitles = (): void => {
 // We can't say for certain that a listing is in the United States without
 // calling other API endpoints in certain cases. But here we just check that we
 // aren't finding non-US countries in the title or location
-export const isUnitedStates = (titleOrLocation: string): boolean => {
+export const isUnitedStates = (titleOrLocation: string, companyName: string, job: ApiJob): boolean => {
   if (!titleOrLocation || typeof titleOrLocation !== 'string') {
-    console.error(`isUnitedStates: invalid or missing job title or location: ${titleOrLocation}`);
+    console.error(`isUnitedStates: invalid or missing job title or location for ${companyName}: ${JSON.stringify(job)}`);
     return true;
   }
 
@@ -95,7 +96,7 @@ export const isUnitedStates = (titleOrLocation: string): boolean => {
 
 // Checks against the ROLE_MATCHERS and ROLE_EXCLUSIONS lists (in constants.ts)
 // to filter for potential matches by keywords
-export const isPotentialJobMatch = (title: string): boolean => {
+export const isPotentialJobMatch = (title: string, companyName: string, job: ApiJob): boolean => {
   if (!title || typeof title !== 'string') {
     console.error(`isPotentialJobMatch: invalid or missing job title: ${title}`);
     return false;
@@ -103,7 +104,7 @@ export const isPotentialJobMatch = (title: string): boolean => {
 
   const normalized = title.trim();
 
-  if (!isUnitedStates(title)) {
+  if (!isUnitedStates(title, companyName, job)) {
     return false;
   }
 
