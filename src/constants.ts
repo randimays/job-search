@@ -204,6 +204,7 @@ export const NON_US_LOCATIONS = [
   'Poland',
   'Portugal',
   'Romania',
+  'Slovenia',
   'South Africa',
   'Spain',
   'Sweden',
