@@ -79,7 +79,6 @@ export const flushOmittedTitles = (): void => {
 // calling other API endpoints in certain cases. But here we just check that we
 // aren't finding non-US countries in the title or location
 export const isUnitedStates = (titleOrLocation: string): boolean => {
-  console.log('titleOrLocation: ', titleOrLocation);
   if (!titleOrLocation || typeof titleOrLocation !== 'string') {
     console.error(`isUnitedStates: invalid or missing job title or location: ${titleOrLocation}`);
     return true;

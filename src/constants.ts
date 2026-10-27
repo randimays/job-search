@@ -8,7 +8,6 @@ export const ROLE_MATCHERS = [
   'front end',
   'full stack',
   'javascript',
-  'mid-level',
   'programmer',
   'react',
   'software',

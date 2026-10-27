@@ -11,13 +11,16 @@ import {
   kulaHandler,
   leverHandler,
   paylocityHandler,
+  recruiteeHandler,
   ripplingHandler,
+  wordpressHandler,
   workableHandler,
   workdayHandler
 } from '../../utils/ats-handlers';
 import { AshbyMock } from '../../mock/ashby';
 import { BambooMock } from '../../mock/bamboo';
 import { BreezyMock } from '../../mock/breezy';
+import { ClearCompanyMock } from '../../mock/clearcompany';
 import { DayforceMock } from '../../mock/dayforce';
 import { GemMock } from '../../mock/gem';
 import { GreenhouseMock } from '../../mock/greenhouse';
@@ -25,10 +28,11 @@ import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
+import { RecruiteeMock } from '../../mock/recruitee';
 import { RipplingMock } from '../../mock/rippling';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
-import { ClearCompanyMock } from '../../mock/clearcompany';
+import { WordpressMock } from '../../mock/wordpress';
 
 describe('handlers', () => {
   beforeEach(() => {
@@ -327,6 +331,35 @@ describe('handlers', () => {
     });
   });
 
+  describe('recruiteeHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(recruiteeHandler([], 'Differential')).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = RecruiteeMock;
+  
+      expect(recruiteeHandler(jobs, 'Differential')).toEqual([
+        {
+          companyName: 'Differential',
+          id: '2740642',
+          published: new Date('2026-09-09 14:11:36 UTC'),
+          title: 'Senior Software Developer',
+          updated: new Date('2026-09-09 14:11:36 UTC'),
+          url: 'https://careers.differential.com/o/senior-software-developer-4',
+        },
+        {
+          companyName: 'Differential',
+          id: '2715929',
+          published: new Date('2026-08-19 18:46:32 UTC'),
+          title: 'Senior Software Engineer (FinTech)',
+          updated: new Date('2026-09-01 15:15:11 UTC'),
+          url: 'https://careers.differential.com/o/senior-software-engineer-fintech',
+        }
+      ]);
+    });
+  });
+  
   describe('ripplingHandler', () => {
     it('handles empty jobs array', () => {
       expect(ripplingHandler([], 'MCCi')).toEqual([]);
@@ -339,11 +372,40 @@ describe('handlers', () => {
         {
           companyName: 'MCCi',
           id: '9f630b2a-f7c7-4e5e-b2a1-ff69f2c5efd9',
-          published: new Date('2026-10-14T17:00:00.000Z'),
+          published: new Date('2026-10-13T17:00:00.000Z'),
           title: 'Software Engineer III',
-          updated: new Date('2026-10-14T17:00:00.000Z'),
+          updated: new Date('2026-10-13T17:00:00.000Z'),
           url: 'https://ats.rippling.com/mccicareers/jobs/9f630b2a-f7c7-4e5e-b2a1-ff69f2c5efd9',
         }
+      ]);
+    });
+  });
+
+  describe('wordpressHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(wordpressHandler([], 'Aretum')).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = WordpressMock;
+  
+      expect(wordpressHandler(jobs, 'Aretum')).toEqual([
+        {
+          companyName: 'Aretum',
+          id: '86564',
+          published: new Date('2026-10-20T18:04:40'),
+          title: 'Biomedical Engineering Support Specialist III',
+          updated: new Date('2026-10-26T18:17:21'),
+          url: 'https://aretum.com/job-openings/biomedical-engineering-support-specialist-iii-3/',
+        },
+        {
+          companyName: 'Aretum',
+          id: '86339',
+          published: new Date('2026-10-09T15:37:13'),
+          title: 'Sr. .NET Developer',
+          updated: new Date('2026-10-26T18:17:15'),
+          url: 'https://aretum.com/job-openings/sr-net-developer/',
+        },
       ]);
     });
   });

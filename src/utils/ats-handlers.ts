@@ -8,7 +8,7 @@ import type {
   GreenhouseJobApiFormat,
   JobviteJobApiFormat,
   KulaJobApiFormat,
-  LeverJobPosting,
+  LeverJobApiFormat,
   PaylocityJobApiFormat,
   RecruiteeJobApiFormat,
   RipplingJobApiFormat,
@@ -144,7 +144,7 @@ export const kulaHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[
     return jobs
       .filter(job => 
         job?.ats_job.workplace === 'remote' && 
-        isUnitedStates(job?.ats_job?.offices?.[0].location))
+        isUnitedStates(job?.ats_job?.offices?.[0].country))
       .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => kulaMapper(filteredJob, companyName));
   }
@@ -152,7 +152,7 @@ export const kulaHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[
   return [];
 };
 
-export const leverHandler = (jobs: LeverJobPosting[], companyName: string): Job[] | [] => {
+export const leverHandler = (jobs: LeverJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => !isHybridOrOnsite(job?.workplaceType) && isUnitedStates(job?.country))
@@ -209,7 +209,6 @@ export const wordpressHandler = (jobs: WordpressJobApiFormat[], companyName: str
   return [];
 };
 
-
 export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
@@ -224,9 +223,7 @@ export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: strin
 export const workdayHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
-      // Remote job filtering is skipped for Workday because the listing doesn't return
-      // enough information for us to deterimine this
-      .filter(job => isUnitedStatesWorkday(job.bulletFields))
+      .filter(job => job.remoteType === 'Full Remote' && isUnitedStatesWorkday(job.bulletFields))
       .filter(job => isPotentialJobMatch(job?.title))
       .map(filteredJob => workdayMapper(filteredJob, companyName));
   } 

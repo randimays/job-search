@@ -11,11 +11,14 @@ import {
   kulaMapper,
   leverMapper,
   paylocityMapper,
+  recruiteeMapper,
   ripplingMapper,
+  wordpressMapper,
   workableMapper,
   workdayMapper,
 } from '../../utils/ats-mappers';
 import { AshbyMock } from '../../mock/ashby';
+import { BambooMock } from '../../mock/bamboo';
 import { BreezyMock } from '../../mock/breezy';
 import { ClearCompanyMock } from '../../mock/clearcompany';
 import { DayforceMock } from '../../mock/dayforce';
@@ -25,10 +28,11 @@ import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
+import { RecruiteeMock } from '../../mock/recruitee';
 import { RipplingMock } from '../../mock/rippling';
+import { WordpressMock } from '../../mock/wordpress';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
-import { BambooMock } from '../../mock/bamboo';
 
 describe('mappers', () => {
   beforeEach(() => {
@@ -107,7 +111,7 @@ describe('mappers', () => {
       url: 'https://switchboard.breezy.hr/p/5720a5741f80-customer-experience-associate-resume-drop-interviewing-begins-nov-dec-2026'
     };
 
-    it('properly formats an API entry from Bamboo', () => {
+    it('properly formats an API entry from Breezy', () => {
       const mockEntry = BreezyMock[0];
       expect(breezyMapper(mockEntry)).toEqual(expectedBreezyReturn);
     });
@@ -128,14 +132,14 @@ describe('mappers', () => {
   describe('clearCompanyMapper', () => {
     const expectedCCReturn = {
       companyName: 'Ad Hoc',
-          id: 'f71c1213-fe6a-9202-9704-206536d822c5',
-          published: new Date('2026-10-26T00:00:00'),
-          title: 'Senior Software Engineer - Front End/Back End (Library of Congress)',
-          updated: new Date('2026-10-26T00:00:00'),
-          url: 'https://adhoc.clearcompany.com/careers/jobs/f71c1213-fe6a-9202-9704-206536d822c5/apply?source=CJB-0'
+        id: 'f71c1213-fe6a-9202-9704-206536d822c5',
+        published: new Date('2026-10-26T00:00:00'),
+        title: 'Senior Software Engineer - Front End/Back End (Library of Congress)',
+        updated: new Date('2026-10-26T00:00:00'),
+        url: 'https://adhoc.clearcompany.com/careers/jobs/f71c1213-fe6a-9202-9704-206536d822c5/apply?source=CJB-0'
     };
 
-    it('properly formats an API entry from Bamboo', () => {
+    it('properly formats an API entry from ClearCompany', () => {
       const mockEntry = ClearCompanyMock[0];
       expect(clearCompanyMapper(mockEntry)).toEqual(expectedCCReturn);
     });
@@ -154,7 +158,7 @@ describe('mappers', () => {
   });
 
   describe('dayforceMapper', () => {
-    const expectedCCReturn = {
+    const expectedDayforceReturn = {
       companyName: 'Stretto',
       id: '179',
       published: new Date('2026-08-04T03:00:00'),
@@ -163,9 +167,9 @@ describe('mappers', () => {
       url: 'https://jobs.dayforcehcm.com/en-US/stretto/StrettoCareers/jobs/179'
     };
 
-    it('properly formats an API entry from Bamboo', () => {
+    it('properly formats an API entry from Dayforce', () => {
       const mockEntry = DayforceMock[0];
-      expect(dayforceMapper(mockEntry)).toEqual(expectedCCReturn);
+      expect(dayforceMapper(mockEntry)).toEqual(expectedDayforceReturn);
     });
   });
 
@@ -275,7 +279,7 @@ describe('mappers', () => {
 
   describe('paylocityMapper', () => {
     const expectedPaylocityReturn = {
-      companyName: 'Ellevation',
+      companyName: 'eSimplicity',
       id: '4314622',
       published: new Date('2026-10-16T12:32:17-05:00'),
       title: 'Senior Spectrum Manager',
@@ -285,17 +289,33 @@ describe('mappers', () => {
     
     it('properly formats an API entry from Paylocity}', () => {
       const mockEntry = PaylocityMock[0];
-      expect(paylocityMapper(mockEntry, 'Ellevation')).toEqual(expectedPaylocityReturn);
+      expect(paylocityMapper(mockEntry, 'eSimplicity')).toEqual(expectedPaylocityReturn);
     });
   });
 
+  describe('recruiteeMapper', () => {
+    const expectedRecruiteeReturn = {
+      companyName: 'Differential',
+      id: '2740642',
+      published: new Date('2026-09-09 14:11:36 UTC'),
+      title: 'Senior Software Developer',
+      updated: new Date('2026-09-09 14:11:36 UTC'),
+      url: 'https://careers.differential.com/o/senior-software-developer-4',
+    };
+    
+    it('properly formats an API entry from Recruitee', () => {
+      const mockEntry = RecruiteeMock[0];
+      expect(recruiteeMapper(mockEntry, 'Differential')).toEqual(expectedRecruiteeReturn);
+    });
+  });
+  
   describe('ripplingMapper', () => {
     const expectedRipplingReturn = {
       companyName: 'MCCi',
       id: '77db9e1f-dd55-4517-a2da-3945425e34d6',
-      published: new Date('2026-10-14T17:00:00.000Z'),
+      published: new Date('2026-10-13T17:00:00.000Z'),
       title: 'Cloud Operations Engineer',
-      updated: new Date('2026-10-14T17:00:00.000Z'),
+      updated: new Date('2026-10-13T17:00:00.000Z'),
       url: 'https://ats.rippling.com/mccicareers/jobs/77db9e1f-dd55-4517-a2da-3945425e34d6',
     };
     
@@ -314,6 +334,22 @@ describe('mappers', () => {
         ...expectedRipplingReturn,
         id: ''
       });
+    });
+  });
+
+  describe('wordpressMapper', () => {
+    const expectedWordpressReturn = {
+      companyName: 'Aretum',
+      id: '86564',
+      published: new Date('2026-10-20T18:04:40'),
+      title: 'Biomedical Engineering Support Specialist III',
+      updated: new Date('2026-10-26T18:17:21'),
+      url: 'https://aretum.com/job-openings/biomedical-engineering-support-specialist-iii-3/',
+    };
+    
+    it('properly formats an API entry from Recruitee', () => {
+      const mockEntry = WordpressMock[1];
+      expect(wordpressMapper(mockEntry, 'Aretum')).toEqual(expectedWordpressReturn);
     });
   });
 

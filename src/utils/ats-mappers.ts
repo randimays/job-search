@@ -8,10 +8,11 @@ import type {
   GreenhouseJobApiFormat,
   JobviteJobApiFormat,
   KulaJobApiFormat,
-  LeverJobPosting,
+  LeverJobApiFormat,
   PaylocityJobApiFormat,
   RecruiteeJobApiFormat,
   RipplingJobApiFormat,
+  WordpressJobApiFormat,
   WorkableJobApiFormat,
   WorkdayJobApiFormat
 } from '../types/job-api-format';
@@ -102,7 +103,7 @@ export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => (
   url: 'https://careers.kula.ai/hire', // No distinct URLs for job postings
 });
 
-export const leverMapper = (job: LeverJobPosting, companyName: string): Job => ({
+export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.id || '',
   published: new Date(job?.createdAt),
@@ -136,6 +137,15 @@ export const ripplingMapper = (job: RipplingJobApiFormat, companyName: string): 
   title: cleanUpAPIString(job.name),
   updated: createAPIDate(), // Rippling doesn't have any dates
   url: job?.url
+});
+
+export const wordpressMapper = (job: WordpressJobApiFormat, companyName: string): Job => ({
+  companyName,
+  id: job?.id.toString(),
+  published: createAPIDate(job?.date),
+  title: cleanUpAPIString(job?.title?.rendered),
+  updated: createAPIDate(job?.modified),
+  url: job?.link
 });
 
 export const workableMapper = (job: WorkableJobApiFormat, companyName: string): Job => ({
