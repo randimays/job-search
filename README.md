@@ -55,4 +55,25 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 
 ## Notes
 
-- ADP & ICIMS do not have a publicly-accessible API to call for jobs
+## Supported ATS Platforms
+
+- Ashby
+- BambooHR
+- BreezyHR
+- Dayforce
+- Gem
+- Greenhouse
+- Kula
+- Lever
+- Paylocity
+- Recruitee
+- Rippling
+- Workable
+- Workday
+
+## ATS Platforms Not Supported
+
+- ADP
+- Dover
+- Gusto
+- ICIMS

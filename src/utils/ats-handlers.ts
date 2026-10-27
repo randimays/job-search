@@ -1,11 +1,15 @@
 import type {
   AshbyJobApiFormat,
   BambooHrJobApiFormat,
+  BreezyJobApiFormat,
+  DayforceJobApiFormat,
   GemJobsApiFormat,
   GreenhouseJobApiFormat,
+  JobviteJobApiFormat,
   KulaJobApiFormat,
   LeverJobPosting,
   PaylocityJobApiFormat,
+  RecruiteeJobApiFormat,
   RipplingJobApiFormat,
   WorkableJobApiFormat,
   WorkdayJobApiFormat
@@ -20,11 +24,15 @@ import {
 import {
   ashbyMapper,
   bambooMapper,
+  breezyMapper,
+  dayforceMapper,
   gemMapper,
   greenhouseMapper,
+  jobviteMapper,
   kulaMapper,
   leverMapper,
   paylocityMapper,
+  recruiteeMapper,
   ripplingMapper,
   workableMapper,
   workdayMapper
@@ -32,7 +40,7 @@ import {
 
 // -------- Handlers
 
-export const ashbyJobsHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] | [] => {
+export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => job?.isRemote && isUnitedStates(job?.location))
@@ -43,7 +51,7 @@ export const ashbyJobsHandler = (jobs: AshbyJobApiFormat[], companyName: string)
   return [];
 };
 
-export const bambooJobsHandler = (jobs: BambooHrJobApiFormat[], companyName: string): Job[] | [] => {
+export const bambooHandler = (jobs: BambooHrJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       // Remote filtering is skipped for Bamboo jobs because so far I've only seen
@@ -55,7 +63,29 @@ export const bambooJobsHandler = (jobs: BambooHrJobApiFormat[], companyName: str
   return [];
 };
 
-export const gemJobsHandler = (jobs: GemJobsApiFormat[], companyName: string): Job[] | [] => {
+export const breezyHandler = (jobs: BreezyJobApiFormat[]): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => job?.location?.is_remote && isUnitedStates(job?.location?.country?.name))
+      .filter(job => isPotentialJobMatch(job?.name))
+      .map(filteredJob => breezyMapper(filteredJob));
+  }
+
+  return [];
+};
+
+export const dayforceHandler = (jobs: DayforceJobApiFormat[]): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => job?.IsVirtualLocation && isUnitedStates(job?.Country || ''))
+      .filter(job => isPotentialJobMatch(job?.Title))
+      .map(filteredJob => dayforceMapper(filteredJob));
+  }
+
+  return [];
+};
+
+export const gemHandler = (jobs: GemJobsApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => job?.location_type === 'remote' && isUnitedStates(job?.location?.name))
@@ -66,7 +96,7 @@ export const gemJobsHandler = (jobs: GemJobsApiFormat[], companyName: string): J
   return [];
 };
 
-export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
+export const greenhouseHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => isRemoteOrVirtualUS(job?.location?.name))
@@ -77,7 +107,18 @@ export const greenhouseJobsHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [
   return [];
 };
 
-export const kulaJobsHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[] | [] => {
+export const jobviteHandler = (jobs: JobviteJobApiFormat[], companyName: string): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => isRemoteOrVirtualUS(job?.location))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+      .map(filteredJob => jobviteMapper(filteredJob, companyName));
+  }
+
+  return [];
+};
+
+export const kulaHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => job?.ats_job.workplace === 'remote' && isUnitedStates(job?.ats_job?.offices?.[0].location))
@@ -88,7 +129,7 @@ export const kulaJobsHandler = (jobs: KulaJobApiFormat[], companyName: string): 
   return [];
 };
 
-export const leverJobsHandler = (jobs: LeverJobPosting[], companyName: string): Job[] | [] => {
+export const leverHandler = (jobs: LeverJobPosting[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => isRemoteOrVirtualUS(job?.workplaceType))
@@ -99,7 +140,7 @@ export const leverJobsHandler = (jobs: LeverJobPosting[], companyName: string): 
   return [];
 };
 
-export const paylocityJobsHandler = (jobs: PaylocityJobApiFormat[], companyName: string): Job[] | [] => {
+export const paylocityHandler = (jobs: PaylocityJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => job?.IsRemote && isUnitedStates(job?.JobLocation?.Country))
@@ -110,7 +151,18 @@ export const paylocityJobsHandler = (jobs: PaylocityJobApiFormat[], companyName:
   return [];
 };
 
-export const ripplingJobsHandler = (jobs: RipplingJobApiFormat[], companyName: string): Job[] | [] => {
+export const recruiteeHandler = (jobs: RecruiteeJobApiFormat[], companyName: string): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => job?.remote && isUnitedStates(job?.country))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+      .map(filteredJob => recruiteeMapper(filteredJob, companyName));
+  } 
+  
+  return [];
+};
+
+export const ripplingHandler = (jobs: RipplingJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => isRemoteOrVirtualUS(job?.workLocation.label))
@@ -122,7 +174,7 @@ export const ripplingJobsHandler = (jobs: RipplingJobApiFormat[], companyName: s
 };
 
 
-export const workableJobsHandler = (jobs: WorkableJobApiFormat[], companyName: string): Job[] | [] => {
+export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => job?.telecommuting && isUnitedStates(job?.country))
@@ -133,7 +185,7 @@ export const workableJobsHandler = (jobs: WorkableJobApiFormat[], companyName: s
   return [];
 };
 
-export const workdayJobsHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] | [] => {
+export const workdayHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       // Remote job filtering is skipped for Workday because the listing doesn't return

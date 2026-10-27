@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  ashbyJobsHandler,
-  bambooJobsHandler,
-  gemJobsHandler,
-  greenhouseJobsHandler,
-  kulaJobsHandler,
-  leverJobsHandler,
-  paylocityJobsHandler,
-  ripplingJobsHandler,
-  workableJobsHandler,
-  workdayJobsHandler
+  ashbyHandler,
+  bambooHandler,
+  gemHandler,
+  greenhouseHandler,
+  kulaHandler,
+  leverHandler,
+  paylocityHandler,
+  ripplingHandler,
+  workableHandler,
+  workdayHandler
 } from '../../utils/ats-handlers';
 import { AshbyMock } from '../../mock/ashby';
 import { BambooMock } from '../../mock/bamboo';
@@ -32,15 +32,15 @@ describe('handlers', () => {
     vi.useRealTimers();
   });
 
-  describe('ashbyJobsHandler', () => {
+  describe('ashbyHandler', () => {
     it('handles empty jobs array', () => {
-      expect(ashbyJobsHandler([], 'Vanta')).toEqual([]);
+      expect(ashbyHandler([], 'Vanta')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = AshbyMock;
   
-      expect(ashbyJobsHandler(jobs, 'Vanta')).toEqual([
+      expect(ashbyHandler(jobs, 'Vanta')).toEqual([
         {
           companyName: 'Vanta',
           id: '1513e1ac-5dca-4acb-a99d-8b5461115651',
@@ -61,15 +61,15 @@ describe('handlers', () => {
     });
   });
   
-  describe('bambooJobsHandler', () => {
+  describe('bambooHandler', () => {
     it('handles empty jobs array', () => {
-      expect(bambooJobsHandler([], 'Maisha Meds')).toEqual([]);
+      expect(bambooHandler([], 'Maisha Meds')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = BambooMock;
   
-      expect(bambooJobsHandler(jobs, 'Maisha Meds')).toEqual([
+      expect(bambooHandler(jobs, 'Maisha Meds')).toEqual([
         {
           companyName: 'Maisha Meds',
           id: '173',
@@ -82,15 +82,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('gemJobsHandler', () => {
+  describe('gemHandler', () => {
     it('handles empty jobs array', () => {
-      expect(gemJobsHandler([], 'Snout')).toEqual([]);
+      expect(gemHandler([], 'Snout')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = GemMock;
   
-      expect(gemJobsHandler(jobs, 'Snout')).toEqual([
+      expect(gemHandler(jobs, 'Snout')).toEqual([
         {
           companyName: 'Snout',
           id: 'am9icG9zdDqQjNG0z9Cfaj7woaSEXnLq',
@@ -103,15 +103,15 @@ describe('handlers', () => {
     });
   });
   
-  describe('greenhouseJobsHandler', () => {
+  describe('greenhouseHandler', () => {
     it('handles empty jobs array', () => {
-      expect(greenhouseJobsHandler([])).toEqual([]);
+      expect(greenhouseHandler([])).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = GreenhouseMock;
   
-      expect(greenhouseJobsHandler(jobs)).toEqual([
+      expect(greenhouseHandler(jobs)).toEqual([
         {
           companyName: 'Capital Technology Group',
           id: '5147833007',
@@ -132,15 +132,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('kulaJobsHandler', () => {
+  describe('kulaHandler', () => {
     it('handles empty jobs array', () => {
-      expect(kulaJobsHandler([], 'Swiftly')).toEqual([]);
+      expect(kulaHandler([], 'Swiftly')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = KulaMock;
   
-      expect(kulaJobsHandler(jobs, 'Swiftly')).toEqual([
+      expect(kulaHandler(jobs, 'Swiftly')).toEqual([
         {
           companyName: 'Swiftly',
           id: '19319',
@@ -161,15 +161,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('leverJobsHandler', () => {
+  describe('leverHandler', () => {
     it('handles empty jobs array', () => {
-      expect(leverJobsHandler([], 'Ellevation Education')).toEqual([]);
+      expect(leverHandler([], 'Ellevation Education')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = LeverMock;
   
-      expect(leverJobsHandler(jobs, 'Ellevation Education')).toEqual([
+      expect(leverHandler(jobs, 'Ellevation Education')).toEqual([
         {
           companyName: 'Ellevation Education',
           id: '63d5bd17-5957-4562-8971-5a096dc28079',
@@ -182,15 +182,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('paylocityJobsHandler', () => {
+  describe('paylocityHandler', () => {
     it('handles empty jobs array', () => {
-      expect(paylocityJobsHandler([], 'eSimplicity')).toEqual([]);
+      expect(paylocityHandler([], 'eSimplicity')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = PaylocityMock;
   
-      expect(paylocityJobsHandler(jobs, 'eSimplicity')).toEqual([
+      expect(paylocityHandler(jobs, 'eSimplicity')).toEqual([
         {
           companyName: 'eSimplicity',
           id: '4564982',
@@ -211,15 +211,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('ripplingJobsHandler', () => {
+  describe('ripplingHandler', () => {
     it('handles empty jobs array', () => {
-      expect(ripplingJobsHandler([], 'MCCi')).toEqual([]);
+      expect(ripplingHandler([], 'MCCi')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = RipplingMock;
   
-      expect(ripplingJobsHandler(jobs, 'MCCi')).toEqual([
+      expect(ripplingHandler(jobs, 'MCCi')).toEqual([
         {
           companyName: 'MCCi',
           id: '9f630b2a-f7c7-4e5e-b2a1-ff69f2c5efd9',
@@ -232,15 +232,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('workableJobsHandler', () => {
+  describe('workableHandler', () => {
     it('handles empty jobs array', () => {
-      expect(workableJobsHandler([], 'Panorama Education')).toEqual([]);
+      expect(workableHandler([], 'Panorama Education')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = WorkableMock;
   
-      expect(workableJobsHandler(jobs, 'Panorama Education')).toEqual([
+      expect(workableHandler(jobs, 'Panorama Education')).toEqual([
         {
           companyName: 'Panorama Education',
           id: 'E3D5CEAFC4',
@@ -253,15 +253,15 @@ describe('handlers', () => {
     });
   });
 
-  describe('workdayJobsHandler', () => {
+  describe('workdayHandler', () => {
     it('handles empty jobs array', () => {
-      expect(workdayJobsHandler([], 'Capital One')).toEqual([]);
+      expect(workdayHandler([], 'Capital One')).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = WorkdayMock;
   
-      expect(workdayJobsHandler(jobs, 'Capital One')).toEqual([
+      expect(workdayHandler(jobs, 'Capital One')).toEqual([
         {
           companyName: 'Capital One',
           id: 'JR101609',

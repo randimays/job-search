@@ -67,21 +67,32 @@ const workdayProxy = (): Plugin => ({
   },
 });
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), bamboohrProxy(), workdayProxy()],
   server: {
     proxy: {
-      '/paylocity': {
-        target: 'https://recruiting.paylocity.com',
+      '/dayforce': {
+        target: 'https://www.dayforcehcm.com',
         changeOrigin: true,
         followRedirects: true,
-        rewrite: path => path.replace(/^\/paylocity/, ''),
+        rewrite: path => path.replace(/^\/dayforce/, '/api'),
+      },
+      '/jobvite': {
+        target: 'https://app.jobvite.com',
+        changeOrigin: true,
+        followRedirects: true,
+        rewrite: path => path.replace(/^\/jobvite/, '')
       },
       '/kula': {
         target: 'https://careers.kula.ai',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/kula/, ''),
+      },
+      '/paylocity': {
+        target: 'https://recruiting.paylocity.com',
+        changeOrigin: true,
+        followRedirects: true,
+        rewrite: path => path.replace(/^\/paylocity/, ''),
       },
     },
   },

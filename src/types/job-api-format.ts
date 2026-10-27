@@ -72,6 +72,78 @@ export interface BambooHrJobApiFormat {
   locationType: string
 }
 
+interface BreezyLocation {
+  country: {
+    name: string,
+    id: string
+  },
+  state: {
+    id: string,
+    name: string
+  },
+  city: string,
+  primary: boolean,
+  streetAddress: {
+    location: string,
+    components: {
+      long_name: string,
+      short_name: string,
+      types: string[]
+    }[]
+  },
+  is_remote: boolean,
+  name: string,
+  id: string
+}
+
+export interface BreezyJobApiFormat {
+  id: string,
+  friendly_id: string,
+  name: string,
+  url: string,
+  published_date: string,
+  type: {
+    id: string,
+    name: string
+  }
+  location: BreezyLocation,
+  department: string | null,
+  salary: string,
+  company: {
+    name: string,
+    logo_url: string | null,
+    friendly_id: string,
+    isMultipleLocationsEnabled: boolean
+  },
+  locations: BreezyLocation[]
+}
+
+export interface DayforceJobApiFormat {
+  Title: string,
+  Description: string,
+  ClientSiteName: string,
+  ClientSiteXRefCode: string,
+  CompanyName: string,
+  ParentCompanyName: string,
+  JobDetailsUrl: string,
+  ApplyUrl: string,
+  City?: string,
+  State?: string,
+  Country?: string,
+  PostalCode?: string,
+  JobFamily?: string,
+  DatePosted: string,
+  LastUpdated: string,
+  ReferenceNumber: number,
+  CultureCode: string,
+  ParentRequisitionCode: number,
+  MinHiringRate: number,
+  MaxHiringRate: number,
+  JobType: number,
+  TravelRequired: number,
+  IsVirtualLocation: boolean
+}
+
 export interface GemJobsApiFormat {
   absolute_url: string,
   content: string,
@@ -123,6 +195,27 @@ export interface GreenhouseJobApiFormat {
   requisition_id: string,
   title: string,
   updated_at: string
+}
+
+export interface JobviteJobApiFormat {
+  agency_x0020_access: string,
+  'apply-url': string,
+  briefdescription: string,
+  category: string,
+  created_x0020_on: string,
+  date: string,
+  department: string,
+  description: string,
+  'detail-url': string,
+  externalJobPostingId: string,
+  hiring_x0020_manager: string,
+  id: string,
+  jobtype: string,
+  location: string,
+  region: string,
+  requisitionid: 1280,
+  title: string,
+  workflow: string
 }
 
 export interface KulaJobApiFormat {
@@ -242,6 +335,123 @@ export interface PaylocityJobApiFormat {
   },
   IsRemote: boolean,
   IndeedRemoteType: number
+}
+
+interface RecruiteeBodyTranslations {
+  [languageCode: string]: {
+    body: string
+  }
+}
+
+export interface RecruiteeJobApiFormat {
+  id: number,
+  guid: string,
+  slug: string,
+  title: string,
+  status: string,
+  position: number,
+  department: string | null,
+  category_code: string,
+  employment_type_code: string,
+  experience_code: string,
+  education_code: string,
+  tags: string[],
+  highlight: string | null,
+  cover_image: string | null,
+  sharing_image: string | null,
+  sharing_title: string,
+  sharing_description: string,
+  description: string,
+  requirements: string,
+  translations: {
+    [languageCode: string]: {
+      description: string,
+      title: string,
+      highlight: string | null,
+      sharing_image: string | null,
+      requirements: string,
+      locations_question: string,
+      sharing_description: string,
+      sharing_title: string
+    }
+  },
+  created_at: string,
+  updated_at: string,
+  published_at: string,
+  close_at: string | null,
+  remote: boolean,
+  hybrid: boolean,
+  on_site: boolean,
+  location: string,
+  city: string,
+  state_code: string,
+  state_name: string,
+  postal_code: string,
+  country: string,
+  country_code: string,
+  locations: {
+    id: number,
+    name: string,
+    state: string,
+    country: string,
+    city: string,
+    translations: {
+      [languageCode: string]: {
+        name: string,
+        city: string,
+        postal_code: string,
+        street: string,
+        note: string | null
+      }
+    },
+    country_code: string,
+    postal_code: string,
+    state_code: string,
+    street: string,
+    note: string | null
+  }[],
+  locations_question: string,
+  locations_question_type: string,
+  locations_question_required: boolean,
+  location_question_visible: boolean,
+  min_hours: number | null,
+  max_hours: number | null,
+  min_hours_per_week: number | null,
+  max_hours_per_week: number | null,
+  salary: {
+    min: number | null,
+    max: number | null,
+    period: string | null,
+    currency: string | null
+  },
+  options_salutation: string,
+  options_phone: string,
+  options_title: string,
+  options_cv: string,
+  options_photo: string,
+  options_cover_letter: string,
+  open_questions: {
+    id: number,
+    position: number,
+    options: {
+      length?: number
+    },
+    required: boolean,
+    body: string,
+    kind: any,
+    translations: RecruiteeBodyTranslations,
+    open_question_options: {
+      id: number,
+      position: number,
+      body: string,
+      translations: RecruiteeBodyTranslations
+    }[]
+  }[],
+  dynamic_fields: unknown[],
+  company_name: string,
+  mailbox_email: string,
+  careers_url: string,
+  careers_apply_url: string
 }
 
 export interface RipplingJobApiFormat {

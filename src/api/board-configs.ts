@@ -1,14 +1,19 @@
+import { XMLParser } from 'fast-xml-parser';
 import {
-  ashbyJobsHandler,
-  bambooJobsHandler,
-  gemJobsHandler,
-  greenhouseJobsHandler,
-  kulaJobsHandler,
-  leverJobsHandler,
-  paylocityJobsHandler,
-  ripplingJobsHandler,
-  workableJobsHandler,
-  workdayJobsHandler
+  ashbyHandler,
+  bambooHandler,
+  breezyHandler,
+  dayforceHandler,
+  gemHandler,
+  greenhouseHandler,
+  jobviteHandler,
+  kulaHandler,
+  leverHandler,
+  paylocityHandler,
+  recruiteeHandler,
+  ripplingHandler,
+  workableHandler,
+  workdayHandler
 } from '../utils/ats-handlers';
 import type { Job } from '../types';
 
@@ -22,127 +27,145 @@ interface BoardConfig {
 
 // Comment out various sections to speed up local API calls while dev'ing
 export const BOARD_CONFIGS: BoardConfig[] = [
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Dayforce',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
-  // },
-  // {
-  //   handler: () => {}, // TODO
-  //   name: 'Gusto',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
-  // },
   //   {
   //   handler: () => {}, // TODO
   //   name: 'JazzHR',
   //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
   // },
   // {
-  //   handler: () => {}, // TODO
-  //   name: 'Jobvite',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
+  //   handler: ashbyHandler,
+  //   name: 'Ashby',
+  //   url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
+  //   parse: async response => {
+  //     return (await response.json()).jobs;
+  //   }
+  // },
+  // {
+  //   handler: bambooHandler,
+  //   name: 'Bamboo',
+  //   url: (board_token: string): string => `/bamboohr/${board_token}/careers/list`,
+  //   parse: async response => {
+  //      return (await response.json()).result;
+  //   }
+  // },
+  // {
+  //   handler: breezyHandler,
+  //   name: 'Breezy',
+  //   url: (board_token: string): string => `https://${board_token}.breezy.hr/json`,
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
+  // {
+  //   handler: dayforceHandler,
+  //   name: 'Dayforce',
+  //   url: (board_token: string): string => `/dayforce/${board_token}/V1/JobFeeds`,
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
+  // {
+  //   handler: gemHandler,
+  //   name: 'Gem',
+  //   url: (board_token: string): string => `https://api.gem.com/job_board/v0/${board_token}/job_posts/`,
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
+  // {
+  //   handler: greenhouseHandler,
+  //   name: 'Greenhouse',
+  //   url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`,
+  //   parse: async response => {
+  //     return (await response.json()).jobs;
+  //   },
+  //   concurrency: 50
   // },
   {
-    handler: ashbyJobsHandler,
-    name: 'Ashby',
-    url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
+    handler: jobviteHandler,
+    name: 'Jobvite',
+    url: (board_token: string): string => `/jobvite/CompanyJobs/Xml.aspx?c=${board_token}`,
     parse: async response => {
-      return (await response.json()).jobs;
-    }
-  },
-  {
-    handler: bambooJobsHandler,
-    name: 'Bamboo',
-    url: (board_token: string): string => `/bamboohr/${board_token}/careers/list`,
-    parse: async response => {
-       return (await response.json()).result;
-    }
-  },
-
-  {
-    handler: gemJobsHandler,
-    name: 'Gem',
-    url: (board_token: string): string => `https://api.gem.com/job_board/v0/${board_token}/job_posts/`,
-    parse: async response => {
-      return await response.json();
-    }
-  },
-  {
-    handler: greenhouseJobsHandler,
-    name: 'Greenhouse',
-    url: (board_token: string): string => `https://boards-api.greenhouse.io/v1/boards/${board_token}/jobs`,
-    parse: async response => {
-      return (await response.json()).jobs;
-    },
-    concurrency: 50
-  },
-  {
-    handler: kulaJobsHandler,
-    name: 'Kula',
-    url: (board_token: string): string => `/kula/api/internal/ats_job_posts?accountName=${board_token}&page=1&type=ats_job_post.index&items=99`,
-    parse: async response => {
-      return (await response.json()).data;
+      const parser = new XMLParser();
+      console.log('this: ', parser.parse(await response.text())?.result?.job);
+      return parser.parse(await response.text())?.result?.job;
     },
   },
+  // {
+  //   handler: kulaHandler,
+  //   name: 'Kula',
+  //   url: (board_token: string): string => `/kula/api/internal/ats_job_posts?accountName=${board_token}&page=1&type=ats_job_post.index&items=99`,
+  //   parse: async response => {
+  //     return (await response.json()).data;
+  //   },
+  // },
  
-  {
-    handler: leverJobsHandler,
-    name: 'Lever',
-    url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`,
-    parse: async (response) => {
-      const data = await response.json();
+  // {
+  //   handler: leverHandler,
+  //   name: 'Lever',
+  //   url: (board_token: string): string => `https://api.lever.co/v0/postings/${board_token}?group=team&mode=json`,
+  //   parse: async (response) => {
+  //     const data = await response.json();
 
-      if (!Array.isArray(data)) {
-        throw new Error('Unexpected Lever response shape');
-      }
+  //     if (!Array.isArray(data)) {
+  //       throw new Error('Unexpected Lever response shape');
+  //     }
 
-      return data.flatMap(department => department.postings);
-    }
-  },
-  {
-    handler: paylocityJobsHandler,
-    name: 'Paylocity',
-    url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
-    parse: async (response) => {
-      const html = await response.text();
-      const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
+  //     return data.flatMap(department => department.postings);
+  //   }
+  // },
+  // {
+  //   handler: paylocityHandler,
+  //   name: 'Paylocity',
+  //   url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
+  //   parse: async (response) => {
+  //     const html = await response.text();
+  //     const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
       
-      if (match) {
-        const pageData = JSON.parse(match[1]);
+  //     if (match) {
+  //       const pageData = JSON.parse(match[1]);
 
-        return (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
-      }
+  //       return (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
+  //     }
 
-      return [];
-    },
-    concurrency: 2
-  },
-  {
-    handler: ripplingJobsHandler,
-    name: 'Rippling',
-    url: (board_token: string): string => `https://api.rippling.com/platform/api/ats/v1/board/${board_token}/jobs`,
-    parse: async response => {
-      return await response.json();
-    }
-  },
-  {
-    handler: workableJobsHandler,
-    name: 'Workable',
-    url: (board_token: string): string => `https://apply.workable.com/api/v1/widget/accounts/${board_token}?details=true`,
-    parse: async response => {
-      return await response.json();
-    }
-  },
-  {
-    handler: workdayJobsHandler,
-    name: 'Workday',
-    url: (board_token: string): string => {
-      const [tenant, shard, site] = board_token.split(';');
+  //     return [];
+  //   },
+  //   concurrency: 2
+  // },
+  // {  
+  //   handler: recruiteeHandler,
+  //   name: 'Recruitee',
+  //   url: (board_token: string): string => `https://${board_token}.recruitee.com/api/offers`,
+  //   parse: async response => {
+  //     return (await response.json()).offers;
+  //   }
+  // },
+  // {
+  //   handler: ripplingHandler,
+  //   name: 'Rippling',
+  //   url: (board_token: string): string => `https://api.rippling.com/platform/api/ats/v1/board/${board_token}/jobs`,
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
+  // {
+  //   handler: workableHandler,
+  //   name: 'Workable',
+  //   url: (board_token: string): string => `https://apply.workable.com/api/v1/widget/accounts/${board_token}?details=true`,
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
+  // {
+  //   handler: workdayHandler,
+  //   name: 'Workday',
+  //   url: (board_token: string): string => {
+  //     const [tenant, shard, site] = board_token.split(';');
 
-      return `https://${tenant}.${shard}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
-    },
-    parse: async response => {
-      return await response.json();
-    }
-  },
+  //     return `https://${tenant}.${shard}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
+  //   },
+  //   parse: async response => {
+  //     return await response.json();
+  //   }
+  // },
 ];

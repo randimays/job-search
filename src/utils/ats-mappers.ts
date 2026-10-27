@@ -1,11 +1,15 @@
 import type {
   AshbyJobApiFormat,
   BambooHrJobApiFormat,
+  BreezyJobApiFormat,
+  DayforceJobApiFormat,
   GemJobsApiFormat,
   GreenhouseJobApiFormat,
+  JobviteJobApiFormat,
   KulaJobApiFormat,
   LeverJobPosting,
   PaylocityJobApiFormat,
+  RecruiteeJobApiFormat,
   RipplingJobApiFormat,
   WorkableJobApiFormat,
   WorkdayJobApiFormat
@@ -34,6 +38,24 @@ export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Jo
   url: `https://maishameds.bamboohr.com/careers/${job.id}`
 });
 
+export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
+  companyName: job?.company?.name,
+  id: job?.id || '',
+  published: new Date(job?.published_date), 
+  title: cleanUpAPIString(job.name),
+  updated: new Date(job?.published_date),
+  url: job?.url
+});
+
+export const dayforceMapper = (job: DayforceJobApiFormat): Job => ({
+  companyName: job?.CompanyName,
+  id: job?.ReferenceNumber.toString() || '', // TODO these have duplicates; need a unique ID
+  published: new Date(job?.DatePosted), 
+  title: cleanUpAPIString(job.Title),
+  updated: new Date(job?.LastUpdated),
+  url: job?.JobDetailsUrl
+});
+
 export const gemMapper = (job: GemJobsApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.id || '',
@@ -50,6 +72,15 @@ export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
   title: cleanUpAPIString(job.title),
   updated: new Date(job?.updated_at),
   url: cleanUpAPIString(job.absolute_url),
+});
+
+export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Job => ({
+  companyName,
+  id: job.id,
+  published: new Date(job.created_x0020_on),
+  title: cleanUpAPIString(job.title),
+  updated: new Date(job?.date),
+  url: cleanUpAPIString(job['apply-url']),
 });
 
 export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => ({
@@ -77,6 +108,15 @@ export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string)
   title: cleanUpAPIString(job.JobTitle),
   updated: new Date(job.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
   url: `https://recruiting.paylocity.com/Recruiting/Jobs/Details/${job.JobId}`
+});
+
+export const recruiteeMapper = (job: RecruiteeJobApiFormat, companyName: string): Job => ({
+  companyName,
+  id: job.id.toString(),
+  published: new Date(job?.published_at),
+  title: cleanUpAPIString(job.title),
+  updated: new Date(job.updated_at),
+  url: job.careers_url
 });
 
 export const ripplingMapper = (job: RipplingJobApiFormat, companyName: string): Job => ({

@@ -1,5 +1,5 @@
 import type { Failure, Job } from '../types';
-import { flushOmittedTitles, toTitleCase } from '../utils';
+import { flushOmittedTitles } from '../utils';
 import { useJobs } from '../store';
 import { BOARD_CONFIGS } from './board-configs';
 import { batchCompaniesByProvider } from '../utils/api-prep';
