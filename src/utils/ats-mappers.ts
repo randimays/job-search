@@ -90,7 +90,7 @@ export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Jo
   published: createAPIDate(job?.created_x0020_on),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.date),
-  url: cleanUpAPIString(job['apply-url']),
+  url: cleanUpAPIString(job['detail-url']),
 });
 
 export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => ({

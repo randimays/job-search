@@ -3,8 +3,11 @@ import {
   ashbyMapper,
   bambooMapper,
   breezyMapper,
+  clearCompanyMapper,
+  dayforceMapper,
   gemMapper,
   greenhouseMapper,
+  jobviteMapper,
   kulaMapper,
   leverMapper,
   paylocityMapper,
@@ -14,8 +17,11 @@ import {
 } from '../../utils/ats-mappers';
 import { AshbyMock } from '../../mock/ashby';
 import { BreezyMock } from '../../mock/breezy';
+import { ClearCompanyMock } from '../../mock/clearcompany';
+import { DayforceMock } from '../../mock/dayforce';
 import { GemMock } from '../../mock/gem';
 import { GreenhouseMock } from '../../mock/greenhouse';
+import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
@@ -66,9 +72,9 @@ describe('mappers', () => {
     const expectedBambooReturn = {
       companyName: 'Maisha Meds',
       id: '173',
-      published: new Date('2026-10-14T17:00:00.000Z'),
+      published: new Date('2026-10-13T17:00:00.000Z'),
       title: 'Senior Software Engineer',
-      updated: new Date('2026-10-14T17:00:00.000Z'),
+      updated: new Date('2026-10-13T17:00:00.000Z'),
       url: 'https://maishameds.bamboohr.com/careers/173'
     };
 
@@ -114,9 +120,52 @@ describe('mappers', () => {
 
       expect(breezyMapper(mockWithoutId)).toEqual({
         ...expectedBreezyReturn,
-        url: 'https://switchboard.breezy.hr/p/5720a5741f80-customer-experience-associate-resume-drop-interviewing-begins-nov-dec-2026',
         id: ''
       });
+    });
+  });
+
+  describe('clearCompanyMapper', () => {
+    const expectedCCReturn = {
+      companyName: 'Ad Hoc',
+          id: 'f71c1213-fe6a-9202-9704-206536d822c5',
+          published: new Date('2026-10-26T00:00:00'),
+          title: 'Senior Software Engineer - Front End/Back End (Library of Congress)',
+          updated: new Date('2026-10-26T00:00:00'),
+          url: 'https://adhoc.clearcompany.com/careers/jobs/f71c1213-fe6a-9202-9704-206536d822c5/apply?source=CJB-0'
+    };
+
+    it('properly formats an API entry from Bamboo', () => {
+      const mockEntry = ClearCompanyMock[0];
+      expect(clearCompanyMapper(mockEntry)).toEqual(expectedCCReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...ClearCompanyMock[0],
+        id: '',
+      };
+
+      expect(clearCompanyMapper(mockWithoutId)).toEqual({
+        ...expectedCCReturn,
+        id: ''
+      });
+    });
+  });
+
+  describe('dayforceMapper', () => {
+    const expectedCCReturn = {
+      companyName: 'Stretto',
+      id: '179',
+      published: new Date('2026-08-04T03:00:00'),
+      title: 'Software Engineer',
+      updated: new Date('2026-09-17T19:37:38.29'),
+      url: 'https://jobs.dayforcehcm.com/en-US/stretto/StrettoCareers/jobs/179'
+    };
+
+    it('properly formats an API entry from Bamboo', () => {
+      const mockEntry = DayforceMock[0];
+      expect(dayforceMapper(mockEntry)).toEqual(expectedCCReturn);
     });
   });
 
@@ -161,6 +210,22 @@ describe('mappers', () => {
     it('properly formats an API entry from Greenhouse', () => {
       const mockEntry = GreenhouseMock[0];
       expect(greenhouseMapper(mockEntry)).toEqual(expectedGreenhouseReturn);
+    });
+  });
+
+  describe('jobviteMapper', () => {
+    const expectedJobviteReturn = {
+      companyName: 'Uplight',
+      id: 'oTxMAfww',
+      published: new Date('9/10/2026'),
+      title: 'Senior Software Engineer',
+      updated: new Date('9/10/2026'),
+      url: 'http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oTxMAfww',
+    };
+
+    it('properly formats an API entry from Uplight', () => {
+      const mockEntry = JobviteMock[4];
+      expect(jobviteMapper(mockEntry, 'Uplight')).toEqual(expectedJobviteReturn);
     });
   });
 

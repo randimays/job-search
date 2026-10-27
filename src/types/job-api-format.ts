@@ -36,146 +36,63 @@ export interface BreezyJobApiFormat {
 
 export interface ClearCompanyJobApiFormat {
   id: string,
-  userDefinedId: string,
   positionTitle: string,
-  description: string,
   openDate: string,
   postedDate: string,
-  departmentId: string,
-  departmentName: string,
-  officeId: string,
   officeName: string,
-  jobFunctionId: string | null,
   jobFunctionName: string | null,
   location: string,
   locations: {
-    city: string | null,
-    subdivision: string,
-    subdivisionFullName: string,
     country: string,
-    postalCode: string | null,
-    addressLine1: string | null,
-    addressLine2: string | null,
-    isRemote: boolean,
-    isNationwide: boolean,
-    isStatewide: boolean,
-    latitude: string | null,
-    longitude: string | null
   }[],
   brandName: string,
   applyLink: string,
-  canSelfSchedule: boolean,
-  salaryRangeLow: string,
-  salaryRangeHigh: string,
-  salaryType: string | null,
-  customFieldAnswers: {
-    customFieldId: string,
-    customFieldName: string | null,
-    customFieldOptionId: string,
-    customFieldOptionName: string | null
-  }[]
 }
 
 export interface DayforceJobApiFormat {
   Title: string,
-  Description: string,
-  ClientSiteName: string,
-  ClientSiteXRefCode: string,
   CompanyName: string,
-  ParentCompanyName: string,
   JobDetailsUrl: string,
-  ApplyUrl: string,
-  City?: string,
-  State?: string,
   Country?: string,
-  PostalCode?: string,
-  JobFamily?: string,
   DatePosted: string,
   LastUpdated: string,
   ReferenceNumber: number,
-  CultureCode: string,
-  ParentRequisitionCode: number,
-  MinHiringRate: number,
-  MaxHiringRate: number,
-  JobType: number,
-  TravelRequired: number,
   IsVirtualLocation: boolean
 }
 
 export interface GemJobsApiFormat {
   absolute_url: string,
-  content: string,
-  content_plain: string,
   created_at: string,
-  departments: {
-    child_ids: string[],
-    id: string,
-    name: string,
-    parent_id: string | null
-  }[],
-  employment_type: string,
   first_published_at: string,
   id: string,
-  internal_job_id: string,
   location: {
     name: string,
   },
   location_type: string,
-  offices: {
-    child_ids: string[],
-    child_office_external_ids: string[],
-    id: string,
-    location: {
-      name: string
-    },
-    name: string,
-    parent_id: string | null,
-    parent_office_external_id: string | null
-  }[],
-  requisition_id: string,
   title: string,
   updated_at: string
 }
 
 export interface GreenhouseJobApiFormat {
   absolute_url: string,
-  application_deadline: string | null,
   company_name: string,
-  data_compliance: any[],
   first_published: string,
   id: number,
-  internal_job_id: number,
-  language: string,
   location: {
     name: string
   },
-  metadata: any,
-  requisition_id: string,
   title: string,
   updated_at: string
 }
 
 export interface JobviteJobApiFormat {
-  agency_x0020_access: string,
-  'apply-url': string,
-  briefdescription: string,
-  category: string,
   created_x0020_on: string,
   date: string,
-  department: string,
-  description: string,
   'detail-url': string,
-  externalJobPostingId: string,
-  hiring_x0020_manager: string[] | string,
   id: string,
-  jobtype: string,
   location: string,
-  parentId?: string,
-  region: string,
   remote_x0020_type?: string,
-  requisitionid: number,
   title: string,
-  workflow: string
 }
 
 export interface KulaJobApiFormat {

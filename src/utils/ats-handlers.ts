@@ -85,7 +85,7 @@ export const breezyHandler = (jobs: BreezyJobApiFormat[]): Job[] | [] => {
 export const clearCompanyHandler = (jobs: ClearCompanyJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
-      .filter(job => job?.locations?.[0].isRemote && isUnitedStates(job?.locations?.[0]?.country))
+      .filter(job => job?.officeName === 'Remote' && isUnitedStates(job?.locations?.[0]?.country))
       .filter(job => isPotentialJobMatch(job?.positionTitle))
       .map(filteredJob => clearCompanyMapper(filteredJob));
   }

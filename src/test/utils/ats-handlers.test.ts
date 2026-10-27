@@ -3,8 +3,11 @@ import {
   ashbyHandler,
   bambooHandler,
   breezyHandler,
+  clearCompanyHandler,
+  dayforceHandler,
   gemHandler,
   greenhouseHandler,
+  jobviteHandler,
   kulaHandler,
   leverHandler,
   paylocityHandler,
@@ -15,14 +18,17 @@ import {
 import { AshbyMock } from '../../mock/ashby';
 import { BambooMock } from '../../mock/bamboo';
 import { BreezyMock } from '../../mock/breezy';
+import { DayforceMock } from '../../mock/dayforce';
 import { GemMock } from '../../mock/gem';
 import { GreenhouseMock } from '../../mock/greenhouse';
+import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
 import { RipplingMock } from '../../mock/rippling';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
+import { ClearCompanyMock } from '../../mock/clearcompany';
 
 describe('handlers', () => {
   beforeEach(() => {
@@ -105,6 +111,72 @@ describe('handlers', () => {
     });
   });
 
+  describe('clearCompanyHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(clearCompanyHandler([])).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = ClearCompanyMock;
+  
+      expect(clearCompanyHandler(jobs)).toEqual([
+        {
+          companyName: 'Ad Hoc',
+          id: 'f71c1213-fe6a-9202-9704-206536d822c5',
+          published: new Date('2026-10-26T00:00:00'),
+          title: 'Senior Software Engineer - Front End/Back End (Library of Congress)',
+          updated: new Date('2026-10-26T00:00:00'),
+          url: 'https://adhoc.clearcompany.com/careers/jobs/f71c1213-fe6a-9202-9704-206536d822c5/apply?source=CJB-0'
+        },
+        {
+          companyName: 'Ad Hoc',
+          id: '3c96b712-1954-c370-8b20-63c8139925f5',
+          published: new Date('2026-10-26T00:00:00'),
+          title: 'Software Engineer III - Back End (Library of Congress)',
+          updated: new Date('2026-10-26T00:00:00'),
+          url: 'https://adhoc.clearcompany.com/careers/jobs/3c96b712-1954-c370-8b20-63c8139925f5/apply?source=CJB-0'
+        },
+        {
+          companyName: 'Ad Hoc',
+          id: '91c3f9ee-f8e1-1f08-8091-c42dda76fd68',
+          published: new Date('2026-10-08T00:00:00'),
+          title: 'Senior Software Engineer - Full Stack (Ruby on Rails)',
+          updated: new Date('2026-10-08T00:00:00'),
+          url: 'https://adhoc.clearcompany.com/careers/jobs/91c3f9ee-f8e1-1f08-8091-c42dda76fd68/apply?source=CJB-0'
+        },
+        {
+          companyName: 'Ad Hoc',
+          id: 'bc376ffe-7a04-fab0-ec9c-fd27dc141683',
+          published: new Date('2026-10-06T00:00:00'),
+          title: 'Software Engineer III - Full Stack (Drupal)',
+          updated: new Date('2026-10-06T00:00:00'),
+          url: 'https://adhoc.clearcompany.com/careers/jobs/bc376ffe-7a04-fab0-ec9c-fd27dc141683/apply?source=CJB-0'
+        }
+      ])
+    });
+  });
+
+  describe('dayforceHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(dayforceHandler([])).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = DayforceMock;
+  
+      expect(dayforceHandler(jobs)).toEqual([
+        {
+          companyName: 'Stretto',
+          id: '179',
+          published: new Date('2026-08-04T03:00:00'),
+          title: 'Software Engineer',
+          updated: new Date('2026-09-17T19:37:38.29'),
+          url: 'https://jobs.dayforcehcm.com/en-US/stretto/StrettoCareers/jobs/179'
+        }
+      ])
+    });
+  });
+
   describe('gemHandler', () => {
     it('handles empty jobs array', () => {
       expect(gemHandler([], 'Snout')).toEqual([]);
@@ -150,6 +222,27 @@ describe('handlers', () => {
           title: 'Software Developer',
           updated: new Date('2026-09-16T08:59:35-04:00'),
           url: 'https://boards.greenhouse.io/capitaltg/jobs/5239695007?gh_jid=5239695007',
+        }
+      ])
+    });
+  });
+
+  describe('jobviteHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(jobviteHandler([], 'Uplight')).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = JobviteMock;
+  
+      expect(jobviteHandler(jobs, 'Uplight')).toEqual([
+        {
+          companyName: 'Uplight',
+          id: 'oTxMAfww',
+          published: new Date('9/10/2026'),
+          title: 'Senior Software Engineer',
+          updated: new Date('9/10/2026'),
+          url: 'http://app.jobvite.com/CompanyJobs/Job.aspx?c=qf79Vfwa&j=oTxMAfww',
         }
       ])
     });
