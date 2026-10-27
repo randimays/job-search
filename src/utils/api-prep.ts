@@ -1,5 +1,4 @@
 import { BOARD_CONFIGS } from '../api/board-configs';
-import { toTitleCase } from '.';
 
 type Batches = Record<string, string[][]>;
 
@@ -13,7 +12,7 @@ export const batchCompaniesByProvider = (csvData: string[][]): Batches => {
     const companiesForThisBatch = csvData.filter(row => {
       const boardName = row[0];
 
-      return toTitleCase(boardName) === config.name;
+      return boardName.toLowerCase() === config.name.toLowerCase();
     });
 
     if (companiesForThisBatch.length) {

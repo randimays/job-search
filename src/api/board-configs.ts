@@ -3,6 +3,7 @@ import {
   ashbyHandler,
   bambooHandler,
   breezyHandler,
+  clearCompanyHandler,
   dayforceHandler,
   gemHandler,
   greenhouseHandler,
@@ -56,6 +57,15 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //     return await response.json();
   //   }
   // },
+//   {
+//     handler: clearCompanyHandler,
+//     name: 'ClearCompany',
+//     url: (board_token: string): string => `
+// https://careers-api.clearcompany.com/v1/${board_token}?pageIndex=0&pageSize=10&source=CJB-0`,
+//     parse: async response => {
+//       return (await response.json()).results;
+//     }
+//   },
   // {
   //   handler: dayforceHandler,
   //   name: 'Dayforce',
@@ -79,18 +89,17 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   parse: async response => {
   //     return (await response.json()).jobs;
   //   },
-  //   concurrency: 50
+  //   concurrency: 200
   // },
-  {
-    handler: jobviteHandler,
-    name: 'Jobvite',
-    url: (board_token: string): string => `/jobvite/CompanyJobs/Xml.aspx?c=${board_token}`,
-    parse: async response => {
-      const parser = new XMLParser();
-      console.log('this: ', parser.parse(await response.text())?.result?.job);
-      return parser.parse(await response.text())?.result?.job;
-    },
-  },
+  // {
+  //   handler: jobviteHandler,
+  //   name: 'Jobvite',
+  //   url: (board_token: string): string => `/jobvite/CompanyJobs/Xml.aspx?c=${board_token}`,
+  //   parse: async response => {
+  //     const parser = new XMLParser();
+  //     return parser.parse(await response.text())?.result?.job;
+  //   },
+  // },
   // {
   //   handler: kulaHandler,
   //   name: 'Kula',
@@ -148,6 +157,14 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //     return await response.json();
   //   }
   // },
+  {
+    handler: wordpressHandler,
+    name: 'Wordpress',
+    url: (board_token: string): string => `https://${board_token}.com/wp-json/wp/v2/job_opening?per_page=10&page=1&orderby=date&order=desc`,
+    parse: async response => {
+      return await response.json();
+    }
+  },
   // {
   //   handler: workableHandler,
   //   name: 'Workable',

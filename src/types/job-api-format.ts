@@ -2,120 +2,78 @@
 export interface AshbyJobApiFormat {
   id: string,
   title: string,
-  department: string,
-  team: string,
-  employmentType: string,
   location: string,
-  shouldDisplayCompensationOnJobPostings: boolean,
-  secondaryLocations: string[],
   publishedAt: string,
-  isListed: boolean,
   isRemote: boolean,
   workplaceType: string,
-  address: {
-    postalAddress: {
-      addressRegion?: string,
-      addressCountry: string,
-      addressLocality?: string
-    }
-  },
   jobUrl: string,
-  applyUrl: string,
-  descriptionHtml: string,
-  descriptionPlain: string,
-  compensation: {
-    compensationTierSummary: string | null,
-    scrapeableCompensationSalarySummary: string | null,
-    compensationTiers: {
-      id: string,
-      tierSummary: string,
-      title: string | null,
-      additionalInformation: string | null,
-      components: {
-        id: string,
-        summary: string,
-        compensationType: string,
-        interval: string,
-        currencyCode: string | null,
-        minValue: number | null,
-        maxValue: number | null
-      }[]
-    }[],
-    summaryComponents: {
-      compensationType: string,
-      interval: string,
-      currencyCode: string | null,
-      minValue: number | null,
-      maxValue: number | null
-    }[]
-  }
 }
 
 export interface BambooHrJobApiFormat {
   id: string,
   jobOpeningName: string,
-  departmentId: string,
-  departmentLabel: string,
-  employmentStatusLabel: string,
-  employmentType: string | null,
-  location: {
-    city: string | null,
-    state: string | null
-  },
   atsLocation: {
     country: string | null,
-    state: string | null,
-    province: string | null,
-    city: string | null,
   },
   isRemote: boolean | null,
-  locationType: string
-}
-
-interface BreezyLocation {
-  country: {
-    name: string,
-    id: string
-  },
-  state: {
-    id: string,
-    name: string
-  },
-  city: string,
-  primary: boolean,
-  streetAddress: {
-    location: string,
-    components: {
-      long_name: string,
-      short_name: string,
-      types: string[]
-    }[]
-  },
-  is_remote: boolean,
-  name: string,
-  id: string
 }
 
 export interface BreezyJobApiFormat {
   id: string,
-  friendly_id: string,
   name: string,
   url: string,
   published_date: string,
-  type: {
-    id: string,
-    name: string
-  }
-  location: BreezyLocation,
-  department: string | null,
-  salary: string,
+  location: {
+    country: {
+      name: string,
+    },
+    is_remote: boolean,
+  },
   company: {
     name: string,
-    logo_url: string | null,
-    friendly_id: string,
-    isMultipleLocationsEnabled: boolean
-  },
-  locations: BreezyLocation[]
+  }
+}
+
+export interface ClearCompanyJobApiFormat {
+  id: string,
+  userDefinedId: string,
+  positionTitle: string,
+  description: string,
+  openDate: string,
+  postedDate: string,
+  departmentId: string,
+  departmentName: string,
+  officeId: string,
+  officeName: string,
+  jobFunctionId: string | null,
+  jobFunctionName: string | null,
+  location: string,
+  locations: {
+    city: string | null,
+    subdivision: string,
+    subdivisionFullName: string,
+    country: string,
+    postalCode: string | null,
+    addressLine1: string | null,
+    addressLine2: string | null,
+    isRemote: boolean,
+    isNationwide: boolean,
+    isStatewide: boolean,
+    latitude: string | null,
+    longitude: string | null
+  }[],
+  brandName: string,
+  applyLink: string,
+  canSelfSchedule: boolean,
+  salaryRangeLow: string,
+  salaryRangeHigh: string,
+  salaryType: string | null,
+  customFieldAnswers: {
+    customFieldId: string,
+    customFieldName: string | null,
+    customFieldOptionId: string,
+    customFieldOptionName: string | null
+  }[]
 }
 
 export interface DayforceJobApiFormat {
@@ -208,12 +166,14 @@ export interface JobviteJobApiFormat {
   description: string,
   'detail-url': string,
   externalJobPostingId: string,
-  hiring_x0020_manager: string,
+  hiring_x0020_manager: string[] | string,
   id: string,
   jobtype: string,
   location: string,
+  parentId?: string,
   region: string,
-  requisitionid: 1280,
+  remote_x0020_type?: string,
+  requisitionid: number,
   title: string,
   workflow: string
 }
@@ -466,6 +426,106 @@ export interface RipplingJobApiFormat {
     label: string,
     id: string
   }
+}
+
+export interface WordpressJobApiFormat {
+  id: number,
+  date: string,
+  date_gmt: string,
+  guid: {
+    rendered: string
+  },
+  modified: string,
+  modified_gmt: string,
+  slug: string,
+  status: string,
+  type: string,
+  link: string,
+  title: {
+    rendered: string
+  },
+  content: {
+    rendered: string,
+    protected: boolean
+  },
+  excerpt: {
+    rendered: string,
+    protected: boolean
+  },
+  template: string,
+  meta: {
+    '_acf_changed': boolean
+  },
+  workplace_type: number[],
+  job_location: number[],
+  job_department: number[],
+  employment_type: number[],
+  experience: number[],
+  education: number[],
+  class_list: string[],
+  acf: string[],
+  workplace_type_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  job_location_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  job_department_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  employment_type_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  experience_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  education_details: {
+    id: number,
+    name: string,
+    slug: string,
+    parent: number
+  }[],
+  jetpack_sharing_enabled: boolean,
+  '_links': {
+    self: {
+      href: string,
+      targetHints: {
+        allow: string[]
+      }
+    }[]
+    collection: {
+      href: string
+    }[],
+    about: {
+      href: string
+    }[],
+    'wp:attachment': {
+      href: string
+    }[],
+    'wp:term': {
+      taxonomy: string,
+      embeddable: boolean,
+      href: string
+    }[],
+    'curies': {
+      href: string
+    }[],
+  },
 }
 
 export interface WorkableJobApiFormat {

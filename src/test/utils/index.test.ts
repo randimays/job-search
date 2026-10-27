@@ -3,11 +3,10 @@ import {
   cleanUpAPIString,
   determinePublishDateForWorkday,
   formatDate,
-  isRemoteOrVirtualUS,
+  isHybridOrOnsite,
   isPotentialJobMatch,
   isUnitedStates,
   isUnitedStatesWorkday,
-  toTitleCase,
   flushOmittedTitles,
   parseCsv,
 } from '../../utils';
@@ -50,19 +49,7 @@ describe('utils', () => {
       expect(formatDate(new Date('2026-10-02T10:14:01-04:00'))).toBe('10/2/2026');
     });
   });
-  
-  describe('toTitleCase', () => {
-    it('handles junk values', () => {
-      expect(toTitleCase('')).toBe('');
-    });
-  
-    it('handles valid values', () => {
-      expect(toTitleCase('a')).toBe('a');
-      expect(toTitleCase('greenhouse')).toBe('Greenhouse');
-      expect(toTitleCase('GREENHOUSE')).toBe('Greenhouse');
-      expect(toTitleCase('greenhouse platform')).toBe('Greenhouse Platform');
-    });
-  });
+
   
   describe('cleanUpAPIString', () => {
     it('handles null values', () => {
@@ -235,7 +222,7 @@ describe('utils', () => {
     });
   });
   
-  describe('isRemoteOrVirtualUS', () => {
+  describe('isHybridOrOnsite', () => {
     const testPermutations = (keyword: string) => {
       const permutations = [
         keyword,
@@ -250,7 +237,7 @@ describe('utils', () => {
       ]
   
       permutations.forEach(permutation => {
-        expect(isRemoteOrVirtualUS(permutation)).toBe(true);
+        expect(isHybridOrOnsite(permutation)).toBe(true);
       });
     };
   
@@ -260,8 +247,8 @@ describe('utils', () => {
     });
 
     it('correctly handles not explicitly remote or virtual jobs', () => {
-      expect(isRemoteOrVirtualUS('LATAM')).toBe(false);
-      expect(isRemoteOrVirtualUS('')).toBe(true);
+      expect(isHybridOrOnsite('LATAM')).toBe(false);
+      expect(isHybridOrOnsite('')).toBe(true);
     });
   });
 

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ashbyHandler,
   bambooHandler,
+  breezyHandler,
   gemHandler,
   greenhouseHandler,
   kulaHandler,
@@ -13,6 +14,7 @@ import {
 } from '../../utils/ats-handlers';
 import { AshbyMock } from '../../mock/ashby';
 import { BambooMock } from '../../mock/bamboo';
+import { BreezyMock } from '../../mock/breezy';
 import { GemMock } from '../../mock/gem';
 import { GreenhouseMock } from '../../mock/greenhouse';
 import { KulaMock } from '../../mock/kula';
@@ -73,10 +75,31 @@ describe('handlers', () => {
         {
           companyName: 'Maisha Meds',
           id: '173',
-          published: new Date('2026-10-14T17:00:00.000Z'),
+          published: new Date('2026-10-13T17:00:00.000Z'),
           title: 'Senior Software Engineer',
-          updated: new Date('2026-10-14T17:00:00.000Z'),
+          updated: new Date('2026-10-13T17:00:00.000Z'),
           url: 'https://maishameds.bamboohr.com/careers/173'
+        }
+      ])
+    });
+  });
+
+  describe('breezyHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(breezyHandler([])).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = BreezyMock;
+  
+      expect(breezyHandler(jobs)).toEqual([
+        {
+          companyName: 'Switchboard',
+          id: '5720a5741f80',
+          published: new Date('2026-10-26T18:50:20.122Z'),
+          title: 'Senior Software Engineer',
+          updated: new Date('2026-10-26T18:50:20.122Z'),
+          url: 'https://switchboard.breezy.hr/p/5720a5741f80-customer-experience-associate-resume-drop-interviewing-begins-nov-dec-2026'
         }
       ])
     });

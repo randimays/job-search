@@ -48,6 +48,8 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
 
   useJobs.getState().setFetchingJobs(true);
 
+  console.log('batches: ', batches);
+
   if (Object.keys(batches).length) {
     // Loop through each of the providers from the above object and create Promises for each,
     // then call the API in batches to prevent rate-limiting. Return job results and failed calls

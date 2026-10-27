@@ -2,6 +2,7 @@ import type {
   AshbyJobApiFormat,
   BambooHrJobApiFormat,
   BreezyJobApiFormat,
+  ClearCompanyJobApiFormat,
   DayforceJobApiFormat,
   GemJobsApiFormat,
   GreenhouseJobApiFormat,
@@ -15,7 +16,7 @@ import type {
   WorkdayJobApiFormat
 } from '../types/job-api-format';
 import type { Job } from '../types';
-import { cleanUpAPIString, determinePublishDateForWorkday } from '.';
+import { cleanUpAPIString, createAPIDate, determinePublishDateForWorkday } from '.';
 
 // -------- Mappers
 // Used to map an API response to a Job type for easy formatting
@@ -23,72 +24,81 @@ import { cleanUpAPIString, determinePublishDateForWorkday } from '.';
 export const ashbyMapper = (job: AshbyJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.id || '',
-  published: new Date(job.publishedAt),
+  published: createAPIDate(job?.publishedAt),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job.publishedAt), // Ashby doesn't have "updated" so we use publish date instead
+  updated: createAPIDate(job?.publishedAt), // Ashby doesn't have "updated" so we use publish date instead
   url: cleanUpAPIString(job.jobUrl),
 });
 
 export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.id || '',
-  published: new Date(), // BambooHR does not have published dates
+  published: createAPIDate(), // BambooHR does not have published dates
   title: cleanUpAPIString(job.jobOpeningName),
-  updated: new Date(), // BambooHR does not have updated dates
+  updated: createAPIDate(), // BambooHR does not have updated dates
   url: `https://maishameds.bamboohr.com/careers/${job.id}`
 });
 
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
   companyName: job?.company?.name,
   id: job?.id || '',
-  published: new Date(job?.published_date), 
+  published: createAPIDate(job?.published_date), 
   title: cleanUpAPIString(job.name),
-  updated: new Date(job?.published_date),
+  updated: createAPIDate(job?.published_date),
   url: job?.url
+});
+
+export const clearCompanyMapper = (job: ClearCompanyJobApiFormat): Job => ({
+  companyName: job?.brandName,
+  id: job?.id || '',
+  published: createAPIDate(job?.openDate), 
+  title: cleanUpAPIString(job.positionTitle),
+  updated: createAPIDate(job?.postedDate),
+  url: job?.applyLink
 });
 
 export const dayforceMapper = (job: DayforceJobApiFormat): Job => ({
   companyName: job?.CompanyName,
   id: job?.ReferenceNumber.toString() || '', // TODO these have duplicates; need a unique ID
-  published: new Date(job?.DatePosted), 
+  published: createAPIDate(job?.DatePosted), 
   title: cleanUpAPIString(job.Title),
-  updated: new Date(job?.LastUpdated),
+  updated: createAPIDate(job?.LastUpdated),
   url: job?.JobDetailsUrl
 });
 
 export const gemMapper = (job: GemJobsApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.id || '',
-  published: new Date(job?.first_published_at),
+  published: createAPIDate(job?.first_published_at),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job?.updated_at),
+  updated: createAPIDate(job?.updated_at),
   url: cleanUpAPIString(job.absolute_url),
 });
 
 export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
   companyName: cleanUpAPIString(job.company_name),
   id: job.id.toString(),
-  published: new Date(job.first_published),
+  published: createAPIDate(job?.first_published),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job?.updated_at),
+  updated: createAPIDate(job?.updated_at),
   url: cleanUpAPIString(job.absolute_url),
 });
 
 export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.id,
-  published: new Date(job.created_x0020_on),
+  published: createAPIDate(job?.created_x0020_on),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job?.date),
+  updated: createAPIDate(job?.date),
   url: cleanUpAPIString(job['apply-url']),
 });
 
 export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.id.toString(),
-  published: new Date(job.launch_at),
+  published: createAPIDate(job?.launch_at),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job?.launch_at),
+  updated: createAPIDate(job?.launch_at),
   url: 'https://careers.kula.ai/hire', // No distinct URLs for job postings
 });
 
@@ -97,43 +107,43 @@ export const leverMapper = (job: LeverJobPosting, companyName: string): Job => (
   id: job?.id || '',
   published: new Date(job?.createdAt),
   title: cleanUpAPIString(job.text),
-  updated: new Date(job.createdAt), // Lever doesn't have "updated" so we use publish date instead,
+  updated: new Date(job?.createdAt), // Lever doesn't have "updated" so we use publish date instead,
   url: job?.hostedUrl
 });
 
 export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.JobId.toString(),
-  published: new Date(job?.PublishedDate),
+  published: createAPIDate(job?.PublishedDate),
   title: cleanUpAPIString(job.JobTitle),
-  updated: new Date(job.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
+  updated: createAPIDate(job?.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
   url: `https://recruiting.paylocity.com/Recruiting/Jobs/Details/${job.JobId}`
 });
 
 export const recruiteeMapper = (job: RecruiteeJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.id.toString(),
-  published: new Date(job?.published_at),
+  published: createAPIDate(job?.published_at),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job.updated_at),
+  updated: createAPIDate(job?.updated_at),
   url: job.careers_url
 });
 
 export const ripplingMapper = (job: RipplingJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.uuid || '',
-  published: new Date(), // Rippling doesn't have any dates
+  published: createAPIDate(), // Rippling doesn't have any dates
   title: cleanUpAPIString(job.name),
-  updated: new Date(), // Rippling doesn't have any dates
+  updated: createAPIDate(), // Rippling doesn't have any dates
   url: job?.url
 });
 
 export const workableMapper = (job: WorkableJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job?.shortcode || '',
-  published: new Date(job?.created_at),
+  published: createAPIDate(job?.created_at),
   title: cleanUpAPIString(job.title),
-  updated: new Date(job.published_on),
+  updated: createAPIDate(job?.published_on),
   url: job?.url
 });
 

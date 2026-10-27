@@ -60,6 +60,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Ashby
 - BambooHR
 - BreezyHR
+- ClearCompany
 - Dayforce
 - Gem
 - Greenhouse
@@ -68,6 +69,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Paylocity
 - Recruitee
 - Rippling
+- Wordpress
 - Workable
 - Workday
 

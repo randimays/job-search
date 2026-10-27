@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ashbyMapper,
   bambooMapper,
+  breezyMapper,
   gemMapper,
   greenhouseMapper,
   kulaMapper,
@@ -12,6 +13,7 @@ import {
   workdayMapper,
 } from '../../utils/ats-mappers';
 import { AshbyMock } from '../../mock/ashby';
+import { BreezyMock } from '../../mock/breezy';
 import { GemMock } from '../../mock/gem';
 import { GreenhouseMock } from '../../mock/greenhouse';
 import { KulaMock } from '../../mock/kula';
@@ -84,6 +86,35 @@ describe('mappers', () => {
       expect(bambooMapper(mockWithoutId, 'Maisha Meds')).toEqual({
         ...expectedBambooReturn,
         url: 'https://maishameds.bamboohr.com/careers/',
+        id: ''
+      });
+    });
+  });
+
+  describe('breezyMapper', () => {
+    const expectedBreezyReturn = {
+      companyName: 'Switchboard',
+      id: '5720a5741f80',
+      published: new Date('2026-10-26T18:50:20.122Z'),
+      title: 'Senior Software Engineer',
+      updated: new Date('2026-10-26T18:50:20.122Z'),
+      url: 'https://switchboard.breezy.hr/p/5720a5741f80-customer-experience-associate-resume-drop-interviewing-begins-nov-dec-2026'
+    };
+
+    it('properly formats an API entry from Bamboo', () => {
+      const mockEntry = BreezyMock[0];
+      expect(breezyMapper(mockEntry)).toEqual(expectedBreezyReturn);
+    });
+
+    it('properly handles missing ID', () => {
+      const mockWithoutId = {
+        ...BreezyMock[0],
+        id: '',
+      };
+
+      expect(breezyMapper(mockWithoutId)).toEqual({
+        ...expectedBreezyReturn,
+        url: 'https://switchboard.breezy.hr/p/5720a5741f80-customer-experience-associate-resume-drop-interviewing-begins-nov-dec-2026',
         id: ''
       });
     });

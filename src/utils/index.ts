@@ -13,18 +13,6 @@ export const formatDate = (date: Date = new Date()): string => {
   return new Date(date).toLocaleDateString();
 };
 
-export const toTitleCase = (value: string): string => {
-  if (!value || typeof value !== 'string' || value.length === 1) {
-    return value;
-  }
-
-  return value
-    .toLowerCase()
-    .split(' ')
-    .map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
-    .join(' ');
-}
-
 // -------- Job formatting (from API, for display)
 
 export const cleanUpAPIString = (value?: string | null): string => {
@@ -35,7 +23,24 @@ export const cleanUpAPIString = (value?: string | null): string => {
   return value.trim();
 };
 
+// If something doesn't have a date, we add yesterday's date so it doesn't
+// clutter up today's job listings, and still shows up as recent for review
+export const handleEmptyDate = () => {
+  const today = new Date();
+  const yesterday = new Date(today);
 
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  return yesterday;
+}
+
+export const createAPIDate = (value?: string | undefined): Date => {
+  if (!value || typeof value !== 'string') {
+    return handleEmptyDate(); 
+  }
+
+  return new Date(value);
+}
 
 // -------- Job filtering
 
@@ -74,8 +79,9 @@ export const flushOmittedTitles = (): void => {
 // calling other API endpoints in certain cases. But here we just check that we
 // aren't finding non-US countries in the title or location
 export const isUnitedStates = (titleOrLocation: string): boolean => {
+  console.log('titleOrLocation: ', titleOrLocation);
   if (!titleOrLocation || typeof titleOrLocation !== 'string') {
-    console.error(`isUnitedStates: invalid or missing job title or location: ${location}`);
+    console.error(`isUnitedStates: invalid or missing job title or location: ${titleOrLocation}`);
     return true;
   }
 
@@ -119,22 +125,19 @@ export const isUnitedStatesWorkday = (location: string[]): boolean => {
   );
 };
 
-export const isRemoteOrVirtualUS = (location: string): boolean => {
+export const isHybridOrOnsite = (location: string): boolean => {
   if (location && typeof location === 'string') {
-    return (location.toLowerCase().includes('remote') || location.toLowerCase().includes('virtual')) && isUnitedStates(location);
+    return (location.toLowerCase().includes('hybrid') || location.toLowerCase().includes('on-site'));
   }
 
-  // Keep the net wide; we can really only filter out on-site and hybrid
-  return true;
+  return false;
 }
 
 // Job mapping
 
 export const determinePublishDateForWorkday = (postedOn: string, companyName: string): Date => {
-  const today = new Date();
-
   if (!postedOn || postedOn === 'Posted Today') {
-    return today;
+    return handleEmptyDate(); 
   }
 
   if (postedOn.startsWith('Posted')) {
@@ -152,14 +155,14 @@ export const determinePublishDateForWorkday = (postedOn: string, companyName: st
     
     if (isNaN(numberOfDaysAgo)) {
       console.error(`determinePublishDateForWorkday: ${numberOfDaysAgo} for ${companyName} is NaN`);
-      return today;
+      return handleEmptyDate(); 
     }
 
-    const pastDate = new Date(today);
+    const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - numberOfDaysAgo);
 
     return pastDate; 
   }
 
-  return today;
+  return handleEmptyDate(); 
 };
