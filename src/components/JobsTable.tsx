@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { Job } from '../types';
 import JobRow from './JobRow';
+import tempIgnoreList from '../api/temp-ignore-list';
 
 interface JobsTableProps {
   jobs: Job[];
@@ -23,10 +24,12 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
 
     return 0;
   });
+  
+  const filteredJobs = sortedJobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
 
   return (
     <>
-      <p className="mt-12">You have {sortedJobs.length} jobs to review.</p>
+      <p className="mt-12">You have {filteredJobs.length} jobs to review.</p>
       <table className="table-auto mt-6 border border-gray-400 dark:border-gray-500">
         <thead className="text-sm text-left font-semibold">
           <tr>
@@ -38,7 +41,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {sortedJobs.map(job => <JobRow key={job.id} job={job} />)}
+          {filteredJobs.map(job => <JobRow key={job.id} job={job} />)}
         </tbody>
       </table>
     </>

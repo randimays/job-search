@@ -1,4 +1,4 @@
-import { BOARD_CONFIGS } from '../api/board-configs';
+import { BOARD_CONFIGS } from '../api/board-configs.ts';
 
 type Batches = Record<string, string[][]>;
 

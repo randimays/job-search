@@ -29,11 +29,6 @@ interface BoardConfig {
 
 // Comment out various sections to speed up local API calls while dev'ing
 export const BOARD_CONFIGS: BoardConfig[] = [
-  //   {
-  //   handler: () => {}, // TODO
-  //   name: 'JazzHR',
-  //   url: (board_token: string): string => `https://jobs.jobvite.com/${board_token}`
-  // },
   {
     handler: ashbyHandler,
     name: 'Ashby',
@@ -173,16 +168,16 @@ https://careers-api.clearcompany.com/v1/${board_token}?pageIndex=0&pageSize=10&s
       return await response.json();
     }
   },
-  // {
-  //   handler: workdayHandler,
-  //   name: 'Workday',
-  //   url: (board_token: string): string => {
-  //     const [tenant, shard, site] = board_token.split(';');
+  {
+    handler: workdayHandler,
+    name: 'Workday',
+    url: (board_token: string): string => {
+      const [tenant, shard, site] = board_token.split(';');
 
-  //     return `https://${tenant}.${shard}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
-  //   },
-  //   parse: async response => {
-  //     return await response.json();
-  //   }
-  // },
+      return `https://${tenant}.${shard}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
+    },
+    parse: async response => {
+      return await response.json();
+    }
+  },
 ];

@@ -29,3 +29,4 @@ jobs.db
 jobs.db-wal
 jobs.db-shm
 coverage
+src/api/temp-ignore-list.ts
