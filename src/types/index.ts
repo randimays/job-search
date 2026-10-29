@@ -14,3 +14,9 @@ export interface Failure {
   },
   row: string[]
 }
+
+export interface JobsResponse {
+  jobs: Job[],
+  failures: Failure[],
+  noResults: string[]
+}

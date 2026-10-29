@@ -3,14 +3,9 @@ import { flushOmittedTitles } from '../utils';
 import { useJobs } from '../store';
 import { BOARD_CONFIGS } from './board-configs';
 import { batchCompaniesByProvider } from '../utils/api-prep';
+import type { JobsResponse } from '../types';
 
 type Batches = Record<string, string[][]>;
-
-interface JobsResponse {
-  jobs: Job[],
-  failures: Failure[],
-  noResults: string[]
-}
 
 const settleWithLimit = async <R>(
   companiesToFetch: string[][],

@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material';
 import type { Job } from '../types';
 import JobRow from './JobRow';
 import tempIgnoreList from '../api/temp-ignore-list';
@@ -7,29 +10,105 @@ interface JobsTableProps {
   jobs: Job[];
 }
 
+const alphabetizeDesc = (a: string | Date, b: string | Date) => {
+  if (a < b) {
+    return 1;
+  }
+
+  if (a > b) {
+    return -1;
+  }
+
+  return 0;
+};
+
+const alphabetizeAsc = (a: string | Date, b: string | Date) => {
+  if (a > b) {
+    return 1;
+  }
+
+  if (a < b) {
+    return -1;
+  }
+
+  return 0;
+};
+
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
+  const [companiesWithJobs, setCompaniesWithJobs] = useState<string[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [companySpecificJobs, setCompanySpecificJobs] = useState<Job[]>([]);
+  const [selectedCompany, setSelectedCompany] = useState<string>('');
+
+  useEffect(() => {
+    // Merge all company job arrays into one array
+    const flattenedJobs = jobs.flat();
+  
+    // Sort jobs by most recent to least recent
+    const sortedJobs = flattenedJobs.sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated));
+    
+    // Temporarily manually filter out jobs that are not of interest anymore until the DB is working
+    const jobsFiltered = sortedJobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
+    
+    if (jobsFiltered?.length) {
+      setFilteredJobs(jobsFiltered);
+      
+      const companyNames = Array.from(
+        new Set(
+          jobsFiltered
+            .map(job => job.companyName)
+            .sort((a, b) => alphabetizeAsc(a, b)
+          )
+        )
+      );
+  
+      if (companyNames.length) {
+        setCompaniesWithJobs(companyNames);
+      }
+    }
+  }, [jobs]);
+
+  useEffect(() => {
+    if (selectedCompany) {
+      const jobsForCompany = filteredJobs.filter(job => job.companyName === selectedCompany);
+
+      if (jobsForCompany?.length) {
+        setCompanySpecificJobs(jobsForCompany);
+      }
+    }
+  }, [selectedCompany]);
+  
   if (!jobs || !jobs.length) {
     return <p className="mt-12">No suitable jobs found for today.</p>;
   }
-
-  const flattenedJobs = jobs.flat();
-  const sortedJobs = flattenedJobs.sort((a: Job, b: Job) => {
-    if (a.updated < b.updated) {
-      return 1;
-    }
-
-    if (a.updated > b.updated) {
-      return -1;
-    }
-
-    return 0;
-  });
   
-  const filteredJobs = sortedJobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
+  const selectCompany = (e: SelectChangeEvent) => {
+    if (e?.target?.value) {
+      setSelectedCompany(e.target.value);
+    }
+  };
+
+  const jobsToDisplay = selectedCompany ? companySpecificJobs : filteredJobs;
 
   return (
     <>
-      <p className="mt-12">You have {filteredJobs.length} jobs to review.</p>
+      <p className="mt-12 mb-6">You have {filteredJobs.length} jobs to review.</p>
+      {companiesWithJobs.length ? (
+        <FormControl fullWidth>
+          <InputLabel id="selected-company-label">Select company</InputLabel>
+            <Select
+              labelId="selected-company-label"
+              id="selected-company-input"
+              value={selectedCompany}
+              label="Select company"
+              onChange={selectCompany}
+            >
+          {companiesWithJobs.map(company => (
+            <MenuItem onClick={selectCompany} value={company}>{company}</MenuItem>
+          ))}
+        </Select>
+        </FormControl>
+      ): null}
       <table className="table-auto mt-6 border border-gray-400 dark:border-gray-500">
         <thead className="text-sm text-left font-semibold">
           <tr>
@@ -41,7 +120,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {filteredJobs.map(job => <JobRow key={job.id} job={job} />)}
+          {jobsToDisplay.map(job => <JobRow key={job.id} job={job} />)}
         </tbody>
       </table>
     </>
