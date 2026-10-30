@@ -80,4 +80,5 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Dover
 - Gusto
 - ICIMS
+- iSolvedHire
 - JazzHR

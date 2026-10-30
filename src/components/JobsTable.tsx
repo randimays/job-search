@@ -4,7 +4,6 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import type { Job } from '../types';
 import JobRow from './JobRow';
-import tempIgnoreList from '../api/temp-ignore-list';
 
 interface JobsTableProps {
   jobs: Job[];
@@ -36,26 +35,20 @@ const alphabetizeAsc = (a: string | Date, b: string | Date) => {
 
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
   const [companiesWithJobs, setCompaniesWithJobs] = useState<string[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [companySpecificJobs, setCompanySpecificJobs] = useState<Job[]>([]);
+  const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<string>('');
 
   useEffect(() => {
-    // Merge all company job arrays into one array
-    const flattenedJobs = jobs.flat();
-  
     // Sort jobs by most recent to least recent
-    const sortedJobs = flattenedJobs.sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated));
+    const sortedJobs = jobs.sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated));
     
-    // Temporarily manually filter out jobs that are not of interest anymore until the DB is working
-    const jobsFiltered = sortedJobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
-    
-    if (jobsFiltered?.length) {
-      setFilteredJobs(jobsFiltered);
-      
+    if (sortedJobs?.length) {
+      setAllJobs(sortedJobs);
+
       const companyNames = Array.from(
         new Set(
-          jobsFiltered
+          sortedJobs
             .map(job => job.companyName)
             .sort((a, b) => alphabetizeAsc(a, b)
           )
@@ -70,7 +63,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
 
   useEffect(() => {
     if (selectedCompany) {
-      const jobsForCompany = filteredJobs.filter(job => job.companyName === selectedCompany);
+      const jobsForCompany = allJobs.filter(job => job.companyName === selectedCompany);
 
       if (jobsForCompany?.length) {
         setCompanySpecificJobs(jobsForCompany);
@@ -88,11 +81,11 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
     }
   };
 
-  const jobsToDisplay = selectedCompany ? companySpecificJobs : filteredJobs;
+  const jobsToShow = selectedCompany ? companySpecificJobs : allJobs;
 
   return (
     <>
-      <p className="mt-12 mb-6">You have {filteredJobs.length} jobs to review.</p>
+      <p className="mt-12 mb-6">You have {jobsToShow.length} jobs to review.</p>
       {companiesWithJobs.length ? (
         <FormControl fullWidth>
           <InputLabel id="selected-company-label">Select company</InputLabel>
@@ -120,7 +113,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {jobsToDisplay.map(job => <JobRow key={job.id} job={job} />)}
+          {jobsToShow.map(job => <JobRow key={job.id} job={job} />)}
         </tbody>
       </table>
     </>

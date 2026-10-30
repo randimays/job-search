@@ -48,8 +48,8 @@ export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Jo
     return jobs
       .filter(job => 
         !isHybridOrOnsite(job?.workplaceType) && 
-        isUnitedStates(job?.location, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.location))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => ashbyMapper(filteredJob, companyName));
   }
 
@@ -61,28 +61,28 @@ export const bambooHandler = (jobs: BambooHrJobApiFormat[], companyName: string)
     return jobs
       .filter(job => 
         (job?.isRemote !== false && !['0', '2'].includes(job?.locationType)) &&
-        isUnitedStates(job?.atsLocation?.country || '', companyName, job))
-      .filter(job => isPotentialJobMatch(job?.jobOpeningName, companyName, job))
+        isUnitedStates(job?.atsLocation?.country || ''))
+      .filter(job => isPotentialJobMatch(job?.jobOpeningName))
       .map(filteredJob => bambooMapper(filteredJob, companyName));
   }
 
   return [];
 };
 
-export const breezyHandler = (jobs: BreezyJobApiFormat[], companyName: string): Job[] | [] => {
+export const breezyHandler = (jobs: BreezyJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
         job?.location?.is_remote !== false && 
-        isUnitedStates(job?.location?.country?.name, companyName, job))
-      .filter(job => isPotentialJobMatch(job?.name, companyName, job))
+        isUnitedStates(job?.location?.country?.name))
+      .filter(job => isPotentialJobMatch(job?.name))
       .map(filteredJob => breezyMapper(filteredJob));
   }
 
   return [];
 };
 
-export const clearCompanyHandler = (jobs: ClearCompanyJobApiFormat[], companyName: string): Job[] | [] => {
+export const clearCompanyHandler = (jobs: ClearCompanyJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => {
@@ -90,16 +90,16 @@ export const clearCompanyHandler = (jobs: ClearCompanyJobApiFormat[], companyNam
         const clearlyNotRemote = locations.length > 0 && locations.every(l => l?.isRemote === false);
 
         return !clearlyNotRemote &&
-          isUnitedStates(job?.locations?.[0]?.country, companyName, job)
+          isUnitedStates(job?.locations?.[0]?.country)
       })
-      .filter(job => isPotentialJobMatch(job?.positionTitle, companyName, job))
+      .filter(job => isPotentialJobMatch(job?.positionTitle))
       .map(filteredJob => clearCompanyMapper(filteredJob));
   }
 
   return [];
 };
 
-export const dayforceHandler = (jobs: DayforceJobApiFormat[], companyName: string): Job[] | [] => {
+export const dayforceHandler = (jobs: DayforceJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     // Dayforce has some contradiction with IsVirtualLocation and what is in the description, so
     // we have some explicit checking here
@@ -128,9 +128,9 @@ export const dayforceHandler = (jobs: DayforceJobApiFormat[], companyName: strin
 
         return (job?.IsVirtualLocation ||
           (!postingsWithVirtualRow.has(job.ReferenceNumber) && isRemoteText(job))) &&
-          isUnitedStates(country, companyName, job)
+          isUnitedStates(country)
       })
-      .filter(job => isPotentialJobMatch(job?.Title, companyName, job))
+      .filter(job => isPotentialJobMatch(job?.Title))
       .map(filteredJob => dayforceMapper(filteredJob));
   }
 
@@ -142,21 +142,21 @@ export const gemHandler = (jobs: GemJobsApiFormat[], companyName: string): Job[]
     return jobs
       .filter(job => 
         job?.location_type === 'remote' && 
-        isUnitedStates(job?.location?.name, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.location?.name))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => gemMapper(filteredJob, companyName));
   }
 
   return [];
 };
 
-export const greenhouseHandler = (jobs: GreenhouseJobApiFormat[], companyName: string): Job[] | [] => {
+export const greenhouseHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
         !isHybridOrOnsite(job?.location?.name) && 
-        isUnitedStates(job?.location?.name, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.location?.name))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => greenhouseMapper(filteredJob));
   }
 
@@ -169,8 +169,8 @@ export const jobviteHandler = (jobs: JobviteJobApiFormat[], companyName: string)
       .filter(job => 
         (job?.remote_x0020_type !== 'No Remote' &&
           (job?.remote_x0020_type === 'Remote' || !isHybridOrOnsite(job?.location))) && 
-        isUnitedStates(job?.location, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.location))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => jobviteMapper(filteredJob, companyName));
   }
 
@@ -186,9 +186,9 @@ export const kulaHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[
           .filter(Boolean);
 
         return job?.ats_job?.workplace === 'remote' &&
-          (places.length === 0 || places.some(place => isUnitedStates(place, companyName, job)));
+          (places.length === 0 || places.some(place => isUnitedStates(place)));
       })
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => kulaMapper(filteredJob, companyName));
   }
 
@@ -210,9 +210,9 @@ export const leverHandler = (jobs: LeverJobApiFormat[], companyName: string): Jo
         const hasRemoteLocation = job?.categories?.allLocations?.some(location => /remote/i.test(location));
 
         return (!isHybridOrOnsite(job?.workplaceType) || hasRemoteLocation) &&
-          isUnitedStates(country, companyName, job);
+          isUnitedStates(country);
       })
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.text, companyName, remoteJob))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.text))
       .map(filteredJob => leverMapper(filteredJob, companyName));
   } 
   
@@ -224,8 +224,8 @@ export const paylocityHandler = (jobs: PaylocityJobApiFormat[], companyName: str
     return jobs
       .filter(job => 
         job?.IsRemote && 
-        isUnitedStates(job?.JobLocation?.Country, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.JobTitle, companyName, remoteJob))
+        isUnitedStates(job?.JobLocation?.Country))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.JobTitle))
       .map(filteredJob => paylocityMapper(filteredJob, companyName));
   } 
   
@@ -237,8 +237,8 @@ export const recruiteeHandler = (jobs: RecruiteeJobApiFormat[], companyName: str
     return jobs
       .filter(job => 
         job?.remote && 
-        isUnitedStates(job?.country, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.country))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => recruiteeMapper(filteredJob, companyName));
   } 
   
@@ -250,8 +250,8 @@ export const ripplingHandler = (jobs: RipplingJobApiFormat[], companyName: strin
     return jobs
       .filter(job => 
         !isHybridOrOnsite(job?.workLocation.label) && 
-        isUnitedStates(job?.workLocation?.label, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.name, companyName, remoteJob))
+        isUnitedStates(job?.workLocation?.label))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.name))
       // Rippling returns one row per location, which can result in duplicates for the same job
       .filter((job, index, all) => all.findIndex(other => other.uuid === job.uuid) === index)
       .map(filteredJob => ripplingMapper(filteredJob, companyName));
@@ -264,7 +264,7 @@ export const wordpressHandler = (jobs: WordpressJobApiFormat[], companyName: str
   if (jobs && jobs.length) {
     return jobs
       .filter(job => !isHybridOrOnsite(job?.workplace_type_details?.[0].name))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title?.rendered, companyName, remoteJob))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title?.rendered))
       .map(filteredJob => wordpressMapper(filteredJob, companyName));
   } 
   
@@ -276,8 +276,8 @@ export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: strin
     return jobs
       .filter(job => 
         job?.telecommuting && 
-        isUnitedStates(job?.country, companyName, job))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title, companyName, remoteJob))
+        isUnitedStates(job?.country))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => workableMapper(filteredJob, companyName));
   } 
   
@@ -289,8 +289,8 @@ export const workdayHandler = (jobs: WorkdayJobApiFormat[], companyName: string)
     return jobs
       .filter(job =>
         !isHybridOrOnsite((job?.bulletFields ?? []).join(' ')) &&
-        isUnitedStates(job?.locationsText, companyName, job))
-      .filter(job => isPotentialJobMatch(job?.title, companyName, job))
+        isUnitedStates(job?.locationsText))
+      .filter(job => isPotentialJobMatch(job?.title))
       .map(filteredJob => workdayMapper(filteredJob, companyName));
   } 
   

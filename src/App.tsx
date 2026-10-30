@@ -11,26 +11,40 @@ import type { JobsState } from './store';
 import FailuresTable from './components/FailuresTable';
 import NoResults from './components/NoResults';
 import OmittedJobs from './components/OmittedJobs';
+import tempIgnoreList from './api/temp-ignore-list';
 
 function App() {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [failures, setFailures] = useState<Failure[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [noResultsCompanies, setNoResultsCompanies] = useState<string[]>([]);
+
   const today = formatDate();
   const omittedTitlesSet = useJobs((state: JobsState) => state.omittedTitles);
   const omittedTitlesArray = [...omittedTitlesSet].sort();
   const fetchingJobs = useJobs((state: JobsState) => state.fetchingJobs);
 
+  const filterJobsByExcludeList = (jobs: Job[]) => {
+    const jobsFiltered = jobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
+
+    if (jobsFiltered?.length) {
+      setFilteredJobs(jobsFiltered);
+    }
+  };
+
   useEffect(() => {
-    if (!jobs.length) {
+    if (!allJobs.length) {
       const csvToArray = parseCsv(csv);
 
       const fetchData = async () => {
         const response = await prepareForApiCalls(csvToArray);
-        console.log("🚀 ~ fetchData ~ response:", response)
 
         if (response?.jobs) {
-          setJobs(response.jobs);
+          // Merge all company job arrays into one array
+          const flattenedJobs = response.jobs.flat();
+
+          setAllJobs(flattenedJobs);
+          filterJobsByExcludeList(flattenedJobs);
         }
 
         if (response?.failures) {
@@ -46,10 +60,14 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    filterJobsByExcludeList(allJobs);
+  }, [tempIgnoreList]);
+
   return (
     <>
       <h1 className="text-3xl text-center font-bold">Job search for {today}</h1>
-      {(!fetchingJobs && jobs) ? <JobsTable jobs={jobs} /> : null}
+      {(!fetchingJobs && filteredJobs) ? <JobsTable jobs={filteredJobs} /> : null}
       {fetchingJobs ? (
         <>
           <div className="w-full flex justify-center">

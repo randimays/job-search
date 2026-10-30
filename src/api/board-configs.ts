@@ -179,5 +179,5 @@ export const BOARD_CONFIGS: BoardConfig[] = [
 //     parse: async response => {
 //       return await response.json();
 //     }
-  // },
+//   },
 ];
