@@ -57,6 +57,7 @@ export const NON_US_LOCATIONS = [
   'Chile',
   'China',
   'Colombia',
+  'Finland',
   'France',
   'Germany',
   'Great Britain',

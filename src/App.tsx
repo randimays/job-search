@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { prepareForApiCalls } from './api/fetch-jobs-external';
 import JobsTable from './components/JobsTable';
 import { formatDate } from './utils';
-import { parseCsv } from './utils/parseCsv'; // TODO fix this
+import { parseCsv } from './utils/parse-csv'; // TODO fix this
 import csv from './data/jobBoards.csv?raw';
 import type { Failure, Job } from './types';
 import { useJobs } from './store';
@@ -16,7 +16,6 @@ import tempIgnoreList from './api/temp-ignore-list';
 function App() {
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [failures, setFailures] = useState<Failure[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [noResultsCompanies, setNoResultsCompanies] = useState<string[]>([]);
 
   const today = formatDate();
@@ -24,13 +23,10 @@ function App() {
   const omittedTitlesArray = [...omittedTitlesSet].sort();
   const fetchingJobs = useJobs((state: JobsState) => state.fetchingJobs);
 
-  const filterJobsByExcludeList = (jobs: Job[]) => {
-    const jobsFiltered = jobs.filter(job => !!!tempIgnoreList.find(id => id === job.id));
-
-    if (jobsFiltered?.length) {
-      setFilteredJobs(jobsFiltered);
-    }
-  };
+  const filteredJobs = useMemo(
+    () => allJobs.filter(job => !tempIgnoreList.some(id => id === job.id)),
+    [allJobs]
+  );
 
   useEffect(() => {
     if (!allJobs.length) {
@@ -44,7 +40,6 @@ function App() {
           const flattenedJobs = response.jobs.flat();
 
           setAllJobs(flattenedJobs);
-          filterJobsByExcludeList(flattenedJobs);
         }
 
         if (response?.failures) {
@@ -58,11 +53,7 @@ function App() {
 
       fetchData();      
     }
-  }, []);
-
-  useEffect(() => {
-    filterJobsByExcludeList(allJobs);
-  }, [tempIgnoreList]);
+  }, [allJobs.length]);
 
   return (
     <>

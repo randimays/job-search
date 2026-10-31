@@ -37,9 +37,9 @@ const settleWithLimit = async <R>(
 
 export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsResponse> => {
   const batches: Batches = batchCompaniesByProvider(csvData);
-  let jobs: Job[] = [];
-  let failures: Failure[] = [];
-  let noResults: string[] = [];
+  const jobs: Job[] = [];
+  const failures: Failure[] = [];
+  const noResults: string[] = [];
 
   useJobs.getState().setFetchingJobs(true);
 

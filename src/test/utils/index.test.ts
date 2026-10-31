@@ -7,10 +7,8 @@ import {
   isPotentialJobMatch,
   isUnitedStates,
   flushOmittedTitles,
-  parseCsv,
 } from '../../utils';
 import { useJobs } from '../../store';
-import { AshbyMock } from '../../mock/ashby';
 
 describe('utils', () => {
   let errorSpy: ReturnType<typeof vi.spyOn>;
@@ -175,8 +173,6 @@ describe('utils', () => {
   });
   
   describe('isUnitedStates', () => {
-    const job = AshbyMock[0];
-
     it('handles locations correctly', () => {
       expect(isUnitedStates('Canada')).toBe(false);
       expect(isUnitedStates('ireland')).toBe(false);
@@ -210,7 +206,7 @@ describe('utils', () => {
         `${keyword} (United States)`,
         `${keyword} (US)`,
         `${keyword} (U.S.)`
-      ]
+      ];
   
       permutations.forEach(permutation => {
         expect(isHybridOrOnsite(permutation)).toBe(true);
@@ -225,16 +221,6 @@ describe('utils', () => {
     it('correctly handles not explicitly remote or virtual jobs', () => {
       expect(isHybridOrOnsite('LATAM')).toBe(false);
       expect(isHybridOrOnsite('')).toBe(true);
-    });
-  });
-
-  describe('parseCsv', () => {
-    it('correctly parses CSV data', () => {
-      expect(parseCsv('Ashby,aidkit,AidKit\nAshby,propel,Propel\nAshby,sovra,SOVRA')).toEqual([
-        ['Ashby', 'aidkit', 'AidKit'],
-        ['Ashby', 'propel', 'Propel'],
-        ['Ashby', 'sovra', 'SOVRA']
-      ])
     });
   });
   

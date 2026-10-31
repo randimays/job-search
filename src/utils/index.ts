@@ -1,7 +1,6 @@
 import { ROLE_EXCLUSIONS, ROLE_MATCHERS } from '../constants';
 import { useJobs } from '../store';
 import { NON_US_LOCATIONS } from '../constants';
-import type { ApiJob } from '../types/job-api-format';
 
 // -------- Data formatting
 

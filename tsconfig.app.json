@@ -22,5 +22,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "randi-keywords.ts", "server.ts"]
+  "include": ["src", "server.ts"]
 }

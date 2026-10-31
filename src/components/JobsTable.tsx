@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { ReactElement } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
@@ -34,54 +34,35 @@ const alphabetizeAsc = (a: string | Date, b: string | Date) => {
 };
 
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
-  const [companiesWithJobs, setCompaniesWithJobs] = useState<string[]>([]);
-  const [companySpecificJobs, setCompanySpecificJobs] = useState<Job[]>([]);
-  const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<string>('');
 
-  useEffect(() => {
-    // Sort jobs by most recent to least recent
-    const sortedJobs = jobs.sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated));
-    
-    if (sortedJobs?.length) {
-      setAllJobs(sortedJobs);
+  const allJobs = useMemo(() => 
+    [...jobs].sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated)),
+    [jobs]
+  );
 
-      const companyNames = Array.from(
-        new Set(
-          sortedJobs
-            .map(job => job.companyName)
-            .sort((a, b) => alphabetizeAsc(a, b)
-          )
-        )
-      );
-  
-      if (companyNames.length) {
-        setCompaniesWithJobs(companyNames);
-      }
-    }
-  }, [jobs]);
+  const companiesWithJobs = useMemo(() =>
+    Array.from(
+      new Set(
+        allJobs
+          .map(job => job.companyName)))
+          .sort(alphabetizeAsc),
+      [allJobs]
+  );
 
-  useEffect(() => {
-    if (selectedCompany) {
-      const jobsForCompany = allJobs.filter(job => job.companyName === selectedCompany);
-
-      if (jobsForCompany?.length) {
-        setCompanySpecificJobs(jobsForCompany);
-      }
-    }
-  }, [selectedCompany]);
-  
-  if (!jobs || !jobs.length) {
-    return <p className="mt-12">No suitable jobs found for today.</p>;
-  }
+  const jobsToShow = useMemo(
+    () =>
+      selectedCompany ?
+        allJobs.filter(job => job.companyName === selectedCompany)
+        : allJobs,
+      [allJobs, selectedCompany]
+  );
   
   const selectCompany = (e: SelectChangeEvent) => {
     if (e?.target?.value) {
       setSelectedCompany(e.target.value);
     }
   };
-
-  const jobsToShow = selectedCompany ? companySpecificJobs : allJobs;
 
   return (
     <>
@@ -97,7 +78,12 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
               onChange={selectCompany}
             >
           {companiesWithJobs.map(company => (
-            <MenuItem onClick={selectCompany} value={company}>{company}</MenuItem>
+            <MenuItem
+              key={company}
+              value={company}
+            >
+              {company}
+            </MenuItem>
           ))}
         </Select>
         </FormControl>

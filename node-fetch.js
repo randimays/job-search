@@ -1,6 +1,6 @@
 import fs from 'fs';
 import http from 'http';
-import { parseCsv } from './src/utils/parseCsv.ts';
+import { parseCsv } from './src/utils/parse-csv.ts';
 import { batchCompaniesByProvider } from './src/utils/api-prep.ts';
 
 const spreadsheetRaw = fs.readFileSync('./jobBoards-test.csv', 'utf-8');

@@ -3,7 +3,7 @@ import { BOARD_CONFIGS } from '../api/board-configs.ts';
 type Batches = Record<string, string[][]>;
 
 export const batchCompaniesByProvider = (csvData: string[][]): Batches => {
-  let batches: Batches = {};
+  const batches: Batches = {};
 
   // Create an object with key:value pairs where the key is a provider (e.g. Greenhouse)
   // and the value is all of the rows in the spreadsheet for companies that use that provider

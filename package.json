@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start:db": "node db.ts",
-    "start:node": "nodemon node-fetch.js",
+    "start:node": "nodemon --exec tsx node-fetch.js",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },

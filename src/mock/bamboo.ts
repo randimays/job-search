@@ -12,7 +12,7 @@ export const BambooMock: BambooHrJobApiFormat[] = [
   },
   {
     "id": "174",
-    "jobOpeningName": "VP of Product \/ Chief Product Officer",
+    "jobOpeningName": "VP of Product Chief Product Officer",
     "atsLocation": {
       "country": null,
     },

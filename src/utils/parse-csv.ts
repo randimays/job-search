@@ -1,4 +1,4 @@
-export const parseCsv = (fileContents: string): any => {
+export const parseCsv = (fileContents: string): string[][] => {
   return fileContents
     .split(/\r?\n/)
     .map((row: string): string[] => {
