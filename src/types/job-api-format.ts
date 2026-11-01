@@ -5,6 +5,12 @@ export const AshbySchema = z.object({
   id: z.string(),
   title: z.string(),
   location: z.string().nullish(),
+  address: z.object({
+    postalAddress: z.object({
+      addressCountry: z.string().nullish(),
+      addressLocality: z.string().nullish()
+    })
+  }),
   publishedAt: z.string(),
   workplaceType: z.string(),
   jobUrl: z.httpUrl(),
@@ -16,7 +22,6 @@ export const BambooSchema = z.object({
   atsLocation: z.object({
     country: z.string().nullish(),
   }),
-  isRemote: z.boolean().nullish(),
   locationType: z.string(),
 });
 
@@ -24,7 +29,7 @@ export const BreezySchema = z.object({
   id: z.string(),
   name: z.string(),
   url: z.httpUrl(),
-  published_date: z.string().nullish(),
+  published_date: z.string(),
   location: z.object({
     country: z.object({
       name: z.string().nullish(),
@@ -39,8 +44,8 @@ export const BreezySchema = z.object({
 export const ClearCompanySchema = z.object({
   id: z.string(),
   positionTitle: z.string(),
-  openDate: z.string().nullish(),
-  postedDate: z.string().nullish(),
+  openDate: z.string(),
+  postedDate: z.string(),
   locations: z.array(z.object({
     country: z.string().nullish(),
     isRemote: z.boolean().nullish()

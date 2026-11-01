@@ -7,7 +7,6 @@ export const BambooMock: BambooHrJobApiFormat[] = [
     "atsLocation": {
       "country": null,
     },
-    "isRemote": null,
     "locationType": "1"
   },
   {
@@ -16,7 +15,6 @@ export const BambooMock: BambooHrJobApiFormat[] = [
     "atsLocation": {
       "country": null,
     },
-    "isRemote": null,
     "locationType": "0"
   }
 ];

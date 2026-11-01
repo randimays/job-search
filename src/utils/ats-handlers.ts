@@ -46,9 +46,15 @@ import {
 export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] | [] => {
   if (jobs && jobs.length) {
     return jobs
-      .filter(job => 
-        !isHybridOrOnsite(job.workplaceType) && 
-        isUnitedStates(job?.location))
+      .filter(job => {
+        const country = job.address.postalAddress.addressCountry;
+        const locality = job.address.postalAddress.addressLocality;
+
+        return !isHybridOrOnsite(job.workplaceType) && 
+          (isUnitedStates(job?.location) || 
+          isUnitedStates(country) ||
+          isUnitedStates(locality));
+      })
       .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => ashbyMapper(filteredJob, companyName));
   }
@@ -60,7 +66,7 @@ export const bambooHandler = (jobs: BambooHrJobApiFormat[], companyName: string)
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
-        (job?.isRemote !== false && !['0', '2'].includes(job.locationType)) &&
+        !['0', '2'].includes(job.locationType) &&
         isUnitedStates(job?.atsLocation?.country || ''))
       .filter(job => isPotentialJobMatch(job?.jobOpeningName))
       .map(filteredJob => bambooMapper(filteredJob, companyName));
@@ -87,7 +93,8 @@ export const clearCompanyHandler = (jobs: ClearCompanyJobApiFormat[]): Job[] | [
     return jobs
       .filter(job => {
         const locations = job?.locations ?? [];
-        const clearlyNotRemote = locations.length > 0 && locations.every(l => l?.isRemote === false);
+        const clearlyNotRemote = locations.length > 0 && 
+          locations.every(location => location?.isRemote === false);
 
         return !clearlyNotRemote &&
           isUnitedStates(job?.locations?.[0]?.country)

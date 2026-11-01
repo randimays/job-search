@@ -43,7 +43,7 @@ export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Jo
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
   companyName: job.company.name,
   id: job.id,
-  published: createAPIDate(job?.published_date), 
+  published: createAPIDate(job.published_date), 
   title: cleanUpAPIString(job.name),
   updated: createAPIDate(job?.published_date),
   url: job?.url

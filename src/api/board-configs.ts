@@ -36,33 +36,33 @@ interface BoardConfig {
 
 // Comment out various sections to speed up local API calls while dev'ing
 export const BOARD_CONFIGS: BoardConfig[] = [
-  {
-    handler: ashbyHandler,
-    name: 'Ashby',
-    url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
-    parse: async response => {
-      const body: unknown = (await response.json()).jobs;
-      return parseJobs(AshbySchema, body, 'Ashby');
-    }
-  },
-  {
-    handler: bambooHandler,
-    name: 'Bamboo',
-    url: (board_token: string): string => `/bamboohr/${board_token}/careers/list`,
-    parse: async response => {
-      const body: unknown = (await response.json()).result;
-      return parseJobs(BambooSchema, body, 'Bamboo');
-    }
-  },
-  {
-    handler: breezyHandler,
-    name: 'Breezy',
-    url: (board_token: string): string => `https://${board_token}.breezy.hr/json`,
-    parse: async response => {
-      const body: unknown = (await response.json()).result;
-      return parseJobs(BreezySchema, body, 'Breezy');
-    }
-  },
+  // {
+  //   handler: ashbyHandler,
+  //   name: 'Ashby',
+  //   url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
+  //   parse: async response => {
+  //     const body: unknown = (await response.json()).jobs;
+  //     return parseJobs(AshbySchema, body, 'Ashby');
+  //   }
+  // },
+  // {
+  //   handler: bambooHandler,
+  //   name: 'Bamboo',
+  //   url: (board_token: string): string => `/bamboohr/${board_token}/careers/list`,
+  //   parse: async response => {
+  //     const body: unknown = (await response.json()).result;
+  //     return parseJobs(BambooSchema, body, 'Bamboo');
+  //   }
+  // },
+  // {
+  //   handler: breezyHandler,
+  //   name: 'Breezy',
+  //   url: (board_token: string): string => `https://${board_token}.breezy.hr/json`,
+  //   parse: async response => {
+  //     const body: unknown = (await response.json()).result;
+  //     return parseJobs(BreezySchema, body, 'Breezy');
+  //   }
+  // },
   {
     handler: clearCompanyHandler,
     name: 'ClearCompany',
