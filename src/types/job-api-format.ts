@@ -1,55 +1,63 @@
+import { z } from 'zod';
+
 // -------- API types
-export interface AshbyJobApiFormat {
-  id: string,
-  title: string,
-  location: string,
-  publishedAt: string,
-  isRemote: boolean,
-  workplaceType: string,
-  jobUrl: string,
-}
+export const AshbySchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  location: z.string().nullish(),
+  publishedAt: z.string(),
+  workplaceType: z.string(),
+  jobUrl: z.httpUrl(),
+});
 
-export interface BambooHrJobApiFormat {
-  id: string,
-  jobOpeningName: string,
-  atsLocation: {
-    country: string | null,
-  },
-  isRemote: boolean | null,
-  locationType: string
-}
+export const BambooSchema = z.object({
+  id: z.string(),
+  jobOpeningName: z.string(),
+  atsLocation: z.object({
+    country: z.string().nullish(),
+  }),
+  isRemote: z.boolean().nullish(),
+  locationType: z.string(),
+});
 
-export interface BreezyJobApiFormat {
-  id: string,
-  name: string,
-  url: string,
-  published_date: string,
-  location: {
-    country?: {
-      name: string,
-    },
-    is_remote: boolean | null,
-  },
-  company: {
-    name: string,
-  }
-}
+export const BreezySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  url: z.httpUrl(),
+  published_date: z.string().nullish(),
+  location: z.object({
+    country: z.object({
+      name: z.string().nullish(),
+    }),
+    is_remote: z.boolean().nullish(),
+  }),
+  company: z.object({
+    name: z.string(),
+  })
+});
 
-export interface ClearCompanyJobApiFormat {
-  id: string,
-  positionTitle: string,
-  openDate: string,
-  postedDate: string,
-  officeName: string,
-  jobFunctionName: string | null,
-  location: string,
-  locations: {
-    country: string,
-    isRemote: boolean
-  }[],
-  brandName: string,
-  applyLink: string,
-}
+export const ClearCompanySchema = z.object({
+  id: z.string(),
+  positionTitle: z.string(),
+  openDate: z.string().nullish(),
+  postedDate: z.string().nullish(),
+  locations: z.array(z.object({
+    country: z.string().nullish(),
+    isRemote: z.boolean().nullish()
+  })),
+  brandName: z.string(),
+  applyLink: z.url(),
+});
+
+export type AshbyJobApiFormat = z.infer<typeof AshbySchema>;
+export type BambooHrJobApiFormat = z.infer<typeof BambooSchema>;
+export type BreezyJobApiFormat = z.infer<typeof BreezySchema>;
+export type ClearCompanyJobApiFormat = z.infer<typeof ClearCompanySchema>;
+
+
+
+
+
 
 export interface DayforceJobApiFormat {
   Title: string,

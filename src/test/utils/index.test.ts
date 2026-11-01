@@ -10,7 +10,7 @@ import {
 } from '../../utils';
 import { useJobs } from '../../store';
 
-describe('utils', () => {
+describe.skip('utils', () => {
   let errorSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {

@@ -96,13 +96,13 @@ describe('handlers', () => {
 
   describe('breezyHandler', () => {
     it('handles empty jobs array', () => {
-      expect(breezyHandler([], 'Switchboard')).toEqual([]);
+      expect(breezyHandler([])).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = BreezyMock;
   
-      expect(breezyHandler(jobs, 'Switchboard')).toEqual([
+      expect(breezyHandler(jobs)).toEqual([
         {
           companyName: 'Switchboard',
           id: '5720a5741f80',
@@ -117,13 +117,13 @@ describe('handlers', () => {
 
   describe('clearCompanyHandler', () => {
     it('handles empty jobs array', () => {
-      expect(clearCompanyHandler([], 'Ad Hoc')).toEqual([]);
+      expect(clearCompanyHandler([])).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = ClearCompanyMock;
   
-      expect(clearCompanyHandler(jobs, 'Ad Hoc')).toEqual([
+      expect(clearCompanyHandler(jobs)).toEqual([
         {
           companyName: 'Ad Hoc',
           id: 'f71c1213-fe6a-9202-9704-206536d822c5',
@@ -162,13 +162,13 @@ describe('handlers', () => {
 
   describe('dayforceHandler', () => {
     it('handles empty jobs array', () => {
-      expect(dayforceHandler([], 'Stretto')).toEqual([]);
+      expect(dayforceHandler([])).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = DayforceMock;
   
-      expect(dayforceHandler(jobs, 'Stretto')).toEqual([
+      expect(dayforceHandler(jobs)).toEqual([
         {
           companyName: 'Stretto',
           id: '179',
@@ -204,13 +204,13 @@ describe('handlers', () => {
   
   describe('greenhouseHandler', () => {
     it('handles empty jobs array', () => {
-      expect(greenhouseHandler([], 'Capital Technology Group')).toEqual([]);
+      expect(greenhouseHandler([])).toEqual([]);
     });
   
     it('correctly filters a list of jobs per the given keywords', () => {
       const jobs = GreenhouseMock;
   
-      expect(greenhouseHandler(jobs, 'Capital Technology Group')).toEqual([
+      expect(greenhouseHandler(jobs)).toEqual([
         {
           companyName: 'Capital Technology Group',
           id: '5147833007',
@@ -290,6 +290,14 @@ describe('handlers', () => {
       const jobs = LeverMock;
   
       expect(leverHandler(jobs, 'Ellevation Education')).toEqual([
+        {
+          companyName: 'Ellevation Education',
+          id: 'b08c1947-f2f7-42a3-88d1-c23c727424b1',
+          published: new Date('2026-08-24T15:58:55.907Z'),
+          title: 'Partner Development Associate',
+          updated: new Date('2026-08-24T15:58:55.907Z'),
+          url: 'https://jobs.lever.co/ellevationeducation/b08c1947-f2f7-42a3-88d1-c23c727424b1',
+        },
         {
           companyName: 'Ellevation Education',
           id: '63d5bd17-5957-4562-8971-5a096dc28079',

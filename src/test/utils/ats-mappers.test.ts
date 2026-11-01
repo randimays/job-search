@@ -79,7 +79,7 @@ describe('mappers', () => {
       published: new Date('2026-10-13T17:00:00.000Z'),
       title: 'Senior Software Engineer',
       updated: new Date('2026-10-13T17:00:00.000Z'),
-      url: 'https://maishameds.bamboohr.com/careers/173'
+      url: ''
     };
 
     it('properly formats an API entry from Bamboo', () => {
@@ -95,7 +95,7 @@ describe('mappers', () => {
 
       expect(bambooMapper(mockWithoutId, 'Maisha Meds')).toEqual({
         ...expectedBambooReturn,
-        url: 'https://maishameds.bamboohr.com/careers/',
+        url: '',
         id: ''
       });
     });
@@ -132,11 +132,11 @@ describe('mappers', () => {
   describe('clearCompanyMapper', () => {
     const expectedCCReturn = {
       companyName: 'Ad Hoc',
-        id: 'f71c1213-fe6a-9202-9704-206536d822c5',
+        id: '91020e58-a041-db04-89e4-3ace24bddae5',
         published: new Date('2026-10-26T00:00:00'),
-        title: 'Senior Software Engineer - Front End/Back End (Library of Congress)',
+        title: 'Senior Quality Assurance Engineer',
         updated: new Date('2026-10-26T00:00:00'),
-        url: 'https://adhoc.clearcompany.com/careers/jobs/f71c1213-fe6a-9202-9704-206536d822c5/apply?source=CJB-0'
+        url: 'https://adhoc.clearcompany.com/careers/jobs/91020e58-a041-db04-89e4-3ace24bddae5/apply?source=CJB-0'
     };
 
     it('properly formats an API entry from ClearCompany', () => {
@@ -252,11 +252,11 @@ describe('mappers', () => {
   describe('leverMapper', () => {
     const expectedLeverReturn = {
       companyName: 'Ellevation',
-      id: '63d5bd17-5957-4562-8971-5a096dc28079',
-      published: new Date(1787671018630),
-      title: 'Senior Forward Deployed Engineer',
-      updated: new Date(1787671018630),
-      url: 'https://jobs.lever.co/ellevationeducation/63d5bd17-5957-4562-8971-5a096dc28079',
+      id: '014f9e30-c9f8-4b5a-b338-3bd3670910ed',
+      published: new Date(1782329621977),
+      title: 'Software Engineer II, Engineering',
+      updated: new Date(1782329621977),
+      url: 'https://jobs.lever.co/ellevationeducation/014f9e30-c9f8-4b5a-b338-3bd3670910ed',
     };
 
     it('properly formats an API entry from Lever', () => {

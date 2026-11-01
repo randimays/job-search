@@ -47,7 +47,7 @@ export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Jo
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
-        !isHybridOrOnsite(job?.workplaceType) && 
+        !isHybridOrOnsite(job.workplaceType) && 
         isUnitedStates(job?.location))
       .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
       .map(filteredJob => ashbyMapper(filteredJob, companyName));
@@ -60,7 +60,7 @@ export const bambooHandler = (jobs: BambooHrJobApiFormat[], companyName: string)
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
-        (job?.isRemote !== false && !['0', '2'].includes(job?.locationType)) &&
+        (job?.isRemote !== false && !['0', '2'].includes(job.locationType)) &&
         isUnitedStates(job?.atsLocation?.country || ''))
       .filter(job => isPotentialJobMatch(job?.jobOpeningName))
       .map(filteredJob => bambooMapper(filteredJob, companyName));

@@ -64,15 +64,13 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
     }
   
     useJobs.getState().setFetchingJobs(false);
-  
-    return {
-      jobs,
-      failures,
-      noResults,
-    };
   }
-
-  return null;
+  
+  return {
+    jobs,
+    failures,
+    noResults,
+  };
 };
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

@@ -24,16 +24,16 @@ import { cleanUpAPIString, createAPIDate, determinePublishDateForWorkday } from 
 
 export const ashbyMapper = (job: AshbyJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.id || '',
-  published: createAPIDate(job?.publishedAt),
+  id: job.id,
+  published: createAPIDate(job.publishedAt),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.publishedAt), // Ashby doesn't have "updated" so we use publish date instead
+  updated: createAPIDate(job.publishedAt), // Ashby doesn't have "updated"
   url: cleanUpAPIString(job.jobUrl),
 });
 
 export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.id || '',
+  id: job.id,
   published: createAPIDate(), // BambooHR does not have published dates
   title: cleanUpAPIString(job.jobOpeningName),
   updated: createAPIDate(), // BambooHR does not have updated dates
@@ -41,8 +41,8 @@ export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Jo
 });
 
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
-  companyName: job?.company?.name,
-  id: job?.id || '',
+  companyName: job.company.name,
+  id: job.id,
   published: createAPIDate(job?.published_date), 
   title: cleanUpAPIString(job.name),
   updated: createAPIDate(job?.published_date),
@@ -50,8 +50,8 @@ export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
 });
 
 export const clearCompanyMapper = (job: ClearCompanyJobApiFormat): Job => ({
-  companyName: job?.brandName,
-  id: job?.id || '',
+  companyName: job.brandName,
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.openDate), 
   title: cleanUpAPIString(job.positionTitle),
   updated: createAPIDate(job?.postedDate),
@@ -60,7 +60,7 @@ export const clearCompanyMapper = (job: ClearCompanyJobApiFormat): Job => ({
 
 export const dayforceMapper = (job: DayforceJobApiFormat): Job => ({
   companyName: job?.CompanyName,
-  id: job?.ReferenceNumber.toString() || '', // TODO these have duplicates; need a unique ID
+  id: job?.ReferenceNumber?.toString() || '', // TODO these have duplicates; need a unique ID
   published: createAPIDate(job?.DatePosted), 
   title: cleanUpAPIString(job.Title),
   updated: createAPIDate(job?.LastUpdated),
@@ -69,7 +69,7 @@ export const dayforceMapper = (job: DayforceJobApiFormat): Job => ({
 
 export const gemMapper = (job: GemJobsApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.id || '',
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.first_published_at),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.updated_at),
@@ -78,7 +78,7 @@ export const gemMapper = (job: GemJobsApiFormat, companyName: string): Job => ({
 
 export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
   companyName: cleanUpAPIString(job.company_name),
-  id: job.id.toString(),
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.first_published),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.updated_at),
@@ -87,7 +87,7 @@ export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
 
 export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job.id,
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.created_x0020_on),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.date),
@@ -96,7 +96,7 @@ export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Jo
 
 export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job.id.toString(),
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.launch_at),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.launch_at),
@@ -105,7 +105,7 @@ export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => (
 
 export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.id || '',
+  id: String(job.id ?? ''),
   published: new Date(job?.createdAt),
   title: cleanUpAPIString(job.text),
   updated: new Date(job?.createdAt), // Lever doesn't have "updated" so we use publish date instead,
@@ -114,7 +114,7 @@ export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job =>
 
 export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job.JobId.toString(),
+  id: String(job.JobId ?? ''),
   published: createAPIDate(job?.PublishedDate),
   title: cleanUpAPIString(job.JobTitle),
   updated: createAPIDate(job?.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
@@ -123,7 +123,7 @@ export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string)
 
 export const recruiteeMapper = (job: RecruiteeJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job.id.toString(),
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.published_at),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job?.updated_at),
@@ -141,7 +141,7 @@ export const ripplingMapper = (job: RipplingJobApiFormat, companyName: string): 
 
 export const wordpressMapper = (job: WordpressJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.id.toString(),
+  id: String(job.id ?? ''),
   published: createAPIDate(job?.date),
   title: cleanUpAPIString(job?.title?.rendered),
   updated: createAPIDate(job?.modified),

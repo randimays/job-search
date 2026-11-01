@@ -34,7 +34,7 @@ export const handleEmptyDate = () => {
   return yesterday;
 }
 
-export const createAPIDate = (value?: string | undefined): Date => {
+export const createAPIDate = (value?: string | null | undefined): Date => {
   if (!value || typeof value !== 'string') {
     return handleEmptyDate(); 
   }

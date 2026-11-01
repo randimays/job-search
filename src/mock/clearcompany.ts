@@ -6,9 +6,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Senior Quality Assurance Engineer",
     "openDate": "2026-10-26T00:00:00",
     "postedDate": "2026-10-26T00:00:00",
-    "officeName": "Ad Hoc",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -23,9 +20,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Senior Software Engineer - Front End/Back End (Library of Congress)",
     "openDate": "2026-10-26T00:00:00",
     "postedDate": "2026-10-26T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -40,9 +34,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Software Engineer III - Back End (Library of Congress)",
     "openDate": "2026-10-26T00:00:00",
     "postedDate": "2026-10-26T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -57,9 +48,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Open Talent Network: Senior Network/Security Engineer",
     "openDate": "2026-10-20T00:00:00",
     "postedDate": "2026-10-20T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": null,
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -74,9 +62,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Open Talent Network: Staff DevOps and Systems Integration Engineer",
     "openDate": "2026-10-20T00:00:00",
     "postedDate": "2026-10-20T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -91,9 +76,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Open Talent Network: Senior AI Platform & Data Engineer",
     "openDate": "2026-10-20T00:00:00",
     "postedDate": "2026-10-20T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": null,
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -108,9 +90,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Content Management and Operations Lead (Drupal)",
     "openDate": "2026-10-20T00:00:00",
     "postedDate": "2026-10-20T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Design",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -125,9 +104,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Capture Coordinator",
     "openDate": "2026-10-14T00:00:00",
     "postedDate": "2026-10-14T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": null,
-    "location": "Washington DC, Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -146,9 +122,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Program Director",
     "openDate": "2026-10-08T00:00:00",
     "postedDate": "2026-10-08T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": null,
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -163,9 +136,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Senior Software Engineer - Full Stack (Ruby on Rails)",
     "openDate": "2026-10-08T00:00:00",
     "postedDate": "2026-10-08T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
@@ -180,9 +150,6 @@ export const ClearCompanyMock: ClearCompanyJobApiFormat[] = [
     "positionTitle": "Software Engineer III - Full Stack (Drupal)",
     "openDate": "2026-10-06T00:00:00",
     "postedDate": "2026-10-06T00:00:00",
-    "officeName": "Remote",
-    "jobFunctionName": "Information Technology",
-    "location": "Remote (US)",
     "locations": [
       {
         "country": "US",
