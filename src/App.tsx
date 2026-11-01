@@ -38,6 +38,7 @@ function App() {
         if (response?.jobs) {
           // Merge all company job arrays into one array
           const flattenedJobs = response.jobs.flat();
+          console.log("🚀 ~ fetchData ~ flattenedJobs:", flattenedJobs)
 
           setAllJobs(flattenedJobs);
         }

@@ -240,7 +240,7 @@ describe('mappers', () => {
       published: new Date('2025-11-18T20:16:46.000Z'),
       title: 'Senior Forward Deployed Engineer',
       updated: new Date('2025-11-18T20:16:46.000Z'),
-      url: 'https://careers.kula.ai/hire',
+      url: '',
     };
     
     it('properly formats an API entry from Kula', () => {

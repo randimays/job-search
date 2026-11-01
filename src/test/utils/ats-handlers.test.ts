@@ -267,7 +267,7 @@ describe('handlers', () => {
           published: new Date('2025-11-18T20:16:46.000Z'),
           title: 'Senior Forward Deployed Engineer',
           updated: new Date('2025-11-18T20:16:46.000Z'),
-          url: 'https://careers.kula.ai/hire',
+          url: '',
         },
         {
           companyName: 'Swiftly',
@@ -275,7 +275,7 @@ describe('handlers', () => {
           published: new Date('2026-07-31T19:57:37.000Z'),
           title: 'Senior Software Engineer',
           updated: new Date('2026-07-31T19:57:37.000Z'),
-          url: 'https://careers.kula.ai/hire',
+          url: '',
         }
       ])
     });

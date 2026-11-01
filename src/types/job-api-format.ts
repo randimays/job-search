@@ -51,154 +51,161 @@ export const ClearCompanySchema = z.object({
     isRemote: z.boolean().nullish()
   })),
   brandName: z.string(),
-  applyLink: z.url(),
+  applyLink: z.httpUrl(),
+});
+
+export const DayforceSchema = z.object({
+  Title: z.string(),
+  CompanyName: z.string(),
+  Description: z.string().nullish(),
+  JobDetailsUrl: z.httpUrl(),
+  CultureCode: z.string().nullish(),
+  Country: z.string().nullish(),
+  DatePosted: z.string(),
+  LastUpdated: z.string(),
+  ReferenceNumber: z.number(),
+  IsVirtualLocation: z.boolean()
+});
+
+export const GemSchema = z.object({
+  absolute_url: z.httpUrl(),
+  created_at: z.string(),
+  first_published_at: z.string(),
+  id: z.string(),
+  location: z.object({
+    name: z.string(),
+  }),
+  location_type: z.string(),
+  title: z.string(),
+  updated_at: z.string()
+});
+
+export const GreenhouseSchema = z.object({
+  absolute_url: z.string(),
+  company_name: z.string(),
+  first_published: z.string(),
+  id: z.number(),
+  location: z.object({
+    name: z.string()
+  }),
+  title: z.string(),
+  updated_at: z.string()
+});
+
+export const JobviteSchema = z.object({
+  created_x0020_on: z.string(),
+  date: z.string(),
+  'detail-url': z.string(),
+  id: z.string(),
+  location: z.string(),
+  remote_x0020_type: z.string().nullish(),
+  title: z.string(),
+});
+
+export const KulaSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  launch_at: z.string(),
+  ats_job: z.object({
+    workplace: z.string(),
+    offices: z.array(z.object({
+      name: z.string(),
+      country: z.string(),
+    })),
+  })
+});
+
+export const LeverSchema = z.object({
+  createdAt: z.number(),
+  categories: z.object({
+    allLocations: z.array(z.string().nullish()).nullish(),
+    location: z.string()
+  }),
+  id: z.string(),
+  text: z.string(),
+  country: z.string(),
+  workplaceType: z.string(),
+  hostedUrl: z.string(),
+});
+
+export const PaylocitySchema = z.object({
+  JobId: z.number(),
+  JobTitle: z.string(),
+  PublishedDate: z.string(),
+  JobLocation: {
+    Country: z.string(),
+  },
+  IsRemote: z.boolean(),
+});
+
+export const RecruiteeSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  updated_at: z.string(),
+  published_at: z.string(),
+  remote: z.boolean(),
+  country: z.string(),
+  careers_url: z.string(),
+});
+
+export const RipplingSchema = z.object({
+  uuid: z.string(),
+  name: z.string(),
+  url: z.string(),
+  workLocation: z.object({
+    label: z.string(),
+  })
+});
+
+export const WordpressSchema = z.object({
+  id: z.number(),
+  date: z.string(),
+  link: z.string(),
+  modified: z.string(),
+  title: {
+    rendered: z.string()
+  },
+  workplace_type_details: z.array(z.object({
+    name: z.string(),
+  }))
+});
+
+export const WorkableSchema = z.object({
+  title: z.string(),
+  shortcode: z.string(),
+  telecommuting: z.boolean(),
+  url: z.string(),
+  published_on: z.string(),
+  created_at: z.string(),
+  country: z.string(),
+});
+
+export const WorkdaySchema = z.object({
+  title: z.string(),
+  externalPath: z.string(),
+  locationsText: z.string().nullish(),
+  postedOn: z.string(),
+  bulletFields: z.array(z.string()),
+  remoteType: z.string(),
+  url: z.string()
 });
 
 export type AshbyJobApiFormat = z.infer<typeof AshbySchema>;
 export type BambooHrJobApiFormat = z.infer<typeof BambooSchema>;
 export type BreezyJobApiFormat = z.infer<typeof BreezySchema>;
 export type ClearCompanyJobApiFormat = z.infer<typeof ClearCompanySchema>;
-
-
-
-
-
-
-export interface DayforceJobApiFormat {
-  Title: string,
-  CompanyName: string,
-  Description?: string,
-  JobDetailsUrl: string,
-  CultureCode?: string,
-  Country?: string,
-  DatePosted: string,
-  LastUpdated: string,
-  ReferenceNumber: number,
-  IsVirtualLocation: boolean
-}
-
-export interface GemJobsApiFormat {
-  absolute_url: string,
-  created_at: string,
-  first_published_at: string,
-  id: string,
-  location: {
-    name: string,
-  },
-  location_type: string,
-  title: string,
-  updated_at: string
-}
-
-export interface GreenhouseJobApiFormat {
-  absolute_url: string,
-  company_name: string,
-  first_published: string,
-  id: number,
-  location: {
-    name: string
-  },
-  title: string,
-  updated_at: string
-}
-
-export interface JobviteJobApiFormat {
-  created_x0020_on: string,
-  date: string,
-  'detail-url': string,
-  id: string,
-  location: string,
-  remote_x0020_type?: string,
-  title: string,
-}
-
-export interface KulaJobApiFormat {
-  id: number,
-  title: string,
-  launch_at: string,
-  ats_job: {
-    workplace: string,
-    offices: {
-      name: string,
-      country: string,
-    }[],
-  }
-}
-
-export interface LeverJobApiFormat {
-  createdAt: number,
-  categories: {
-    allLocations?: string[],
-    location: string
-  },
-  id: string,
-  text: string,
-  country: string,
-  workplaceType: string,
-  hostedUrl: string,
-}
-
-export interface PaylocityJobApiFormat {
-  JobId: number,
-  JobTitle: string,
-  PublishedDate: string,
-  JobLocation: {
-    Country: string,
-  },
-  IsRemote: boolean,
-}
-
-export interface RecruiteeJobApiFormat {
-  id: number,
-  title: string,
-  updated_at: string,
-  published_at: string,
-  remote: boolean,
-  country: string,
-  careers_url: string,
-}
-
-export interface RipplingJobApiFormat {
-  uuid: string,
-  name: string,
-  url: string,
-  workLocation: {
-    label: string,
-  }
-}
-
-export interface WordpressJobApiFormat {
-  id: number,
-  date: string,
-  link: string,
-  modified: string,
-  title: {
-    rendered: string
-  },
-  workplace_type_details: {
-    name: string,
-  }[]
-}
-
-export interface WorkableJobApiFormat {
-  title: string,
-  shortcode: string,
-  telecommuting: boolean,
-  url: string,
-  published_on: string,
-  created_at: string,
-  country: string,
-}
-
-export interface WorkdayJobApiFormat {
-  title: string,
-  externalPath: string,
-  locationsText?: string,
-  postedOn: string,
-  bulletFields: string[],
-  remoteType: string,
-  url: string
-}
+export type DayforceJobApiFormat = z.infer<typeof DayforceSchema>;
+export type GemJobsApiFormat = z.infer<typeof GemSchema>;
+export type GreenhouseJobApiFormat = z.infer<typeof GreenhouseSchema>;
+export type JobviteJobApiFormat = z.infer<typeof JobviteSchema>;
+export type KulaJobApiFormat = z.infer<typeof KulaSchema>;
+export type LeverJobApiFormat = z.infer<typeof LeverSchema>;
+export type PaylocityJobApiFormat = z.infer<typeof PaylocitySchema>;
+export type RecruiteeJobApiFormat = z.infer<typeof RecruiteeSchema>;
+export type RipplingJobApiFormat = z.infer<typeof RipplingSchema>;
+export type WordpressJobApiFormat = z.infer<typeof WordpressSchema>;
+export type WorkableJobApiFormat = z.infer<typeof WorkableSchema>;
+export type WorkdayJobApiFormat = z.infer<typeof WorkdaySchema>;
 
 export type ApiJob =
   AshbyJobApiFormat |

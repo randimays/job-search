@@ -16,7 +16,7 @@ const JobRow = ({ job }: JobRowProps): ReactElement | null => {
     url
   } = job;
 
-  if (!companyName || !title || !url) {
+  if (!companyName || !title) {
     return null;
   }
 

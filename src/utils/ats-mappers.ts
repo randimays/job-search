@@ -34,10 +34,10 @@ export const ashbyMapper = (job: AshbyJobApiFormat, companyName: string): Job =>
 export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.id,
-  published: createAPIDate(), // BambooHR does not have published dates
+  published: createAPIDate(), // Bamboo does not have published dates
   title: cleanUpAPIString(job.jobOpeningName),
-  updated: createAPIDate(), // BambooHR does not have updated dates
-  url: ''
+  updated: createAPIDate(), // Bamboo does not have updated dates
+  url: '' // Bamboo doesn't return job URLs
 });
 
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
@@ -45,62 +45,62 @@ export const breezyMapper = (job: BreezyJobApiFormat): Job => ({
   id: job.id,
   published: createAPIDate(job.published_date), 
   title: cleanUpAPIString(job.name),
-  updated: createAPIDate(job?.published_date),
-  url: job?.url
+  updated: createAPIDate(job.published_date),
+  url: job.url
 });
 
 export const clearCompanyMapper = (job: ClearCompanyJobApiFormat): Job => ({
   companyName: job.brandName,
-  id: String(job.id ?? ''),
-  published: createAPIDate(job?.openDate), 
+  id: job.id,
+  published: createAPIDate(job.openDate), 
   title: cleanUpAPIString(job.positionTitle),
-  updated: createAPIDate(job?.postedDate),
-  url: job?.applyLink
+  updated: createAPIDate(job.postedDate),
+  url: job.applyLink
 });
 
 export const dayforceMapper = (job: DayforceJobApiFormat): Job => ({
-  companyName: job?.CompanyName,
-  id: job?.ReferenceNumber?.toString() || '', // TODO these have duplicates; need a unique ID
-  published: createAPIDate(job?.DatePosted), 
+  companyName: job.CompanyName,
+  id: job.ReferenceNumber.toString() || '', // TODO these have duplicates; need a unique ID
+  published: createAPIDate(job.DatePosted), 
   title: cleanUpAPIString(job.Title),
-  updated: createAPIDate(job?.LastUpdated),
-  url: job?.JobDetailsUrl
+  updated: createAPIDate(job.LastUpdated),
+  url: job.JobDetailsUrl
 });
 
 export const gemMapper = (job: GemJobsApiFormat, companyName: string): Job => ({
   companyName,
-  id: String(job.id ?? ''),
-  published: createAPIDate(job?.first_published_at),
+  id: job.id,
+  published: createAPIDate(job.first_published_at),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.updated_at),
+  updated: createAPIDate(job.updated_at),
   url: cleanUpAPIString(job.absolute_url),
 });
 
 export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
   companyName: cleanUpAPIString(job.company_name),
-  id: String(job.id ?? ''),
-  published: createAPIDate(job?.first_published),
+  id: job.id.toString(),
+  published: createAPIDate(job.first_published),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.updated_at),
+  updated: createAPIDate(job.updated_at),
   url: cleanUpAPIString(job.absolute_url),
 });
 
 export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: String(job.id ?? ''),
-  published: createAPIDate(job?.created_x0020_on),
+  id: job.id,
+  published: createAPIDate(job.created_x0020_on),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.date),
+  updated: createAPIDate(job.date),
   url: cleanUpAPIString(job['detail-url']),
 });
 
 export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: String(job.id ?? ''),
-  published: createAPIDate(job?.launch_at),
+  id: job.id.toString(),
+  published: createAPIDate(job.launch_at),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.launch_at),
-  url: 'https://careers.kula.ai/hire', // No distinct URLs for job postings
+  updated: createAPIDate(job.launch_at),
+  url: '', // No distinct URLs for job postings
 });
 
 export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job => ({

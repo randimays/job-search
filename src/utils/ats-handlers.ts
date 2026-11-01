@@ -161,9 +161,9 @@ export const greenhouseHandler = (jobs: GreenhouseJobApiFormat[]): Job[] | [] =>
   if (jobs && jobs.length) {
     return jobs
       .filter(job => 
-        !isHybridOrOnsite(job?.location?.name) && 
-        isUnitedStates(job?.location?.name))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+        !isHybridOrOnsite(job.location.name) && 
+        isUnitedStates(job.location.name))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
       .map(filteredJob => greenhouseMapper(filteredJob));
   }
 
@@ -175,9 +175,9 @@ export const jobviteHandler = (jobs: JobviteJobApiFormat[], companyName: string)
     return jobs
       .filter(job => 
         (job?.remote_x0020_type !== 'No Remote' &&
-          (job?.remote_x0020_type === 'Remote' || !isHybridOrOnsite(job?.location))) && 
-        isUnitedStates(job?.location))
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+          (job?.remote_x0020_type === 'Remote' || !isHybridOrOnsite(job.location))) && 
+        isUnitedStates(job.location))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
       .map(filteredJob => jobviteMapper(filteredJob, companyName));
   }
 
@@ -188,14 +188,14 @@ export const kulaHandler = (jobs: KulaJobApiFormat[], companyName: string): Job[
   if (jobs && jobs.length) {
     return jobs
       .filter(job => {
-        const places = (job?.ats_job?.offices ?? [])
-          .map(office => office?.country || office?.name)
+        const places = (job.ats_job.offices ?? [])
+          .map(office => office.country || office.name)
           .filter(Boolean);
 
-        return job?.ats_job?.workplace === 'remote' &&
+        return job.ats_job.workplace === 'remote' &&
           (places.length === 0 || places.some(place => isUnitedStates(place)));
       })
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.title))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
       .map(filteredJob => kulaMapper(filteredJob, companyName));
   }
 
@@ -208,18 +208,20 @@ export const leverHandler = (jobs: LeverJobApiFormat[], companyName: string): Jo
       .filter(job => {
         let country = '';
     
-        if (job?.country) {
+        if (job.country) {
           country = job.country;
-        } else if (job?.categories.location) {
+        } else if (job.categories.location) {
           country = job.categories.location
         }
 
-        const hasRemoteLocation = job?.categories?.allLocations?.some(location => /remote/i.test(location));
+        const hasRemoteLocation = job?.categories?.allLocations?.some(
+          location => /remote/i.test(location || '')
+        );
 
-        return (!isHybridOrOnsite(job?.workplaceType) || hasRemoteLocation) &&
+        return (!isHybridOrOnsite(job.workplaceType) || hasRemoteLocation) &&
           isUnitedStates(country);
       })
-      .filter(remoteJob => isPotentialJobMatch(remoteJob?.text))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob.text))
       .map(filteredJob => leverMapper(filteredJob, companyName));
   } 
   

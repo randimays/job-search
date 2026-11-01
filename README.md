@@ -44,7 +44,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Add a loading state when the jobs are fetching so it's clear that service calls are being made. Should I add a progress bar for this?
 - Implement a dark mode
 - Add filters, search for homepage
-- Refine the remote/virtual filter to filter out other countries
+- Refine the remote/virtual filters for each ATS to filter out other countries
 - Create a button for "I've already applied" to remove a job from the list
 - Add linting rules
 - Make sure that companies that are flagged as no jobs / no matching jobs actually have a successful service call
@@ -52,6 +52,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Fix all the "any" types
 - Make links out of the omitted jobs so if anything comes up in there that I'm interested in, I can go directly to it
   -Troubleshoot the Paylocity listings, they don't all fire even after retries, or come back blank
+  - Make sure that if there are no jobs to show, the table header doesn't show
 
 ## Notes
 
