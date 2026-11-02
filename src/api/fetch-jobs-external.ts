@@ -3,25 +3,34 @@ import { flushOmittedTitles } from '../utils';
 import { useJobs } from '../store';
 import { BOARD_CONFIGS } from './board-configs';
 import { batchCompaniesByProvider } from '../utils/api-prep';
-import type { JobsResponse } from '../types';
+import type { CompanyRow, JobsResponse } from '../types';
 
-type Batches = Record<string, string[][]>;
+type Batches = Record<string, CompanyRow[]>;
 
-const settleWithLimit = async <R>(
-  companiesToFetch: string[][],
+const settleWithLimit = async (
+  companiesToFetch: CompanyRow[],
   provider: string,
   limit = 5,
-): Promise<PromiseSettledResult<R>[]> => {
-  const results: PromiseSettledResult<R>[] = new Array(companiesToFetch.length);
+): Promise<PromiseSettledResult<Job[]>[]> => {
+  const results = new Array<PromiseSettledResult<Job[]>>(companiesToFetch.length);
   let nextIndex = 0;
 
   const worker = async (): Promise<void> => {
     while (nextIndex < companiesToFetch.length) {
       const index = nextIndex++;
-      const [, companyIdentifier, companyName] = companiesToFetch[index];
+      const company = companiesToFetch[index];
+
+      if (!company) {
+        results[index] = { status: 'rejected', reason: new Error(`No company at index ${index}`) };
+
+        continue;
+      }
 
       try {
-        results[index] = { status: 'fulfilled', value: await fetchJobs(provider, companyIdentifier, companyName) };
+        results[index] = {
+          status: 'fulfilled',
+          value: await fetchJobs(provider, company.boardToken, company.companyName),
+        };
       } catch (reason) {
         results[index] = { status: 'rejected', reason };
       }
@@ -35,7 +44,7 @@ const settleWithLimit = async <R>(
   return results;
 };
 
-export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsResponse> => {
+export const prepareForApiCalls = async (csvData: CompanyRow[]): Promise<JobsResponse> => {
   const batches: Batches = batchCompaniesByProvider(csvData);
   const jobs: Job[] = [];
   const failures: Failure[] = [];
@@ -46,26 +55,42 @@ export const prepareForApiCalls = async (csvData: string[][]): Promise<JobsRespo
   if (Object.keys(batches).length) {
     // Loop through each of the providers from the above object and create Promises for each,
     // then call the API in batches to prevent rate-limiting. Return job results and failed calls
-    for (const provider in batches) {
-      const rows = batches[provider];
-      const config = BOARD_CONFIGS.find(c => c.name === provider)!;
-      const results = await settleWithLimit<any>(rows, provider, config.concurrency ?? 5);  // Fix the type here when fetchJobs is fixed
-  
-      jobs.push(...results
-        .flatMap(result => result.status === 'fulfilled' ? [result.value] : []));
-  
-      noResults.push(...results.flatMap((result, index) =>
-        result.status === 'fulfilled' && !result.value?.length ? [rows[index][2]] : []
-      ));
-  
-      failures.push(...results.flatMap((result, index) => 
-        result.status === 'rejected' ? [{ row: rows[index], reason: result.reason }] : []
-      ));
+    const providerResults = await Promise.all(
+      Object.entries(batches).map(async ([provider, rows]) => {
+        const config = BOARD_CONFIGS.find(c => c.name === provider)!;
+        const results = await settleWithLimit(rows, provider, config.concurrency ?? 5);
+
+        return { rows, results};
+      })
+    );
+
+    for (const { rows, results } of providerResults) {
+      results.forEach((result, index) => {
+        const row = rows[index];
+
+        if (!row) {
+          return;
+        }
+
+        if (result.status === 'fulfilled') {
+          jobs.push(...result.value);
+
+          if (!result.value.length) {
+            noResults.push(row.companyName ?? '');
+          }
+
+          return;
+        }
+
+        const reason = result.reason instanceof Error ? result.reason.message : String(result.reason);
+
+        failures.push({ row, reason });
+      });
     }
-  
-    useJobs.getState().setFetchingJobs(false);
   }
-  
+
+  useJobs.getState().setFetchingJobs(false);
+
   return {
     jobs,
     failures,
@@ -90,13 +115,13 @@ const fetchWithRetry = async (url: string, retries = 3, options = {}): Promise<g
   }
 };
 
-const cache = new Map<string, Promise<any>>();
+const cache = new Map<string, Promise<Job[]>>();
 
 const fetchJobsUncached = async (
   boardName: string,
   companyIdentifier: string,
   companyName: string
-): Promise<any> => { // Fix the any type here
+): Promise<Job[]> => {
   const config = BOARD_CONFIGS.filter(board => board.name === boardName)?.[0];
 
   if (!config || !config.url) {
@@ -123,7 +148,7 @@ const fetchJobsUncached = async (
   }
 }
 
-export const fetchWorkdayJobs = async (rowData: string, companyName: string): Promise<any> => {
+export const fetchWorkdayJobs = async (rowData: string, companyName: string): Promise<Job[]> => {
   const config = BOARD_CONFIGS.filter(board => board.name === 'Workday')?.[0];
   const companyUrl = config.url(rowData);
   const limit = 20;
@@ -163,7 +188,7 @@ export const fetchWorkdayJobs = async (rowData: string, companyName: string): Pr
   );
 };
 
-export const fetchJobs = (boardName: string, companyIdentifier: string, companyName: string): Promise<any> => {
+export const fetchJobs = (boardName: string, companyIdentifier: string, companyName: string): Promise<Job[]> => {
   const key = `${boardName}:${companyIdentifier}`;
 
   if (!cache.has(key)) {

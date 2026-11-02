@@ -1,8 +1,9 @@
 import { BOARD_CONFIGS } from '../api/board-configs.ts';
+import type { CompanyRow } from '../types/index.ts';
 
-type Batches = Record<string, string[][]>;
+type Batches = Record<string, CompanyRow[]>;
 
-export const batchCompaniesByProvider = (csvData: string[][]): Batches => {
+export const batchCompaniesByProvider = (csvData: CompanyRow[]): Batches => {
   const batches: Batches = {};
 
   // Create an object with key:value pairs where the key is a provider (e.g. Greenhouse)
@@ -10,9 +11,9 @@ export const batchCompaniesByProvider = (csvData: string[][]): Batches => {
   // e.g. { Greenhouse: [['Greenhouse', 'capitaltg', 'Capital Technology Group']]}
   for (const config of BOARD_CONFIGS) {
     const companiesForThisBatch = csvData.filter(row => {
-      const boardName = row[0];
+      const boardName = row.provider;
 
-      return boardName.toLowerCase() === config.name.toLowerCase();
+      return boardName?.toLowerCase() === config.name.toLowerCase();
     });
 
     if (companiesForThisBatch.length) {

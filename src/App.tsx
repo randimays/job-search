@@ -34,6 +34,7 @@ function App() {
 
       const fetchData = async () => {
         const response = await prepareForApiCalls(csvToArray);
+        console.log("🚀 ~ fetchData ~ response:", response)
 
         if (response?.jobs) {
           // Merge all company job arrays into one array
@@ -52,7 +53,8 @@ function App() {
         }
       };
 
-      fetchData();      
+      fetchData()
+        .catch(error => console.error('Fetch data failed: ', error));      
     }
   }, [allJobs.length]);
 

@@ -7,9 +7,15 @@ export interface Job {
   url: string
 }
 
+export interface CompanyRow {
+  provider: string,
+  boardToken: string,
+  companyName: string
+}
+
 export interface Failure {
   reason: string,
-  row: string[]
+  row: CompanyRow
 }
 
 export interface JobsResponse {

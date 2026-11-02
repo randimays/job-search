@@ -52,15 +52,15 @@ interface BoardConfig {
 
 // Comment out various sections to speed up local API calls while dev'ing
 export const BOARD_CONFIGS: BoardConfig[] = [
-  {
-    handler: ashbyHandler,
-    name: 'Ashby',
-    url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
-    parse: async response => {
-      const body: unknown = (await response.json()).jobs;
-      return parseJobs(AshbySchema, body, 'Ashby');
-    }
-  },
+  // {
+  //   handler: ashbyHandler,
+  //   name: 'Ashby',
+  //   url: (board_token: string): string => `https://api.ashbyhq.com/posting-api/job-board/${board_token}?includeCompensation=true`,
+  //   parse: async response => {
+  //     const body: unknown = (await response.json()).jobs;
+  //     return parseJobs(AshbySchema, body, 'Ashby');
+  //   }
+  // },
 //   {
 //     handler: bambooHandler,
 //     name: 'Bamboo',
@@ -151,32 +151,32 @@ export const BOARD_CONFIGS: BoardConfig[] = [
 //       return parseJobs(LeverSchema, formattedBody, 'Lever')
 //     }
 //   },
-  // {
-  //   handler: paylocityHandler,
-  //   name: 'Paylocity',
-  //   url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
-  //   parse: async (response) => {
-  //     const html = (await response.text());
-  //     const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
+  {
+    handler: paylocityHandler,
+    name: 'Paylocity',
+    url: (board_token: string): string => `/paylocity/Recruiting/Jobs/All/${board_token}`,
+    parse: async (response) => {
+      const html = (await response.text());
+      const match = html.match(/window\.pageData\s*=\s*(\{[\s\S]*?\});?\s*<\/script>/);
       
-  //     if (match) {
-  //       const pageData = JSON.parse(match[1]);
+      if (match) {
+        const pageData = JSON.parse(match[1]);
 
-  //       const dataReturn = (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
-  //       console.log("🚀 ~ dataReturn:", dataReturn)
-  //       return parseJobs(PaylocitySchema, dataReturn, 'Paylocity')
-  //     }
+        const dataReturn = (pageData.Jobs ?? []).filter((job: any) => !job.IsInternal);
+        console.log("🚀 ~ dataReturn:", dataReturn)
+        return parseJobs(PaylocitySchema, dataReturn, 'Paylocity')
+      }
 
-  //     return [];
-  //   },
-  //   concurrency: 2
-  // },
+      return [];
+    },
+    concurrency: 2
+  },
   // {  
   //   handler: pinpointHandler,
   //   name: 'Pinpoint',
   //   url: (board_token: string): string => `https://${board_token}.pinpointhq.com/postings.json`,
   //   parse: async response => {
-  //     const body = (await response.json()).data;
+  //     const body: unknown = (await response.json()).data;
   //     return parseJobs(PinpointSchema, body, 'Pinpoint');
   //   }
   // },
@@ -185,7 +185,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   name: 'Recruitee',
   //   url: (board_token: string): string => `https://${board_token}.recruitee.com/api/offers`,
   //   parse: async response => {
-  //     const body = (await response.json()).offers;
+  //     const body: unknown = (await response.json()).offers;
   //     return parseJobs(RecruiteeSchema, body, 'Recruitee');
   //   }
   // },
@@ -194,7 +194,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   name: 'Rippling',
   //   url: (board_token: string): string => `https://api.rippling.com/platform/api/ats/v1/board/${board_token}/jobs`,
   //   parse: async response => {
-  //     const body = (await response.json());
+  //     const body: unknown = (await response.json());
   //     return parseJobs(RipplingSchema, body, 'Rippling');
   //   }
   // },
@@ -203,7 +203,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   name: 'SmartRecruiters',
   //   url: (board_token: string): string => `https://api.smartrecruiters.com/v1/companies/${board_token}/postings?limit=100&offset=0`,
   //   parse: async response => {
-  //     const body = (await response.json()).content;
+  //     const body: unknown = (await response.json()).content;
   //     return parseJobs(SmartRecruitersSchema, body, 'SmartRecruiters');
   //   }
   // },
@@ -212,7 +212,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   name: 'Wordpress',
   //   url: (board_token: string): string => `https://${board_token}.com/wp-json/wp/v2/job_opening?per_page=10&page=1&orderby=date&order=desc`,
   //   parse: async response => {
-  //     const body = (await response.json());
+  //     const body: unknown = (await response.json());
   //     return parseJobs(WordpressSchema, body, 'Wordpress');
   //   }
   // },
@@ -221,7 +221,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //   name: 'Workable',
   //   url: (board_token: string): string => `https://apply.workable.com/api/v1/widget/accounts/${board_token}?details=true`,
   //   parse: async response => {
-  //     const body = (await response.json()).jobs;
+  //     const body: unknown = (await response.json()).jobs;
   //     return parseJobs(WorkableSchema, body, 'Workable');
   //   }
   // },
@@ -234,7 +234,7 @@ export const BOARD_CONFIGS: BoardConfig[] = [
   //     return `https://${tenant}.${shard}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
   //   },
   //   parse: async response => {
-  //     const body = (await response.json());
+  //     const body: unknown = (await response.json());
   //     return parseJobs(WorkdaySchema, body, 'Workday');
   //   }
   // },
