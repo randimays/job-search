@@ -191,7 +191,7 @@ export const WordpressSchema = z.object({
   }),
   workplace_type_details: z.array(z.object({
     name: z.string(),
-  }))
+  })).default([])
 });
 
 export const WorkableSchema = z.object({

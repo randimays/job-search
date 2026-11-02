@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { Job } from '../types';
 import { formatDate } from '../utils';
+import { TABLE_CELL_CLASS } from '../constants';
 
 interface JobRowProps {
   job: Job;
@@ -22,14 +23,22 @@ const JobRow = ({ job }: JobRowProps): ReactElement | null => {
 
   return (
     <tr>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{formatDate(updated)}</td>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{companyName}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{formatDate(updated)}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{companyName}</td>
       {url ? 
-        <td className="p-1 border border-gray-300 dark:border-gray-600"><a href={url} target="_blank">{title}</a></td> :
-        <td className="p-1 border border-gray-300 dark:border-gray-600">{title}</td>
+        <td className={`p-1 ${TABLE_CELL_CLASS}`}>
+          <a
+            href={url}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {title}
+          </a>
+        </td> :
+        <td className={`p-1 ${TABLE_CELL_CLASS}`}>{title}</td>
       }
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{formatDate(published)}</td>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{id}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{formatDate(published)}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{id}</td>
     </tr>
   );
 };

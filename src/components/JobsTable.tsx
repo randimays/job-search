@@ -4,6 +4,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import type { Job } from '../types';
 import JobRow from './JobRow';
+import { TABLE_CELL_CLASS } from '../constants';
 
 interface JobsTableProps {
   jobs: Job[];
@@ -67,11 +68,11 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
       <table className="table-auto mt-6 border border-gray-400 dark:border-gray-500">
         <thead className="text-sm text-left font-semibold">
           <tr>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">Last Updated</th>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">Company Name</th>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">Title</th>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">Published</th>
-            <th className="p-2 border border-gray-300 dark:border-gray-600">ID</th>
+            <th className={`p-2 ${TABLE_CELL_CLASS}`}>Last Updated</th>
+            <th className={`p-2 ${TABLE_CELL_CLASS}`}>Company Name</th>
+            <th className={`p-2 ${TABLE_CELL_CLASS}`}>Title</th>
+            <th className={`p-2 ${TABLE_CELL_CLASS}`}>Published</th>
+            <th className={`p-2 ${TABLE_CELL_CLASS}`}>ID</th>
           </tr>
         </thead>
         <tbody className="text-sm">

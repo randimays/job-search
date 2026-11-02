@@ -116,6 +116,9 @@ const fetchJobsUncached = async (
 
     return config.handler(jobs, companyName);
   } catch (error) {
+    // const reason = error instanceof Error ? error.message : String(error);
+
+    // results[index] = { status: 'rejected', reason };
     throw new Error(`Service call failed: ${error}`);
   }
 }

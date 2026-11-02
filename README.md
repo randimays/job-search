@@ -18,7 +18,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 2. Run `npm install` within the `job-search` directory
 3. Confirm that you have version 24 or later of Node installed
 4. Create the spreadsheet as per the **Requirements** section above and replace the `data > jobBoards.csv` spreadsheet with your own
-5. Review the `src/constants.ts` file and add your `ROLE_MATCHERS`, which are keywords pertaining to job titles you'd like to see in your matches
+5. Review the `src/constants` files for keywords (`domain-role-exclusions.ts`, `eng-ignore-types.ts` and `index.ts`) and add your `ROLE_MATCHERS`, which are keywords pertaining to job titles you'd like to see in your matches
 6. Next, add the components for `ROLE_EXCLUSIONS`, which are keywords pertaining to job titles you'd like to filter out of your matches
 7. Run `npm run dev` to spin up the local server
 8. Navigate to `http://localhost:5173` in your browser

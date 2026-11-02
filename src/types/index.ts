@@ -8,10 +8,7 @@ export interface Job {
 }
 
 export interface Failure {
-  reason: {
-    message: string,
-    stack: string
-  },
+  reason: string,
   row: string[]
 }
 

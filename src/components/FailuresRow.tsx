@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { Failure } from '../types';
+import { TABLE_CELL_CLASS } from '../constants';
 
 interface FailuresRowProps {
   failure: Failure;
@@ -14,10 +15,10 @@ const FailuresRow = ({ failure }: FailuresRowProps): ReactElement | null => {
 
   return (
     <tr>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{row[0]}</td>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{row[2]}</td>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{row[1]}</td>
-      <td className="p-1 border border-gray-300 dark:border-gray-600">{reason.message}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{row[0]}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{row[2]}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{row[1]}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{reason.message}</td>
     </tr>
   );
 };

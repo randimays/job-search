@@ -2,6 +2,8 @@ import COMMON_NON_US_CITIES from './common-non-us-cities';
 import DOMAIN_ROLE_EXCLUSIONS from './domain-role-exclusions';
 import ENG_TYPES_TO_IGNORE from './eng-ignore-types';
 
+export const TABLE_CELL_CLASS = 'border border-gray-300 dark:border-gray-600';
+
 // This represents all of the keywords 
 // I would want to see matches for
 export const ROLE_MATCHERS = [

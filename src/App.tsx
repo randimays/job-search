@@ -38,13 +38,13 @@ function App() {
         if (response?.jobs) {
           // Merge all company job arrays into one array
           const flattenedJobs = response.jobs.flat();
-          console.log("🚀 ~ fetchData ~ flattenedJobs:", flattenedJobs)
 
           setAllJobs(flattenedJobs);
         }
 
         if (response?.failures) {
           setFailures(response.failures);
+          console.log("🚀 ~ fetchData ~ response.failures:", response.failures)
         }
 
         if (response?.noResults) {
