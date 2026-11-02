@@ -13,6 +13,7 @@ import {
   paylocityHandler,
   recruiteeHandler,
   ripplingHandler,
+  smartRecruitersHandler,
   wordpressHandler,
   workableHandler,
   workdayHandler
@@ -33,6 +34,7 @@ import { RipplingMock } from '../../mock/rippling';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
 import { WordpressMock } from '../../mock/wordpress';
+import { SmartRecruitersMock } from '../../mock/smartrecruiters';
 
 describe('handlers', () => {
   beforeEach(() => {
@@ -384,6 +386,27 @@ describe('handlers', () => {
           title: 'Software Engineer III',
           updated: new Date('2026-10-13T17:00:00.000Z'),
           url: 'https://ats.rippling.com/mccicareers/jobs/9f630b2a-f7c7-4e5e-b2a1-ff69f2c5efd9',
+        }
+      ]);
+    });
+  });
+
+  describe('smartRecruitersHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(smartRecruitersHandler([], 'CasebookPBC')).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = SmartRecruitersMock;
+  
+      expect(smartRecruitersHandler(jobs, 'CasebookPBC')).toEqual([
+        {
+          companyName: 'CasebookPBC',
+          id: '744000158778089',
+          published: new Date('2026-10-30T15:22:45.367Z'),
+          title: 'Software Engineer',
+          updated: new Date('2026-10-30T15:22:45.367Z'),
+          url: 'https://api.smartrecruiters.com/v1/companies/CasebookPBC/postings/744000158778089',
         }
       ]);
     });

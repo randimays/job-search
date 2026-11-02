@@ -12,6 +12,7 @@ import type {
   PaylocityJobApiFormat,
   RecruiteeJobApiFormat,
   RipplingJobApiFormat,
+  SmartRecruitersJobApiFormat,
   WordpressJobApiFormat,
   WorkableJobApiFormat,
   WorkdayJobApiFormat
@@ -106,55 +107,64 @@ export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => (
 export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job => ({
   companyName,
   id: String(job.id ?? ''),
-  published: new Date(job?.createdAt),
+  published: new Date(job.createdAt),
   title: cleanUpAPIString(job.text),
-  updated: new Date(job?.createdAt), // Lever doesn't have "updated" so we use publish date instead,
-  url: job?.hostedUrl
+  updated: new Date(job.createdAt), // Lever doesn't have "updated" so we use publish date instead,
+  url: job.hostedUrl
 });
 
 export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string): Job => ({
   companyName,
   id: String(job.JobId ?? ''),
-  published: createAPIDate(job?.PublishedDate),
+  published: createAPIDate(job.PublishedDate),
   title: cleanUpAPIString(job.JobTitle),
-  updated: createAPIDate(job?.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
+  updated: createAPIDate(job.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
   url: `https://recruiting.paylocity.com/Recruiting/Jobs/Details/${job.JobId}`
 });
 
 export const recruiteeMapper = (job: RecruiteeJobApiFormat, companyName: string): Job => ({
   companyName,
   id: String(job.id ?? ''),
-  published: createAPIDate(job?.published_at),
+  published: createAPIDate(job.published_at),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.updated_at),
+  updated: createAPIDate(job.updated_at),
   url: job.careers_url
 });
 
 export const ripplingMapper = (job: RipplingJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.uuid || '',
+  id: job.uuid,
   published: createAPIDate(), // Rippling doesn't have any dates
   title: cleanUpAPIString(job.name),
   updated: createAPIDate(), // Rippling doesn't have any dates
-  url: job?.url
+  url: job.url
+});
+
+export const smartRecruitersMapper = (job: SmartRecruitersJobApiFormat, companyName: string): Job => ({
+  companyName,
+  id: job.id,
+  published: createAPIDate(job.releasedDate),
+  title: cleanUpAPIString(job.name),
+  updated: createAPIDate(job.releasedDate), // SmartRecruiters doesn't have "updated" so we use publish date instead
+  url: job.ref
 });
 
 export const wordpressMapper = (job: WordpressJobApiFormat, companyName: string): Job => ({
   companyName,
   id: String(job.id ?? ''),
-  published: createAPIDate(job?.date),
-  title: cleanUpAPIString(job?.title?.rendered),
-  updated: createAPIDate(job?.modified),
-  url: job?.link
+  published: createAPIDate(job.date),
+  title: cleanUpAPIString(job.title.rendered),
+  updated: createAPIDate(job.modified),
+  url: job.link
 });
 
 export const workableMapper = (job: WorkableJobApiFormat, companyName: string): Job => ({
   companyName,
-  id: job?.shortcode || '',
-  published: createAPIDate(job?.created_at),
+  id: job.shortcode,
+  published: createAPIDate(job.created_at),
   title: cleanUpAPIString(job.title),
-  updated: createAPIDate(job?.published_on),
-  url: job?.url
+  updated: createAPIDate(job.published_on),
+  url: job.url
 });
 
 export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Job => {
@@ -175,9 +185,9 @@ export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Jo
   return {
     companyName,
     id,
-    published: determinePublishDateForWorkday(job?.postedOn, companyName),
+    published: determinePublishDateForWorkday(job.postedOn, companyName),
     title: cleanUpAPIString(job.title),
-    updated: determinePublishDateForWorkday(job?.postedOn, companyName),
+    updated: determinePublishDateForWorkday(job.postedOn, companyName),
     url: job.url
   };
 };

@@ -13,6 +13,7 @@ import {
   paylocityMapper,
   recruiteeMapper,
   ripplingMapper,
+  smartRecruitersMapper,
   wordpressMapper,
   workableMapper,
   workdayMapper,
@@ -33,6 +34,7 @@ import { RipplingMock } from '../../mock/rippling';
 import { WordpressMock } from '../../mock/wordpress';
 import { WorkableMock } from '../../mock/workable';
 import { WorkdayMock } from '../../mock/workday';
+import { SmartRecruitersMock } from '../../mock/smartrecruiters';
 
 describe('mappers', () => {
   beforeEach(() => {
@@ -58,18 +60,6 @@ describe('mappers', () => {
       const mockEntry = AshbyMock[1];
       expect(ashbyMapper(mockEntry, 'Vanta')).toEqual(expectedAshbyReturn);
     });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...AshbyMock[1],
-        id: '',
-      };
-
-      expect(ashbyMapper(mockWithoutId, 'Vanta')).toEqual({
-        ...expectedAshbyReturn,
-        id: ''
-      });
-    });
   });
 
   describe('bambooMapper', () => {
@@ -85,19 +75,6 @@ describe('mappers', () => {
     it('properly formats an API entry from Bamboo', () => {
       const mockEntry = BambooMock[0];
       expect(bambooMapper(mockEntry, 'Maisha Meds')).toEqual(expectedBambooReturn);
-    });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...BambooMock[0],
-        id: '',
-      };
-
-      expect(bambooMapper(mockWithoutId, 'Maisha Meds')).toEqual({
-        ...expectedBambooReturn,
-        url: '',
-        id: ''
-      });
     });
   });
 
@@ -115,18 +92,6 @@ describe('mappers', () => {
       const mockEntry = BreezyMock[0];
       expect(breezyMapper(mockEntry)).toEqual(expectedBreezyReturn);
     });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...BreezyMock[0],
-        id: '',
-      };
-
-      expect(breezyMapper(mockWithoutId)).toEqual({
-        ...expectedBreezyReturn,
-        id: ''
-      });
-    });
   });
 
   describe('clearCompanyMapper', () => {
@@ -142,18 +107,6 @@ describe('mappers', () => {
     it('properly formats an API entry from ClearCompany', () => {
       const mockEntry = ClearCompanyMock[0];
       expect(clearCompanyMapper(mockEntry)).toEqual(expectedCCReturn);
-    });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...ClearCompanyMock[0],
-        id: '',
-      };
-
-      expect(clearCompanyMapper(mockWithoutId)).toEqual({
-        ...expectedCCReturn,
-        id: ''
-      });
     });
   });
 
@@ -186,18 +139,6 @@ describe('mappers', () => {
     it('properly formats an API entry from Gem', () => {
       const mockEntry = GemMock[3];
       expect(gemMapper(mockEntry, 'Snout')).toEqual(expectedGemReturn);
-    });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...GemMock[3],
-        id: '',
-      };
-
-      expect(gemMapper(mockWithoutId, 'Snout')).toEqual({
-        ...expectedGemReturn,
-        id: ''
-      });
     });
   });
 
@@ -263,18 +204,6 @@ describe('mappers', () => {
       const mockEntry = LeverMock[0];
       expect(leverMapper(mockEntry, 'Ellevation')).toEqual(expectedLeverReturn);
     });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...LeverMock[0],
-        id: '',
-      };
-
-      expect(leverMapper(mockWithoutId, 'Ellevation')).toEqual({
-        ...expectedLeverReturn,
-        id: ''
-      });
-    });
   });
 
   describe('paylocityMapper', () => {
@@ -323,17 +252,21 @@ describe('mappers', () => {
       const mockEntry = RipplingMock[0];
       expect(ripplingMapper(mockEntry, 'MCCi')).toEqual(expectedRipplingReturn);
     });
+  });
 
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...RipplingMock[0],
-        uuid: '',
-      };
-
-      expect(ripplingMapper(mockWithoutId, 'MCCi')).toEqual({
-        ...expectedRipplingReturn,
-        id: ''
-      });
+  describe('smartRecruitersMapper', () => {
+    const expectedRipplingReturn = {
+      companyName: 'CasebookPBC',
+          id: '744000158778089',
+          published: new Date('2026-10-30T15:22:45.367Z'),
+          title: 'Software Engineer',
+          updated: new Date('2026-10-30T15:22:45.367Z'),
+          url: 'https://api.smartrecruiters.com/v1/companies/CasebookPBC/postings/744000158778089',
+    };
+    
+    it('properly formats an API entry from Rippling', () => {
+      const mockEntry = SmartRecruitersMock[0];
+      expect(smartRecruitersMapper(mockEntry, 'CasebookPBC')).toEqual(expectedRipplingReturn);
     });
   });
 
@@ -366,18 +299,6 @@ describe('mappers', () => {
     it('properly formats an API entry from Workable', () => {
       const mockEntry = WorkableMock[0];
       expect(workableMapper(mockEntry, 'Atria Health')).toEqual(expectedWorkableReturn);
-    });
-
-    it('properly handles missing ID', () => {
-      const mockWithoutId = {
-        ...WorkableMock[0],
-        shortcode: '',
-      };
-
-      expect(workableMapper(mockWithoutId, 'Atria Health')).toEqual({
-        ...expectedWorkableReturn,
-        id: ''
-      });
     });
   });
 

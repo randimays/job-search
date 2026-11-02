@@ -132,9 +132,9 @@ export const PaylocitySchema = z.object({
   JobId: z.number(),
   JobTitle: z.string(),
   PublishedDate: z.string(),
-  JobLocation: {
+  JobLocation: z.object({
     Country: z.string(),
-  },
+  }),
   IsRemote: z.boolean(),
 });
 
@@ -157,14 +157,28 @@ export const RipplingSchema = z.object({
   })
 });
 
+export const SmartRecruitersSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  company: z.object({
+    name: z.string()
+  }),
+  releasedDate: z.string(),
+  location: z.object({
+    remote: z.boolean(),
+    fullLocation: z.string(),
+  }),
+  ref: z.httpUrl()
+});
+
 export const WordpressSchema = z.object({
   id: z.number(),
   date: z.string(),
   link: z.string(),
   modified: z.string(),
-  title: {
+  title: z.object({
     rendered: z.string()
-  },
+  }),
   workplace_type_details: z.array(z.object({
     name: z.string(),
   }))
@@ -203,6 +217,7 @@ export type LeverJobApiFormat = z.infer<typeof LeverSchema>;
 export type PaylocityJobApiFormat = z.infer<typeof PaylocitySchema>;
 export type RecruiteeJobApiFormat = z.infer<typeof RecruiteeSchema>;
 export type RipplingJobApiFormat = z.infer<typeof RipplingSchema>;
+export type SmartRecruitersJobApiFormat = z.infer<typeof SmartRecruitersSchema>;
 export type WordpressJobApiFormat = z.infer<typeof WordpressSchema>;
 export type WorkableJobApiFormat = z.infer<typeof WorkableSchema>;
 export type WorkdayJobApiFormat = z.infer<typeof WorkdaySchema>;
