@@ -11,6 +11,7 @@ import {
   kulaMapper,
   leverMapper,
   paylocityMapper,
+  pinpointMapper,
   recruiteeMapper,
   ripplingMapper,
   smartRecruitersMapper,
@@ -29,6 +30,7 @@ import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
+import { PinpointMock } from '../../mock/pinpoint';
 import { RecruiteeMock } from '../../mock/recruitee';
 import { RipplingMock } from '../../mock/rippling';
 import { WordpressMock } from '../../mock/wordpress';
@@ -219,6 +221,22 @@ describe('mappers', () => {
     it('properly formats an API entry from Paylocity}', () => {
       const mockEntry = PaylocityMock[0];
       expect(paylocityMapper(mockEntry, 'eSimplicity')).toEqual(expectedPaylocityReturn);
+    });
+  });
+
+  describe('pinpointMapper', () => {
+    const expectedPinpointReturn = {
+      companyName: 'Coforma',
+      id: '457772',
+      published: new Date('2026-10-13T17:00:00.000Z'),
+      title: 'Software Engineer III',
+      updated: new Date('2026-10-13T17:00:00.000Z'),
+      url: 'https://coforma.pinpointhq.com/en/postings/cdf03ccf-84c1-4c59-ad90-fb1b77ecc0f8',
+    };
+    
+    it('properly formats an API entry from Pinpoint}', () => {
+      const mockEntry = PinpointMock[0];
+      expect(pinpointMapper(mockEntry, 'Coforma')).toEqual(expectedPinpointReturn);
     });
   });
 

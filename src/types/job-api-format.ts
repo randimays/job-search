@@ -138,6 +138,16 @@ export const PaylocitySchema = z.object({
   IsRemote: z.boolean(),
 });
 
+export const PinpointSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  url: z.httpUrl(),
+  workplace_type: z.string(),
+  location: z.object({
+    name: z.string()
+  })
+});
+
 export const RecruiteeSchema = z.object({
   id: z.number(),
   title: z.string(),
@@ -215,6 +225,7 @@ export type JobviteJobApiFormat = z.infer<typeof JobviteSchema>;
 export type KulaJobApiFormat = z.infer<typeof KulaSchema>;
 export type LeverJobApiFormat = z.infer<typeof LeverSchema>;
 export type PaylocityJobApiFormat = z.infer<typeof PaylocitySchema>;
+export type PinpointJobApiFormat = z.infer<typeof PinpointSchema>;
 export type RecruiteeJobApiFormat = z.infer<typeof RecruiteeSchema>;
 export type RipplingJobApiFormat = z.infer<typeof RipplingSchema>;
 export type SmartRecruitersJobApiFormat = z.infer<typeof SmartRecruitersSchema>;

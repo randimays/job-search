@@ -10,6 +10,7 @@ import type {
   KulaJobApiFormat,
   LeverJobApiFormat,
   PaylocityJobApiFormat,
+  PinpointJobApiFormat,
   RecruiteeJobApiFormat,
   RipplingJobApiFormat,
   SmartRecruitersJobApiFormat,
@@ -120,6 +121,15 @@ export const paylocityMapper = (job: PaylocityJobApiFormat, companyName: string)
   title: cleanUpAPIString(job.JobTitle),
   updated: createAPIDate(job.PublishedDate), // Paylocity doesn't have "updated" so we use publish date instead,
   url: `https://recruiting.paylocity.com/Recruiting/Jobs/Details/${job.JobId}`
+});
+
+export const pinpointMapper = (job: PinpointJobApiFormat, companyName: string): Job => ({
+  companyName,
+  id: job.id,
+  published: createAPIDate(), // Pinpoint does not have published dates
+  title: cleanUpAPIString(job.title),
+  updated: createAPIDate(), // Pinpoint does not have updated dates
+  url: job.url
 });
 
 export const recruiteeMapper = (job: RecruiteeJobApiFormat, companyName: string): Job => ({

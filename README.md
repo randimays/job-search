@@ -59,8 +59,8 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 ## Supported ATS Platforms
 
 - Ashby
-- BambooHR
-- BreezyHR
+- BambooHR (referred to as Bamboo)
+- BreezyHR (referred to as Breezy)
 - ClearCompany
 - Dayforce
 - Gem
@@ -69,6 +69,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - Kula
 - Lever
 - Paylocity
+- PinpointHQ (referred to as Pinpoint)
 - Recruitee
 - Rippling
 - SmartRecruiters
@@ -81,6 +82,7 @@ I used AI to help me with parts of the code and troubleshooting, but this code i
 - ADP
 - Dover
 - Gusto
+- HireBridge
 - ICIMS
 - iSolvedHire
 - JazzHR

@@ -11,6 +11,7 @@ import {
   kulaHandler,
   leverHandler,
   paylocityHandler,
+  pinpointHandler,
   recruiteeHandler,
   ripplingHandler,
   smartRecruitersHandler,
@@ -29,6 +30,7 @@ import { JobviteMock } from '../../mock/jobvite';
 import { KulaMock } from '../../mock/kula';
 import { LeverMock } from '../../mock/lever';
 import { PaylocityMock } from '../../mock/paylocity';
+import { PinpointMock } from '../../mock/pinpoint';
 import { RecruiteeMock } from '../../mock/recruitee';
 import { RipplingMock } from '../../mock/rippling';
 import { WorkableMock } from '../../mock/workable';
@@ -336,6 +338,27 @@ describe('handlers', () => {
           title: 'Senior DevOps Engineer',
           updated: new Date('2026-09-28T09:18:34-05:00'),
           url: 'https://recruiting.paylocity.com/Recruiting/Jobs/Details/4469749',
+        }
+      ]);
+    });
+  });
+
+  describe('pinpointHandler', () => {
+    it('handles empty jobs array', () => {
+      expect(pinpointHandler([], 'Coforma')).toEqual([]);
+    });
+  
+    it('correctly filters a list of jobs per the given keywords', () => {
+      const jobs = PinpointMock;
+  
+      expect(pinpointHandler(jobs, 'Coforma')).toEqual([
+        {
+          companyName: 'Coforma',
+          id: '457772',
+          published: new Date('2026-10-13T17:00:00.000Z'),
+          title: 'Software Engineer III',
+          updated: new Date('2026-10-13T17:00:00.000Z'),
+          url: 'https://coforma.pinpointhq.com/en/postings/cdf03ccf-84c1-4c59-ad90-fb1b77ecc0f8',
         }
       ]);
     });

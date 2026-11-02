@@ -10,6 +10,7 @@ import type {
   KulaJobApiFormat,
   LeverJobApiFormat,
   PaylocityJobApiFormat,
+  PinpointJobApiFormat,
   RecruiteeJobApiFormat,
   RipplingJobApiFormat,
   SmartRecruitersJobApiFormat,
@@ -35,6 +36,7 @@ import {
   kulaMapper,
   leverMapper,
   paylocityMapper,
+  pinpointMapper,
   recruiteeMapper,
   ripplingMapper,
   smartRecruitersMapper,
@@ -238,6 +240,19 @@ export const paylocityHandler = (jobs: PaylocityJobApiFormat[], companyName: str
         isUnitedStates(job.JobLocation.Country))
       .filter(remoteJob => isPotentialJobMatch(remoteJob.JobTitle))
       .map(filteredJob => paylocityMapper(filteredJob, companyName));
+  } 
+  
+  return [];
+};
+
+export const pinpointHandler = (jobs: PinpointJobApiFormat[], companyName: string): Job[] | [] => {
+  if (jobs && jobs.length) {
+    return jobs
+      .filter(job => 
+        !isHybridOrOnsite(job.workplace_type) && 
+        isUnitedStates(job.location.name))
+      .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
+      .map(filteredJob => pinpointMapper(filteredJob, companyName));
   } 
   
   return [];
