@@ -108,9 +108,9 @@ export const kulaMapper = (job: KulaJobApiFormat, companyName: string): Job => (
 export const leverMapper = (job: LeverJobApiFormat, companyName: string): Job => ({
   companyName,
   id: String(job.id ?? ''),
-  published: new Date(job.createdAt),
+  published: createAPIDate(job.createdAt),
   title: cleanUpAPIString(job.text),
-  updated: new Date(job.createdAt), // Lever doesn't have "updated" so we use publish date instead,
+  updated: createAPIDate(job.createdAt), // Lever doesn't have "updated" so we use publish date instead,
   url: job.hostedUrl
 });
 

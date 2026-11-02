@@ -34,12 +34,18 @@ export const handleEmptyDate = () => {
   return yesterday;
 }
 
-export const createAPIDate = (value?: string | null | undefined): Date => {
-  if (!value || typeof value !== 'string') {
+export const createAPIDate = (value?: string | number | null | undefined): Date => {
+  if (!value) {
     return handleEmptyDate(); 
   }
 
-  return new Date(value);
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    handleEmptyDate();
+  }
+
+  return date;
 }
 
 // -------- Job filtering

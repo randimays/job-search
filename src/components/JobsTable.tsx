@@ -9,54 +9,29 @@ interface JobsTableProps {
   jobs: Job[];
 }
 
-const alphabetizeDesc = (a: string | Date, b: string | Date) => {
-  if (a < b) {
-    return 1;
-  }
-
-  if (a > b) {
-    return -1;
-  }
-
-  return 0;
-};
-
-const alphabetizeAsc = (a: string | Date, b: string | Date) => {
-  if (a > b) {
-    return 1;
-  }
-
-  if (a < b) {
-    return -1;
-  }
-
-  return 0;
-};
-
 const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
-  const [selectedCompany, setSelectedCompany] = useState<string>('');
+  const [selectedCompany, setSelectedCompany] = useState<string>('All');
 
   const allJobs = useMemo(() => 
-    [...jobs].sort((a: Job, b: Job) => alphabetizeDesc(a.updated, b.updated)),
+    [...jobs].sort((a: Job, b: Job) => b.updated.getTime() - a.updated.getTime()),
     [jobs]
   );
 
-  const companiesWithJobs = useMemo(() =>
-    Array.from(
-      new Set(
-        allJobs
-          .map(job => job.companyName)))
-          .sort(alphabetizeAsc),
-      [allJobs]
-  );
+  const companiesWithJobs = useMemo(() => {
+    const names = new Set(allJobs.map(job => job.companyName));
+
+    return [...names].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  }, [allJobs]);
 
   const jobsToShow = useMemo(
-    () =>
-      selectedCompany ?
-        allJobs.filter(job => job.companyName === selectedCompany)
-        : allJobs,
-      [allJobs, selectedCompany]
-  );
+    () => {
+      if (selectedCompany === 'All') {
+        return allJobs;
+      }
+    
+      return allJobs.filter(job => job.companyName === selectedCompany)
+    }, [allJobs, selectedCompany]
+);
   
   const selectCompany = (e: SelectChangeEvent) => {
     if (e?.target?.value) {
@@ -77,6 +52,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
               label="Select company"
               onChange={selectCompany}
             >
+              <MenuItem value="All">Select a company to filter</MenuItem>
           {companiesWithJobs.map(company => (
             <MenuItem
               key={company}
@@ -99,7 +75,7 @@ const JobsTable = ({ jobs }: JobsTableProps): ReactElement | string => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {jobsToShow.map(job => <JobRow key={job.id} job={job} />)}
+          {jobsToShow.map((job, index) => <JobRow key={job.id ? job.id : index} job={job} />)}
         </tbody>
       </table>
     </>
