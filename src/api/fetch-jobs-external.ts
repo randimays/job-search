@@ -146,7 +146,40 @@ const fetchJobsUncached = async (
     // results[index] = { status: 'rejected', reason };
     throw new Error(`Service call failed: ${error}`);
   }
-}
+};
+
+const createLimiter = (max: number) => {
+  let active = 0;
+  const waiting: Array<() => void> = [];
+
+  const release = () => {
+    const next = waiting.shift();
+
+    if (next) {
+      next(); // hand the slot straight to the next waiter
+
+      return;
+    }
+
+    active--;
+  };
+
+  return async <T>(task: () => Promise<T>): Promise<T> => {
+    if (active < max) {
+      active++;
+    } else {
+      await new Promise<void>(resolve => waiting.push(resolve));
+    }
+
+    try {
+      return await task();
+    } finally {
+      release();
+    }
+  };
+};
+
+const limitWorkday = createLimiter(4);
 
 export const fetchWorkdayJobs = async (rowData: string, companyName: string): Promise<Job[]> => {
   const config = BOARD_CONFIGS.filter(board => board.name === 'Workday')?.[0];
@@ -156,11 +189,11 @@ export const fetchWorkdayJobs = async (rowData: string, companyName: string): Pr
   let total = Infinity;
 
   for (let offset = 0; offset < total; offset += limit) {
-    const response = await fetchWithRetry(`/api/workday?url=${encodeURIComponent(companyUrl)}`, 3, {
+    const response = await limitWorkday(() => fetchWithRetry(`/api/workday?url=${encodeURIComponent(companyUrl)}`, 3, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ appliedFacets: {}, limit, offset, searchText: '' })
-    });
+    }));
 
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText} for ${companyUrl}`);

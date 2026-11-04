@@ -39,7 +39,7 @@ export const bambooMapper = (job: BambooHrJobApiFormat, companyName: string): Jo
   published: createAPIDate(), // Bamboo does not have published dates
   title: cleanUpAPIString(job.jobOpeningName),
   updated: createAPIDate(), // Bamboo does not have updated dates
-  url: '' // Bamboo doesn't return job URLs
+  url: '' // Bamboo doesn't return job URLs; TODO use the board tokens for these and construct them
 });
 
 export const breezyMapper = (job: BreezyJobApiFormat): Job => ({

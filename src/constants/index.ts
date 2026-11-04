@@ -55,6 +55,7 @@ const RESUME_DROP_KEYWORDS = [
 export const NON_US_LOCATIONS = [
   'Argentina',
   'Brazil',
+  'Bulgaria',
   'Canada',
   'Chile',
   'China',

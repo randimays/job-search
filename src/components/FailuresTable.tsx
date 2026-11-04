@@ -22,7 +22,7 @@ const FailuresTable = ({ failures }: FailuresTableProps) => {
         <tbody className="text-sm">
           {failures.map(failure => 
             <FailuresRow
-              key={`${failure.row[0]}:${failure.row[1]}`}
+              key={`${JSON.stringify(failure.row)}:${failure.reason}`}
               failure={failure}
             />
           )}
