@@ -98,7 +98,7 @@ export const JobviteSchema = z.object({
   'detail-url': z.string(),
   id: z.string(),
   location: z.string(),
-  remote_x0020_type: z.string().nullish(),
+  remote_x0020_type: z.string().nullable(),
   title: z.string(),
 });
 

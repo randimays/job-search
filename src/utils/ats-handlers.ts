@@ -44,6 +44,21 @@ import {
   workableMapper,
   workdayMapper
 } from './ats-mappers';
+import { isCityAndState } from './city-state-checker';
+
+export const uniqueBy = <T>(items: T[], getKey: (item: T) => string): T[] => {
+  const seen = new Map<string, T>();
+
+  for (const item of items) {
+    const key = getKey(item);
+
+    if (!seen.has(key)) {
+      seen.set(key, item);
+    }
+  }
+
+  return [...seen.values()];
+};
 
 export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] => {
   return jobs
@@ -52,6 +67,7 @@ export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Jo
       const locality = job.address.postalAddress.addressLocality;
 
       return !isHybridOrOnsite(job.workplaceType) && 
+        !isCityAndState(job?.location) &&
         (isUnitedStates(job?.location) || 
         isUnitedStates(country) ||
         isUnitedStates(locality));
@@ -139,6 +155,7 @@ export const greenhouseHandler = (jobs: GreenhouseJobApiFormat[]): Job[] => {
   return jobs
     .filter(job => 
       !isHybridOrOnsite(job.location.name) && 
+      !isCityAndState(job.location.name) &&
       isUnitedStates(job.location.name))
     .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
     .map(filteredJob => greenhouseMapper(filteredJob));
@@ -243,12 +260,12 @@ export const wordpressHandler = (jobs: WordpressJobApiFormat[], companyName: str
 };
 
 export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: string): Job[] => {
-  return jobs
-    .filter(job => 
-      job.telecommuting && 
-      isUnitedStates(job.country))
-    .filter(remoteJob => isPotentialJobMatch(remoteJob.title))
-    .map(filteredJob => workableMapper(filteredJob, companyName));
+  const candidates = jobs
+    .filter(job => job.telecommuting && isUnitedStates(job.country))
+    .filter(job => isPotentialJobMatch(job.title));
+
+  return uniqueBy(candidates, job => job.shortcode)
+    .map(job => workableMapper(job, companyName));
 };
 
 export const workdayHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] => {

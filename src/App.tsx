@@ -71,7 +71,7 @@ function App() {
         </>)
         : null}
       {noResultsCompanies.length ? <NoResults noResultsCompanies={noResultsCompanies} /> : null}
-      <h2 className="text-2xl text-center font-bold mt-20">Omitted Jobs</h2>
+      <h2 className="text-2xl text-center font-bold mt-20">Omitted Job Titles</h2>
       {!omittedTitlesArray.length ? <p className="mt-12">If there are omitted titles when the search is completed, you'll see them here.</p> : null}
       {omittedTitlesArray.length ? <OmittedJobs omittedJobs={omittedTitlesArray} /> : null}
       {failures.length ? (
