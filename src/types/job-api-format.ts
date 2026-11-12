@@ -10,9 +10,9 @@ export const AshbySchema = z.object({
       addressCountry: z.string().nullish(),
       addressLocality: z.string().nullish()
     })
-  }),
+  }).nullish(),
   publishedAt: z.string(),
-  workplaceType: z.string(),
+  workplaceType: z.string().nullish(),
   jobUrl: z.httpUrl(),
 });
 
@@ -93,12 +93,12 @@ export const GreenhouseSchema = z.object({
 });
 
 export const JobviteSchema = z.object({
-  created_x0020_on: z.string(),
+  created_x0020_on: z.string().nullish(),
   date: z.string(),
   'detail-url': z.string(),
   id: z.string(),
   location: z.string(),
-  remote_x0020_type: z.string().nullable(),
+  remote_x0020_type: z.string().nullish(),
   title: z.string(),
 });
 

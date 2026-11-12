@@ -63,8 +63,8 @@ export const uniqueBy = <T>(items: T[], getKey: (item: T) => string): T[] => {
 export const ashbyHandler = (jobs: AshbyJobApiFormat[], companyName: string): Job[] => {
   return jobs
     .filter(job => {
-      const country = job.address.postalAddress.addressCountry;
-      const locality = job.address.postalAddress.addressLocality;
+      const country = job?.address?.postalAddress?.addressCountry || '';
+      const locality = job?.address?.postalAddress?.addressLocality || '';
 
       return !isHybridOrOnsite(job.workplaceType) && 
         !isCityAndState(job?.location) &&
@@ -122,7 +122,7 @@ export const dayforceHandler = (jobs: DayforceJobApiFormat[]): Job[] => {
   return jobs
   .filter(job => {
       let country = '';
-  
+
       if (job?.Country) {
         country = job.Country;
       } else if (job?.CultureCode) {
@@ -238,6 +238,7 @@ export const ripplingHandler = (jobs: RipplingJobApiFormat[], companyName: strin
   return jobs
     .filter(job => 
       !isHybridOrOnsite(job.workLocation.label) && 
+      !isCityAndState(job.workLocation.label) &&
       isUnitedStates(job.workLocation.label))
     .filter(remoteJob => isPotentialJobMatch(remoteJob.name))
     // Rippling returns one row per location, which can result in duplicates for the same job
@@ -271,7 +272,7 @@ export const workableHandler = (jobs: WorkableJobApiFormat[], companyName: strin
 export const workdayHandler = (jobs: WorkdayJobApiFormat[], companyName: string): Job[] => {
   return jobs
     .filter(job =>
-      !isHybridOrOnsite(job.bulletFields.join(' ')) &&
+      !isHybridOrOnsite(job?.bulletFields?.join(' ') || '') &&
       isUnitedStates(job.locationsText))
     .filter(job => isPotentialJobMatch(job.title))
     .map(filteredJob => workdayMapper(filteredJob, companyName));

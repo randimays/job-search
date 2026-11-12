@@ -7,6 +7,7 @@ export const TABLE_CELL_CLASS = 'border border-gray-300 dark:border-gray-600';
 // This represents all of the keywords 
 // I would want to see matches for
 export const ROLE_MATCHERS = [
+  'design', // temporary
   'develop', // captures "developer and development"
   'engineer',
   'front end',
@@ -31,10 +32,10 @@ const SENIORITY_EXCLUSIONS = [
   // 'intern',
   // 'internship',
   // 'junior',
-  'lead',
-  'leader',
+  // 'lead', // temp
+  // 'leader', // temp
   'manager',
-  'principal',
+  // 'principal', // temp
   'sales',
   'staff',
   'supervisor',

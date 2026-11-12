@@ -48,7 +48,6 @@ export const prepareForApiCalls = async (csvData: CompanyRow[]): Promise<JobsRes
   const batches: Batches = batchCompaniesByProvider(csvData);
   const jobs: Job[] = [];
   const failures: Failure[] = [];
-  const noResults: string[] = [];
 
   useJobs.getState().setFetchingJobs(true);
 
@@ -74,11 +73,6 @@ export const prepareForApiCalls = async (csvData: CompanyRow[]): Promise<JobsRes
 
         if (result.status === 'fulfilled') {
           jobs.push(...result.value);
-
-          if (!result.value.length) {
-            noResults.push(row.companyName ?? '');
-          }
-
           return;
         }
 
@@ -94,7 +88,6 @@ export const prepareForApiCalls = async (csvData: CompanyRow[]): Promise<JobsRes
   return {
     jobs,
     failures,
-    noResults,
   };
 };
 

@@ -1,4 +1,5 @@
 export default [
+  'Auckland',
   'Bengalore',
   'Bengaluru',
   'Dublin',

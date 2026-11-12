@@ -14,9 +14,10 @@ export default [
   'business development',
   'business development representative',
   'c#',
+  'clearance required',
   'computation',
   'databricks',
-  'designer',
+  // 'designer', // temporary
   'devsecops',
   'domain services',
   'enterprise development',

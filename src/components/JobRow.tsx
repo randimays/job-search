@@ -2,12 +2,14 @@ import type { ReactElement } from 'react';
 import type { Job } from '../types';
 import { formatDate } from '../utils';
 import { TABLE_CELL_CLASS } from '../constants';
+import { copyIds } from '../utils/copy-id';
 
 interface JobRowProps {
   job: Job;
+  setClipboardTextCopied: (copied: boolean) => void;
 }
 
-const JobRow = ({ job }: JobRowProps): ReactElement | null => {
+const JobRow = ({ job, setClipboardTextCopied }: JobRowProps): ReactElement | null => {
   const {
     companyName,
     id,
@@ -38,7 +40,13 @@ const JobRow = ({ job }: JobRowProps): ReactElement | null => {
         <td className={`p-1 ${TABLE_CELL_CLASS}`}>{title}</td>
       }
       <td className={`p-1 ${TABLE_CELL_CLASS}`}>{formatDate(published)}</td>
-      <td className={`p-1 ${TABLE_CELL_CLASS}`}>{id}</td>
+      <td className={`p-1 ${TABLE_CELL_CLASS}`}>
+        <button
+          className="p-1 mr-2 cursor-pointer border rounded-md"
+          onClick={() => copyIds([id], setClipboardTextCopied)}
+        >Copy</button>
+        {id}
+      </td>
     </tr>
   );
 };

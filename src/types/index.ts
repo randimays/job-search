@@ -21,5 +21,4 @@ export interface Failure {
 export interface JobsResponse {
   jobs: Job[],
   failures: Failure[],
-  noResults: string[]
 }

@@ -95,6 +95,7 @@ const CITY_PATTERN = /^[A-Za-z][A-Za-z.'\- ]*[A-Za-z.]$/;
  *          'Texas', 'Austin', 'Toronto, Ontario'
  */
 export function isCityAndState(location: string | null | undefined): boolean {
+
   if (!location || typeof location !== 'string') {
     return false;
   }
@@ -107,7 +108,7 @@ export function isCityAndState(location: string | null | undefined): boolean {
 
   const city = parts[0]?.trim().replace(/\s+/g, ' ');
   const state = parts[1]?.trim();
-
+  
   if (!city || !state) {
     return false;
   }

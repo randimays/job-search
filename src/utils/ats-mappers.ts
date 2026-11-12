@@ -90,7 +90,7 @@ export const greenhouseMapper = (job: GreenhouseJobApiFormat): Job => ({
 export const jobviteMapper = (job: JobviteJobApiFormat, companyName: string): Job => ({
   companyName,
   id: job.id,
-  published: createAPIDate(job.created_x0020_on),
+  published: createAPIDate(job?.created_x0020_on),
   title: cleanUpAPIString(job.title),
   updated: createAPIDate(job.date),
   url: cleanUpAPIString(job['detail-url']),
@@ -190,6 +190,10 @@ export const workdayMapper = (job: WorkdayJobApiFormat, companyName: string): Jo
   if (slug) {
     const splitSlug = slug.split('_');
     id = splitSlug[splitSlug.length - 1];
+  }
+
+  if (!id) {
+    console.log('job without id: ', job);
   }
   
   return {
